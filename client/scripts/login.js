@@ -17,7 +17,7 @@ function loginUser() {
   user.password = password;
 
   axios
-    .post("http://localhost:3000/login", user)
+    .post("http://164.90.206.164/login", user)
     .then(async function (response) {
       console.log(response.data);
       if (response.data == "User logged in") {
