@@ -61,6 +61,7 @@ ul {
 .center button:hover {
   background-color: #f088b7;
   font-weight: bolder;
+  cursor: pointer;
 }
 
 .messages{
