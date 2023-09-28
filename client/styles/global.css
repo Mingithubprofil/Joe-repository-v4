@@ -58,6 +58,11 @@ ul {
   margin: 30px;
 }
 
+.center button:hover {
+  background-color: #f088b7;
+  font-weight: bolder;
+}
+
 .messages{
   background-color: white;
   overflow:hidden;
