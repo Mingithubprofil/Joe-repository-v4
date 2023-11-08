@@ -119,7 +119,7 @@ input {
 }
 
 .jss57 {
-    background-image: "Store_image_2_compressed.avif;"
+  background-image: url('Store_image_2_compressed.avif');
 }
 
 *, *::before, *::after {
