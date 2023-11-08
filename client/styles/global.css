@@ -100,3 +100,61 @@ input {
     flex-direction: column;
     justify-content: flex-start;
 }
+
+
+.jss53 {
+    width: 100%;
+    display: flex;
+    padding: 24px;
+    z-index: 1;
+    overflow: hidden;
+    position: relative;
+    min-height: 65vh;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    background-size: cover;
+    justify-content: center;
+    background-position: center;
+}
+
+.jss57 {
+    background-image: url(//images.ctfassets.net/tyelhjh38zrj/4V1DPrExkIqIqVF0omUH30/bd560e5…/Store_image_2_compressed.jpg?q=75&w=600&fm=avif);
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+div {
+    display: block;
+}
+
+body {
+    color: rgba(18, 18, 18, 1);
+    margin: 0;
+    font-size: 14px;
+    font-family: Roboto Flex,Arial,sans-serif;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: -0.19px;
+    background-color: #f8f8f6;
+}
+
+:host, :root {
+    --rem: 16;
+}
+
+html {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
