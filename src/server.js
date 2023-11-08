@@ -24,7 +24,7 @@ app.get('/home', (req, res) => {
 
 
 app.get("/userHome", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/userHome.html"));
+  res.sendFile(path.join(__dirname, "../client/pages/userHome.html"));
 });
 
 app.get('/juicechat', (req, res) => {
