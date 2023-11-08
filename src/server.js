@@ -22,6 +22,10 @@ app.get('/home', (req, res) => {
   
 });
 
+userRoute.get("/userHome", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/userHome.html"));
+});
+
 app.get('/juicechat.html', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/pages/juicechat.html'));
   
