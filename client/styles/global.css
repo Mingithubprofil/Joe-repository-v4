@@ -90,3 +90,13 @@ input {
   border: 2px solid #f7c1d9;
   padding: 5px;
 }
+
+
+.root {
+    display: flex;
+    background: #ffffff;
+    min-height: calc(100vh - 60px);
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+}
