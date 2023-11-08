@@ -22,7 +22,7 @@ app.get('/home', (req, res) => {
   
 });
 
-userRoute.get("/userHome.html", (req, res) => {
+app.get("/userHome.html", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/userHome.html"));
 });
 
