@@ -16,11 +16,11 @@
     <li style="float:right" ><a href="http://164.90.206.164/order">Order</a></li>
     <li style="float:right" ><a href="http://164.90.206.164/juicechat">Juice chat</a></li>
   </ul>
+  <div class="root">
   <div class="center">
     <div>
         <label for="username">Enter username: </label> 
         <input type="text" id="username">
-        
         <button onclick="changeUsername()">Change</button>
         
       <div class="chatArea">
@@ -31,9 +31,11 @@
         <button onclick="sendChat()">Send</button>
       </div>
     </div>
+
       <script src="/socket.io/socket.io.js"></script>
       
     </div>
+  </div>
    
 </body>
 
