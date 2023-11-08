@@ -16,14 +16,21 @@ userRoute.get("/login", (req, res) => {
 userRoute.get("/login.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/login.js"));
 });
+
 userRoute.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/register.html"));
 });
+
+userRoute.get("/userHome", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/userHome.html"));
+});
+
 userRoute.get("/order", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/order.html"));
 });
+
 userRoute.get("/juicehat", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/juicehat.html"));
+  res.sendFile(path.join(__dirname, "../../client/pages/juicechat.html"));
 })
 
 userRoute.get("/register.js", (req, res) => {
