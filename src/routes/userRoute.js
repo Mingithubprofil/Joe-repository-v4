@@ -19,6 +19,9 @@ userRoute.get("/login.js", (req, res) => {
 userRoute.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/register.html"));
 });
+userRoute.get("/order", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/order.html"));
+})
 
 userRoute.get("/register.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/register.js"));
