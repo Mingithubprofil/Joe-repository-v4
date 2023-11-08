@@ -18,7 +18,19 @@
   </ul>
   <div class="root">
   <div class="center">
+    <div>
+    <label for="username">Enter username: </label> 
+    <input type="text" id="username">
     
+    <button onclick="changeUsername()">Change</button>
+    
+    <div class="chatArea">
+      <p style="font-weight: bold; font-family: 'Courier New', Courier, monospace; font-style: italic; font-size: 1.5em;">Juice Chat</p>
+    <ul class="messages" id="messages"></ul>
+    
+    <input id="input" autocomplete="off" placeholder="Write here"/>
+    <button onclick="sendChat()">Send</button>
+  </div>
   </div>
   <script src="/socket.io/socket.io.js"></script>
   
@@ -29,5 +41,5 @@
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
-<script src="/home.js"></script>
+<script src="/juicechat.js"></script>
 </html>
