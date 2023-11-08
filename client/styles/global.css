@@ -119,7 +119,7 @@ input {
 }
 
 .jss57 {
-    background-image: url(//images.ctfassets.net/tyelhjh38zrj/4V1DPrExkIqIqVF0omUH30/bd560e5…/Store_image_2_compressed.jpg?q=75&w=600&fm=avif);
+    background-image: "Store_image_2_compressed.avif;"
 }
 
 *, *::before, *::after {
