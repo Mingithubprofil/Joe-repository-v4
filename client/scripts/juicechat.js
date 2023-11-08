@@ -2,7 +2,9 @@ const socket = io();
 
 const messages = document.getElementById("messages");
 const input = document.getElementById("input");
-document.getElementById("customername_on_order_page").innerHTML = `Welcome ${username}!`
+
+//document.getElementById("customername_on_order_page").innerHTML = `Welcome ${username}!`
+
 // let username = "Anonymous";
 
 // if (localStorage.getItem("Username") != null) {
