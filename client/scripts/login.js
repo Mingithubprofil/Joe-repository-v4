@@ -29,7 +29,7 @@ function loginUser() {
       responseDOM.innerHTML = response.data;
 
       await wait(3)
-      location.href = "/userHome";
+      location.href = "/userHome.html";
     })
     .catch(function (error) {
       console.log(error);
