@@ -21,8 +21,8 @@ userRoute.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/register.html"));
 });
 
-userRoute.get("/userHome", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/userHome.html"));
+userRoute.get("/userhome", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/userhome.html"));
 });
 
 userRoute.get("/order", (req, res) => {

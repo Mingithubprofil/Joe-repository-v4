@@ -23,8 +23,8 @@ app.get('/home', (req, res) => {
 });
 
 
-app.get('/userHome', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/pages/userHome.html'));
+app.get('/userhome', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/pages/userhome.html'));
 });
 
 app.get('/juicechat', (req, res) => {
