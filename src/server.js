@@ -25,14 +25,14 @@ app.get('/home', (req, res) => {
 });
 
 
-app.get('/userHome', (req, res) => {
+/*app.get('/userHome', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/pages/userHome.html'));
 });
 
 app.get('/juicechat', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/pages/juicechat.html'));
   
-}); 
+}); */
 
 app.get('/juicechat.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/scripts/juicechat.js'));
