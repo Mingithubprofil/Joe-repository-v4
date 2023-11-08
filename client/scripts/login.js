@@ -29,7 +29,7 @@ function loginUser() {
       responseDOM.innerHTML = response.data;
 
       await wait(3)
-      location.href = "/juicechat.html";
+      location.href = "/userHome";
     })
     .catch(function (error) {
       console.log(error);
