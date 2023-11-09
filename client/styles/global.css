@@ -211,22 +211,29 @@ h1 {
 #order-button:hover {
   opacity: 1;
 }
-/* Style the product list */
+
 .product-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 0 -10px; /* Add a negative margin to counteract the padding on individual product elements */
 }
 
 .product {
+  font-family: Roboto Flex,Arial,sans-serif;
   margin: 20px 0;
   padding: 20px;
   text-align: center;
   background-color: #fcd2e6;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added box-shadow */
-  width: calc(20% - 40px); /* 5 products per row */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex: 0 1 calc(20% - 40px); /* Use 'flex' property to control the width and add negative margin */
   box-sizing: border-box;
+  margin: 10px; /* Add margin to create a gap between product elements */
+}
+
+.product-list {
+  margin: 0 20px; /* Add a negative margin to create space on the left and right sides of the container */
 }
 
 .product img {
@@ -258,4 +265,19 @@ h1 {
 
 .product button:hover {
   background-color: #f088b7;
+}
+
+h4 {
+  font-size: 1.8em;
+  color: #000000;
+  font-weight: bold;
+  opacity: 1;
+  transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1) 750ms;
+
+}
+
+.h5 {
+  font-weight: bold; 
+  font-size: 1.2em; 
+  padding-bottom: 2em;
 }
