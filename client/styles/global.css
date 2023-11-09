@@ -118,8 +118,8 @@ input {
     background-position: center;
 }
 
-.jss57 {
-  background-image: url('Store_image_2_compressed.avif');
+.root {
+  background-image: url(../image/styles/pages/client/Store_image_2_compressed.avif);
 }
 
 *, *::before, *::after {
