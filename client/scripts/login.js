@@ -1,3 +1,5 @@
+
+
 let responseDOM = document.getElementById("response");
 
 let user = {};
@@ -8,6 +10,9 @@ function wait(time) {
     
   });
 }
+
+
+//login funktion
 
 function loginUser() {
   let username = document.getElementById("username").value;
@@ -35,3 +40,19 @@ function loginUser() {
       console.log(error);
     });
 }
+
+
+//logud funktion
+
+function logoutUser() {
+  // Fjern brugerens autentificeringscookie
+  document.cookie = 'userAuth=; expires= 0; path=/;';
+
+  // Redirect til login-siden eller hvor du ønsker
+  location.href = "/login";
+}
+
+
+
+
+
