@@ -9,6 +9,8 @@ userRoute.use(cookieParser());
 let id = 1;
 let db = [];
 
+//login
+
 userRoute.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/login.html"));
 });
@@ -17,25 +19,39 @@ userRoute.get("/login.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/login.js"));
 });
 
+//register
+
 userRoute.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/register.html"));
-});
-
-userRoute.get("/userHome", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/userHome.html"));
-});
-
-userRoute.get("/order", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/order.html"));
-});
-
-userRoute.get("/juicechat", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/juicechat.html"));
 });
 
 userRoute.get("/register.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/register.js"));
 });
+
+//userHome
+
+userRoute.get("/userHome", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/userHome.html"));
+});
+
+//order
+
+userRoute.get("/order", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/order.html"));
+});
+
+userRoute.get("/customize_juice", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/customize_juice.html"));
+});
+
+//chat
+
+userRoute.get("/juicechat", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/juicechat.html"));
+});
+
+//css
 
 userRoute.get("/global.css", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/styles/global.css"));

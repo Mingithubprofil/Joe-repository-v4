@@ -13,9 +13,9 @@ const host = 'localhost';
 const path = require('path')
 const userRoute = require("./routes/userRoute");
 
-//app.use(express.static(__dirname + '../client'));
+app.use(express.static(__dirname + '../client'));
 
-app.use(express.static(path.join(__dirname, '../client')));
+//app.use(express.static(path.join(__dirname, '../client')));
 
 app.use("/", userRoute);
 
