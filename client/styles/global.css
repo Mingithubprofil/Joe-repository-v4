@@ -119,7 +119,7 @@ input {
 }
 
 .root {
-  background-image: url(../images/Store_image_2_compressed.avif);
+  background-image: url(../image/styles/pages/client/Store_image_2_compressed.avif);
 }
 
 *, *::before, *::after {
