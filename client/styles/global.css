@@ -45,6 +45,7 @@ ul {
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  background-image: url('../images/Store_image_2_compressed');
 }
 
 .center button {
@@ -118,9 +119,9 @@ input {
     background-position: center;
 }
 
-.root {
+/* .root {
   background-image: url(../image/styles/pages/client/Store_image_2_compressed.avif);
-}
+} */
 
 *, *::before, *::after {
     box-sizing: inherit;
