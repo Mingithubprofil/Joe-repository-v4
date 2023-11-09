@@ -1,11 +1,12 @@
 ul {
-    font-family: Calibri;
+    font-family: Flex,Arial,sans-serif;
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #f7c1d9;
     font-size: 2em;
+    font-weight: bold;
   }
   
   li {
@@ -118,10 +119,6 @@ input {
     background-position: center;
 }
 
-.root {
-  background-image: url(../image/styles/pages/client/Store_image_2_compressed.avif);
-}
-
 *, *::before, *::after {
     box-sizing: inherit;
 }
@@ -157,4 +154,59 @@ html {
 
 *, *::before, *::after {
     box-sizing: inherit;
+}
+
+
+.MuiTypography-root.MuiTypography-h1.MuiTypography-colorTextSecondary[data-cy="hero-image-title"] {
+  opacity: 1;
+  transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1) 750ms;
+  font-size: 5em; /* Tilpas skriftstørrelse efter behov */
+  color: #f7c1d9; /* Tilpas farve efter behov */
+  font-weight: bold; /* Tilpas skriftvægt efter behov */
+
+}
+
+.MuiBox-root.jss62 {
+  background-image: url('Baggrundsbillede.joe.png'); /* Erstat 'din-billede-sti.jpg' med stien til dit baggrundsbillede */
+  background-size: cover; /* Skaleres baggrundsbilledet til at dække boksen */
+  background-position: center; /* Centrerer baggrundsbilledet i boksen */
+  background-repeat: no-repeat; /* Forhindre gentagelse af baggrundsbilledet */
+}
+
+
+
+
+.MuiTypography-root.jss54.MuiTypography-body1.MuiTypography-colorTextSecondary {
+  font-weight: bold; 
+  font-size: 1.2em; 
+}
+
+h1 {
+  font-size: 2em;
+  color: #f7c1d9;
+  font-weight: bold;
+  opacity: 1;
+  transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1) 750ms;
+
+}
+
+
+#order-button {
+  font-weight: bold;
+  font-family: Roboto Flex,Arial,sans-serif;
+  background-color: rgba(247, 193, 217, 1);
+  color: #24272a;
+  box-shadow: none;
+  border-radius: 0;
+  font-size: 16px;
+  padding: 10px 16px; /* Tilpas polstring efter behov */
+  text-align: center; /* Centrer teksten vandret */
+  display: inline-block; /* Gør det til en inline-blok for at justere størrelsen til indholdet */
+  text-decoration: none; /* Fjern understregning fra linket */
+  transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1) 750ms;
+}
+
+
+#order-button:hover {
+  opacity: 1;
 }
