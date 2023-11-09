@@ -49,7 +49,7 @@ socket.on("chat message", (msg) => {
 // Cookie her:
 
 let username = getCookie("userAuth");
-//if (!username) location.href = "/login";
+if (!username) location.href = "/login";
 
 
 socket.emit("user joined", username);
