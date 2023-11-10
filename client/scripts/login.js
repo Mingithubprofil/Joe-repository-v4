@@ -22,7 +22,7 @@ function loginUser() {
   user.password = password;
 
   axios
-    .post("http://164.90.206.164/login", user)
+    .post("http://188.166.200.199/login", user)
     .then(async function (response) {
       console.log(response.data);
       if (response.data == "User logged in") {
