@@ -296,3 +296,35 @@ h4 {
     opacity: 1;
   }
 }
+.cart {
+  border: 2px solid #f7c1d9;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart-item img {
+  max-width: 50px;
+  margin-right: 10px;
+}
+
+.remove-button {
+  background-color: #f7c1d9;
+  color: #24272a;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background-color: #f088b7;
+}
