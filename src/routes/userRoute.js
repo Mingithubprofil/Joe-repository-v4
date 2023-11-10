@@ -42,7 +42,7 @@ userRoute.get("/userHome.js", (req, res) => {
 //order
 
 userRoute.get("/order", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/order.html"));
+  res.sendFile(path.join(__dirname, "../../client/pages/order.html"));
 });
 
 userRoute.get("/order.js", (req, res) => {
@@ -55,23 +55,38 @@ userRoute.get("/customize_juice", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/customize_juice.html"));
 });
 
+userRoute.get("/customizeJuice.js", (req, res) => {
+  res.sendFile("../../client/scripts/customizeJuice.js");
+});
 
+userRoute.get("/location.js", (req, res) => {
+  res.sendFile("../../client/scripts/location.js");
+});
+
+userRoute.get("/cart.js", (req, res) => {
+  res.sendFile("../../client/scripts/cart.js");
+});
+
+
+/*
 
 userRoute.get("/customizeJuice.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/scripts/customizeJuice.js"));
+  res.sendFile(path.join(__dirname, "../../client/scripts/customizeJuice.js"));
 });
 
 //location 
 
 userRoute.get("/location.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/scripts/location.js"));
+  res.sendFile(path.join(__dirname, "../../client/scripts/location.js"));
 });
 
 //cart
 
 userRoute.get("/cart.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/scripts/cart.js"));
+  res.sendFile(path.join(__dirname, "../../client/scripts/cart.js"));
 }); 
+
+*/
 
 //chat
 
