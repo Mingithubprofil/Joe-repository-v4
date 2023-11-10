@@ -76,18 +76,21 @@ userRoute.get("/cart.js", (req, res) => {
 
 
 userRoute.get("/customizeJuice.js", (req, res) => {
+  res.header('Content-Type', 'text/javascript');
   res.sendFile(path.join(__dirname, "../client/scripts/customizeJuice.js"));
 });
 
 //location 
 
 userRoute.get("/location.js", (req, res) => {
+  res.header('Content-Type', 'text/javascript');
   res.sendFile(path.join(__dirname, "../client/scripts/location.js"));
 });
 
 //cart
 
 userRoute.get("/cart.js", (req, res) => {
+  res.header('Content-Type', 'text/javascript');
   res.sendFile(path.join(__dirname, "../client/scripts/cart.js"));
 }); 
 
