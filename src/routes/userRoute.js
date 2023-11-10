@@ -57,17 +57,17 @@ userRoute.get("/customize_juice", (req, res) => {
 
 userRoute.get("/customizeJuice.js", (req, res) => {
   res.header('Content-Type', 'text/javascript');
-  res.sendFile("../../client/scripts/customizeJuice.js");
+  res.sendFile("../client/scripts/customizeJuice.js");
 });
 
 userRoute.get("/location.js", (req, res) => {
   res.header('Content-Type', 'text/javascript');
-  res.sendFile("../../client/scripts/location.js");
+  res.sendFile("../client/scripts/location.js");
 });
 
 userRoute.get("/cart.js", (req, res) => {
   res.header('Content-Type', 'text/javascript');
-  res.sendFile("../../client/scripts/cart.js");
+  res.sendFile("../client/scripts/cart.js");
 });
 
 
