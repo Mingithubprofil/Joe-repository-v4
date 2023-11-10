@@ -35,14 +35,34 @@ userRoute.get("/userHome", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/userHome.html"));
 });
 
+userRoute.get("/userHome.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/scripts/userHome.js"));
+});
+
 //order
 
 userRoute.get("/order", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/order.html"));
 });
 
+userRoute.get("/order.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/scripts/order.js"));
+});
+
+//customize_juice
+
 userRoute.get("/customize_juice", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/customize_juice.html"));
+});
+
+userRoute.get("/customizeJuice.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/scripts/customizeJuice.js"));
+});
+
+//cart
+
+userRoute.get("/cart.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/scripts/cart.js"));
 });
 
 //chat
