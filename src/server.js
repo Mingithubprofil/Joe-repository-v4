@@ -30,6 +30,10 @@ app.get('/juicechat.js', (req, res) => {
   
 });
 
+app.get('/customizeJuice.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/scripts/customizeJuice.js'));
+  
+});
 app.get('/global.css', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/styles/global.css'));
   

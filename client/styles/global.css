@@ -161,13 +161,12 @@ html {
   opacity: 1;
   transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1) 750ms;
   font-size: 5em; /* Tilpas skriftstørrelse efter behov */
-  color: #f7c1d9; /* Tilpas farve efter behov */
+  color: #ffffff; /* Tilpas farve efter behov */
   font-weight: bold; /* Tilpas skriftvægt efter behov */
 
 }
 
 .MuiBox-root.jss62 {
-  background-image: url('Baggrundsbillede.joe.png'); /* Erstat 'din-billede-sti.jpg' med stien til dit baggrundsbillede */
   background-size: cover; /* Skaleres baggrundsbilledet til at dække boksen */
   background-position: center; /* Centrerer baggrundsbilledet i boksen */
   background-repeat: no-repeat; /* Forhindre gentagelse af baggrundsbilledet */
@@ -178,13 +177,14 @@ html {
 
 .MuiTypography-root.jss54.MuiTypography-body1.MuiTypography-colorTextSecondary {
   font-weight: bold; 
+  color: #ffffff;
   font-size: 1.2em; 
   padding-bottom: 2em;
 }
 
 h1 {
   font-size: 1.8em;
-  color: #f7c1d9;
+  color: #ffffff;
   font-weight: bold;
   opacity: 1;
   transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1) 750ms;
