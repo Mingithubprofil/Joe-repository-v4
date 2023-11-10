@@ -19,19 +19,38 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 app.use("/", userRoute);
 
+//home
+
 app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/pages/home.html'));
   
 });
 
+//juicechat
 
 app.get('/juicechat.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/scripts/juicechat.js'));
   
 });
 
+//location 
+
+userRoute.get("/location.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/scripts/location.js"));
+});
+
+//cart
+
+userRoute.get("/cart.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/scripts/cart.js"));
+});
+
+//customize juice
+
 app.get('/customizeJuice.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/scripts/customizeJuice.js'));
+
+//css
   
 });
 app.get('/global.css', (req, res) => {
@@ -39,6 +58,7 @@ app.get('/global.css', (req, res) => {
   
 });
 
+//socket io
 
 io.on('connection', (socket) => {
   socket.on('chat message', msg => {
