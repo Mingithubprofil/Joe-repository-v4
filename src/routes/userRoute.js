@@ -58,19 +58,19 @@ userRoute.get("/customize_juice", (req, res) => {
 
 
 userRoute.get("/customizeJuice.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/scripts/customizeJuice.js"));
+  res.sendFile(path.join(__dirname, "../client/scripts/customizeJuice.js"));
 });
 
 //location 
 
 userRoute.get("/location.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/scripts/location.js"));
+  res.sendFile(path.join(__dirname, "../client/scripts/location.js"));
 });
 
 //cart
 
 userRoute.get("/cart.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/scripts/cart.js"));
+  res.sendFile(path.join(__dirname, "../client/scripts/cart.js"));
 }); 
 
 //chat
