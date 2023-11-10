@@ -49,7 +49,7 @@ userRoute.get("/order.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/order.js"));
 });
 
-//customize_juice
+/* //customize_juice
 
 userRoute.get("/customize_juice", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/customize_juice.html"));
@@ -69,7 +69,7 @@ userRoute.get("/location.js", (req, res) => {
 
 userRoute.get("/cart.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/cart.js"));
-}); 
+}); */
 
 //chat
 
