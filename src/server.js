@@ -35,22 +35,22 @@ app.get('/juicechat.js', (req, res) => {
 
 //location 
 
-app.get("/location.js", (req, res) => {
-  //res.header('Content-Type', 'text/javascript');
-  res.sendFile(path.join(__dirname, "../client/scripts/location.js"));
+app.get('/location.js', (req, res) => {
+  res.header('Content-Type', 'text/javascript');
+  res.sendFile(path.join(__dirname, '../client/scripts/location.js'));
 });
 
 //cart
 
-app.get("/cart.js", (req, res) => {
-  //res.header('Content-Type', 'text/javascript');
-  res.sendFile(path.join(__dirname, "../client/scripts/cart.js"));
+app.get('/cart.js', (req, res) => {
+  res.header('Content-Type', 'text/javascript');
+  res.sendFile(path.join(__dirname, '../client/scripts/cart.js'));
 });
 
 //customize juice
 
 app.get('/customizeJuice.js', (req, res) => {
-  //res.header('Content-Type', 'text/javascript');
+  res.header('Content-Type', 'text/javascript');
   res.sendFile(path.join(__dirname, '../client/scripts/customizeJuice.js'));
 //css
   
