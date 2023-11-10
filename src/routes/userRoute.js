@@ -42,7 +42,7 @@ userRoute.get("/userHome.js", (req, res) => {
 //order
 
 userRoute.get("/order", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/order.html"));
+  res.sendFile(path.join(__dirname, "../client/pages/order.html"));
 });
 
 userRoute.get("/order.js", (req, res) => {
