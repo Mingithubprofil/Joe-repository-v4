@@ -9,6 +9,7 @@ userRoute.use(cookieParser());
 let id = 1;
 let db = [];
 
+
 //login
 
 userRoute.get("/login", (req, res) => {
@@ -18,6 +19,7 @@ userRoute.get("/login", (req, res) => {
 userRoute.get("/login.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/login.js"));
 });
+
 
 //register
 
@@ -29,6 +31,7 @@ userRoute.get("/register.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/register.js"));
 });
 
+
 //userHome
 
 userRoute.get("/userHome", (req, res) => {
@@ -38,6 +41,7 @@ userRoute.get("/userHome", (req, res) => {
 userRoute.get("/userHome.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/userHome.js"));
 });
+
 
 //order
 
@@ -49,36 +53,18 @@ userRoute.get("/order.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/order.js"));
 });
 
+
 //customize_juice
 
 userRoute.get("/customize_juice", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/customize_juice.html"));
 });
 
-
-/*
-userRoute.get("/customizeJuice.js", (req, res) => {
-  res.header('Content-Type', 'text/javascript');
-  res.sendFile("../client/scripts/customizeJuice.js");
-});
-
-userRoute.get("/location.js", (req, res) => {
-  res.header('Content-Type', 'text/javascript');
-  res.sendFile("../client/scripts/location.js");
-});
-
-userRoute.get("/cart.js", (req, res) => {
-  res.header('Content-Type', 'text/javascript');
-  res.sendFile("../client/scripts/cart.js");
-}); */
-
-
-/*
-
 userRoute.get("/customizeJuice.js", (req, res) => {
   //res.header('Content-Type', 'text/javascript');
   res.sendFile(path.join(__dirname, "../client/scripts/customizeJuice.js"));
 });
+
 
 //location 
 
@@ -87,6 +73,7 @@ userRoute.get("/location.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/scripts/location.js"));
 });
 
+
 //cart
 
 userRoute.get("/cart.js", (req, res) => {
@@ -94,7 +81,6 @@ userRoute.get("/cart.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/scripts/cart.js"));
 }); 
 
-*/
 
 //chat
 
@@ -102,16 +88,18 @@ userRoute.get("/juicechat", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/juicechat.html"));
 });
 
-/*
+
 userRoute.get('/juicechat.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/scripts/juicechat.js'));
-}); */
+}); 
+
 
 //css
 
 userRoute.get("/global.css", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/styles/global.css"));
 });
+
 
 userRoute
   .get("/user", (req, res) => {

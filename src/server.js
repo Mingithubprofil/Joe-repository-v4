@@ -26,7 +26,7 @@ app.get('/home', (req, res) => {
   
 });
 
-
+/*
 
  //juicechat
 
@@ -56,7 +56,7 @@ app.get('/customizeJuice.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/scripts/customizeJuice.js'));
 });
   
-
+*/
 
 //css
 
