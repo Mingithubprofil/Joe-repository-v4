@@ -71,7 +71,9 @@ function changeUsername() {
 }
 
 
-if (username) document.getElementById("customername_on_order_page").innerHTML = `Welcome ${username}!`
+//username på homepage
+
+if (username) document.getElementById("username_on_home_page").innerHTML = `Welcome ${username}!`
 
 
 

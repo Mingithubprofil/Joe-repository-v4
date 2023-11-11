@@ -2,9 +2,13 @@ const express = require("express");
 const path = require("path");
 const userRoute = express.Router();
 
+
+//const db = require('../db/db.js');
+
 // Cookie implementation
 const cookieParser = require("cookie-parser");
 userRoute.use(cookieParser());
+
 
 let id = 1;
 let db = [];
