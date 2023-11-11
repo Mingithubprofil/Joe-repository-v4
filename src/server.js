@@ -26,38 +26,6 @@ app.get('/home', (req, res) => {
   
 });
 
-/*
-
- //juicechat
-
-app.get('/juicechat.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/scripts/juicechat.js'));
-  
-});
-
-//location 
-
-app.get('/location.js', (req, res) => {
-  res.header('Content-Type', 'text/javascript');
-  res.sendFile(path.join(__dirname, '../client/scripts/location.js'));
-});
-
-//cart
-
-app.get('/cart.js', (req, res) => {
-  res.header('Content-Type', 'text/javascript');
-  res.sendFile(path.join(__dirname, '../client/scripts/cart.js'));
-});
-
-//customize juice
-
-app.get('/customizeJuice.js', (req, res) => {
-  res.header('Content-Type', 'text/javascript');
-  res.sendFile(path.join(__dirname, '../client/scripts/customizeJuice.js'));
-});
-  
-*/
-
 //css
 
 app.get('/global.css', (req, res) => {
