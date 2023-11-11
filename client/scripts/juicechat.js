@@ -73,7 +73,17 @@ function changeUsername() {
 
 //username på homepage
 
-if (username) document.querySelectorAll("username_on_page").innerHTML = `hello ${username}`
+//if (username) document.querySelectorAll("username_on_page").innerHTML = `${username}`
+
+if (username) {
+  // Brug querySelector, da du vil have det første matchende element
+  const elements = document.querySelectorAll(".username_on_page");
+
+  // Loop igennem elementer og opdater indholdet
+  elements.forEach(element => {
+    element.innerHTML = username;
+  });
+}
 
 
 
