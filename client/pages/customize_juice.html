@@ -1,138 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/global.css">
-    <title>Order</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/global.css">
+  <title>Customize Juice</title>
 </head>
+
 <body>
-  <ul>
-    <li><img src="https://assets-global.website-files.com/5cb303852da2ad609e57122e/5ecbabe94966c27dd864c461_Logo%20-%20Joe%20%26%20the%20Juice%20without%20Pink.png" alt="Logo"></li>
-    <li><a href="http://188.166.200.199/home" class="active">Home</a></li>
-    <li style="float:right" ><a href="http://188.166.200.199/login">Log in</a></li>
-    <li style="float:right" ><a href="http://188.166.200.199/register">Register</a></li>
-    <li style="float:right" ><a href="https://www.joejuice.com/store/5f871bf1-b0d1-4e2a-ac84-31047281cde9">Menu</a></li>
-    <li style="float:right" ><a href="http://188.166.200.199/order">Order</a></li>
-    <li style="float:right" ><a href="http://188.166.200.199/juicechat">Juice chat</a></li>
+  <ul style="list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #f7c1d9; font-size: 2em; font-weight: bold; transition: background-color 0.3s ease-in-out;">
+    <li style="float: left; margin-right: 20px;"><img src="https://assets-global.website-files.com/5cb303852da2ad609e57122e/5ecbabe94966c27dd864c461_Logo%20-%20Joe%20%26%20the%20Juice%20without%20Pink.png" alt="Logo"></li>
+    <li style="float: left; margin-right: 20px;"><a href="http://188.166.200.199/home" class="active">Home</a></li>
+    <li style="float:right; margin-right: 20px; margin-top: 3px; position: relative;"><img src="https://cdn-icons-png.flaticon.com/512/34/34568.png" id="cartIcon" style="width: 40px; height: 40px;"></li>
+    <li style="float:right; margin-left: 20px;"><a href="http://188.166.200.199/login">Log in</a></li>
+    <li style="float:right; margin-left: 20px;"><a href="http://188.166.200.199/register">Register</a></li>
+    <li style="float:right; margin-left: 20px;"><a href="https://www.joejuice.com/store/5f871bf1-b0d1-4e2a-ac84-31047281cde9">Menu</a></li>
+    <li style="float:right; margin-left: 20px;"><a href="http://188.166.200.199/order">Order</a></li>
+    <li style="float:right; margin-left: 20px;"><a href="http://188.166.200.199/juicechat">Juice chat</a></li>
   </ul>
 
-    <div class="center">
-      <div>
-       <h4 id="customername_on_order_page"></h4>
-       <h4>On this page, you can customize your own juice!</h4>
-      </div>
-      <div class="Ingredients-list">
-        <h4>Ingredienser</h4>
-    
-        <div class="product">
-            <img src="product1.jpg" alt="Power Shake">
-            <h3>Æble</h3>
-            <p>Beskrivelse af æble</p>
-            <p>Pris: 5,00 kr.</p>
-            <button>Tilføj til kurv</button>
-        </div>
-    
-        <div class="product">
-            <img src="product2.jpg" alt="Go Away DOC">
-            <h3>Gulerod</h3>
-            <p>Beskrivelse af gulerod</p>
-            <p>Pris: 7,00 kr.</p>
-            <button>Tilføj til kurv</button>
-        </div>
-    
-        <div class="product">
-            <img src="product3.jpg" alt="Product 3">
-            <h3>Spinat</h3>
-            <p>Beskrivelse af spinat</p>
-            <p>Pris: 6,00 kr.</p>
-            <button>Tilføj til kurv</button>
-        </div>
-    
-        <div class="product">
-            <img src="product4.jpg" alt="Product 4">
-            <h3>Ananas</h3>
-            <p>Beskrivelse af ananas</p>
-            <p>Pris: 8,00 kr.</p>
-            <button>Tilføj til kurv</button>
-        </div>
-    
-        <div class="product">
-            <img src="product5.jpg" alt="Product 5">
-            <h3>Blåbær</h3>
-            <p>Beskrivelse af blåbær</p>
-            <p>Pris: 9,00 kr.</p>
-            <button>Tilføj til kurv</button>
-        </div>
-    
-        <div class="product">
-            <img src="product6.jpg" alt="Product 6">
-            <h3>Banan</h3>
-            <p>Beskrivelse af banan</p>
-            <p>Pris: 6,00 kr.</p>
-            <button>Tilføj til kurv</button>
-        </div>
-    
-        <div class="product">
-            <img src="product7.jpg" alt="Product 7">
-            <h3>Appelsin</h3>
-            <p>Beskrivelse af appelsin</p>
-            <p>Pris: 7,00 kr.</p>
-            <button>Tilføj til kurv</button>
-        </div>
-    
-        <div class="product">
-            <img src="product8.jpg" alt="Product 8">
-            <h3>Kale</h3>
-            <p>Beskrivelse af kale</p>
-            <p>Pris: 7,00 kr.</p>
-            <button>Tilføj til kurv</button>
-        </div>
-    
-        <div class="product">
-            <img src="product9.jpg" alt="Product 9">
-            <h3>Lime</h3>
-            <p>Beskrivelse af lime</p>
-            <p>Pris: 5,00 kr.</p>
-            <button>Tilføj til kurv</button>
-        </div>
-    
-        <div class="product">
-            <img src="client/img/Power Shake-x2.jpg" alt="Product 10">
-            <h3>Jordbær</h3>
-            <p>Beskrivelse af jordbær</p>
-            <p>Pris: 10,00 kr.</p>
-            <button>Tilføj til kurv</button>
-        </div>
+  <div class="center">
+    <div class="header">
+      <h4 id="customername_on_order_page"></h4>
+      <h4>On this page, you can customize your own juice!</h4>
+      <h4>Ingredienser</h4>
     </div>
-    <div class="center">
-      <div>
-          <h4 id="customername_on_order_page"></h4>
-          <h4>On this page, you can customize your own juice!</h4>
+    <div class="Ingredients-list">
+
+
+      <!-- Product 1 -->
+      <div class="product">
+        <img src="https://de2yypvld0g7s.cloudfront.net/26c9ea13-9e29-4a90-82d3-4b0c3ba1601d/75-x2.png" alt="Power Shake">
+        <h3>Æble</h3>
+        <p>Pris: 6,00 kr.</p>
+        <button class="addToCartBtn">Tilføj til kurv</button>
       </div>
 
-      <div class="Ingredients-list">
-          <h4>Ingredienser</h4>
-          
-          <!-- Your existing product sections -->
-
-          <!-- Add more products here -->
-
-          <!-- Cart Section -->
-          <div class="cart">
-              <h4>Din Kurv</h4>
-              <div id="cart-items"></div>
-          </div>
+      <div class="product">
+        <img src="https://de2yypvld0g7s.cloudfront.net/17bd5317-a51f-4a77-a377-25c461b7f8b4/5-x2.png" alt="Power Shake">
+        <h3>Ingefær</h3>
+        <p>Pris: 6,00 kr.</p>
+        <button class="addToCartBtn">Tilføj til kurv</button>
       </div>
+
+      <div class="product">
+        <img src="https://de2yypvld0g7s.cloudfront.net/4ecee84a-c218-4e35-b7b1-837b3083e0fd/76-x2.png" alt="Power Shake">
+        <h3>Gulerod</h3>
+        <p>Pris: 6,00 kr.</p>
+        <button class="addToCartBtn">Tilføj til kurv</button>
+      </div>
+
+      <div class="product">
+        <img src="https://de2yypvld0g7s.cloudfront.net/cd49d666-560e-4682-a3fc-459f72db32bc/9-x2.png" alt="Power Shake">
+        <h3>Citron</h3>
+        <p>Pris: 6,00 kr.</p>
+        <button class="addToCartBtn">Tilføj til kurv</button>
+      </div>
+
+      <div class="product">
+        <img src="https://de2yypvld0g7s.cloudfront.net/4dcb4ab1-59a8-442c-b4bc-e700162bd764/3-x2.png" alt="Power Shake">
+        <h3>Avocado</h3>
+        <p>Pris: 10,00 kr.</p>
+        <button class="addToCartBtn">Tilføj til kurv</button>
+      </div>
+
+      <div class="product">
+        <img src="https://de2yypvld0g7s.cloudfront.net/2747dc93-876b-4148-9a1b-2c790b23be9f/34-x2.png" alt="Power Shake">
+        <h3>Ananas</h3>
+        <p>Pris: 6,00 kr.</p>
+        <button class="addToCartBtn">Tilføj til kurv</button>
+      </div>
+
+      <div class="product">
+        <img src="https://de2yypvld0g7s.cloudfront.net/75c8d651-b99a-45db-abde-bdc81bec7292/27-x2.png" alt="Power Shake">
+        <h3>Banan</h3>
+        <p>Pris: 6,00 kr.</p>
+        <button class="addToCartBtn">Tilføj til kurv</button>
+      </div>
+
+      <div class="product">
+        <img src="https://de2yypvld0g7s.cloudfront.net/ac4eda4a-ae81-4bc7-bb5a-c71314c45229/25-x2.png" alt="Power Shake">
+        <h3>Jordbær</h3>
+        <p>Pris: 6,00 kr.</p>
+        <button class="addToCartBtn">Tilføj til kurv</button>
+      </div>
+
+      <div class="product">
+        <img src="https://de2yypvld0g7s.cloudfront.net/5a723dd3-7820-4690-9769-fc7b4e5f83c6/Ice%5B44%5D-x2.png" alt="Power Shake">
+        <h3>Is</h3>
+        <p>Pris: 0,00 kr.</p>
+        <button class="addToCartBtn">Tilføj til kurv</button>
+      </div>
+
+      <div class="product">
+        <img src="https://de2yypvld0g7s.cloudfront.net/647b3205-5ba3-4664-9d2d-c6f85f71d880/6-x2.png" alt="Power Shake">
+        <h3>Protein</h3>
+        <p>Pris: 10,00 kr.</p>
+        <button class="addToCartBtn">Tilføj til kurv</button>
+      </div>
+    </div>
   </div>
-    
-        <!-- Add more products here -->
-      </div>
-    </div>
+  
 
-    </body>
-    <script src="../scripts/customizeJuice.js"></script>
-    </html>
+  <!-- Include your JavaScript file at the end -->
+  <script src="../scripts/customizeJuice.js"></script>
+</body>
 
-    
+</html>
