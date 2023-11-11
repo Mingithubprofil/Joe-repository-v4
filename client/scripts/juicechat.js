@@ -71,15 +71,12 @@ function changeUsername() {
 }
 
 
-//username på homepage
-
-//if (username) document.querySelectorAll("username_on_page").innerHTML = `${username}`
+//visning af username på siden
 
 if (username) {
-  // Brug querySelector, da du vil have det første matchende element
+  
   const elements = document.querySelectorAll(".username_on_page");
 
-  // Loop igennem elementer og opdater indholdet
   elements.forEach(element => {
     element.innerHTML = username;
   });

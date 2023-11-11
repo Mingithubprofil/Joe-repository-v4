@@ -50,7 +50,7 @@ userRoute.get("/userHome.js", (req, res) => {
 //profilePage
 
 userRoute.get("/profilePage", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/profile.html"));
+  res.sendFile(path.join(__dirname, "../../client/pages/profilePage.html"));
 });
 
 
