@@ -27,7 +27,6 @@ async function isUserRegistered(username) {
   }
 }
 
-// ... (din øvrige kode)
 
 //login funktion
 function loginUser() {
@@ -46,24 +45,25 @@ function loginUser() {
         if (await isUserRegistered(username)) {
           // localStorage.setItem("Username", username);
           document.cookie = `userAuth=${username}`;
+
+          // Redirect og opdater DOM
+          responseDOM.innerHTML = response.data;
+          await wait(3);
+          location.href = "/userHome";
         } else {
           responseDOM.innerHTML = "Brugeren er ikke registreret.";
           return;
         }
+      } else {
+        // Opdater DOM i tilfælde af anden respons end "User logged in"
+        responseDOM.innerHTML = response.data;
       }
-
-      // Redirect:
-      responseDOM.innerHTML = response.data;
-
-      await wait(3);
-      location.href = "/userHome";
     })
     .catch(function (error) {
       console.log(error);
     });
 }
 
-// ...
 
 
 /*
