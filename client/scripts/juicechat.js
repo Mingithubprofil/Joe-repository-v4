@@ -73,7 +73,7 @@ function changeUsername() {
 
 //username på homepage
 
-// if (username) document.getElementById("username_on_home_page").innerHTML = `Welcome ${username}!`
+if (username) document.querySelectorAll("username_on_page").innerHTML = `${username}`
 
 
 
