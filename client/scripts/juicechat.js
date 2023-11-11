@@ -75,7 +75,7 @@ function changeUsername() {
 
 if (username) {
   
-  const elements = document.querySelectorAll("username_on_page");
+  const elements = document.querySelectorAll(".username_on_page");
 
   elements.forEach(element => {
     element.innerHTML = username;
