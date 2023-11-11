@@ -251,5 +251,68 @@ h4 {
   font-weight: bold;
   animation: fadeIn 1s ease-in-out 750ms forwards;
 }
+.modal {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: auto;
+  overflow: hidden;
+  background-color: #f7c1d9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  border-radius: 10px; /* Add rounded corners */
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
 
+.modal-content {
+  padding: 22px;
+  background-color: white; /* Set a white background for content */
+  border-radius: 10px; /* Match the rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
 
+.close {
+  position: absolute;
+  top: 10px; /* Adjust the top position */
+  right: 10px;
+  font-size: 24px;
+  color: #333; /* Set a dark color for the close icon */
+  cursor: pointer;
+}
+
+#cartItems {
+  list-style-type: none;
+  padding: 0;
+  font-size: 1.2em; /* Adjust the font size */
+}
+
+#totalPrice {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Adjust font size */
+#cartModal h2 {
+  font-size: 2em;
+  color: #333; /* Set a dark color for the heading */
+}
+/* Add this to your existing CSS styles */
+.removeBtn {
+  background-color: #ff6b6b; /* Set the background color as desired */
+  color: #fff; /* Set the text color to white */
+  border: none;
+  padding: 2px 6px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.removeBtn:hover {
+  background-color: #e04f4f; /* Set the hover background color */
+}
+
+#cartIcon:hover {
+  filter: brightness(20%); /* Adjust the brightness as needed */
+  cursor: pointer;
+}
