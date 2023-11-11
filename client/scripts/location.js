@@ -29,7 +29,7 @@ getWeather().then(({ data }) => {
   const temperature = data.current.temperature_2m;
   if (temperature < 20) {
     //orderText.style.display = "none";
-    orderText.textContent = "Uha, det er lidt køligt i dag. Vi tilbyder også kaffe.";
+    kaffelink.textContent = "Uha, det er lidt køligt i dag. Vi tilbyder også kaffe.";
     console.log(temperature)
   } else {
     console.log("Tilbyd kaffe..");
