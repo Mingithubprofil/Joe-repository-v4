@@ -29,7 +29,7 @@ getWeather().then(({ data }) => {
   const temperature = data.current.temperature_2m;
   if (temperature < 20) {
     //orderText.style.display = "none";
-    kaffeAnbefaling.innerHTML = "Uha, det er lidt køligt i dag. Vi tilbyder også <a id='kaffe_link' href='https://www.joejuice.com/store/5f871bf1-b0d1-4e2a-ac84-31047281cde9'>kaffe</a>."
+    kaffeAnbefaling.innerHTML = `Uha ${temperature} grader i København - det er lidt køligt i dag. Vi tilbyder også <a id='kaffe_link' href='https://www.joejuice.com/store/5f871bf1-b0d1-4e2a-ac84-31047281cde9'>kaffe</a>.`
     console.log(temperature)
   } else {
     console.log("Tilbyd kaffe..");
