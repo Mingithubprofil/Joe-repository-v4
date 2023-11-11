@@ -26,7 +26,7 @@ async function getWeather() {
 }
 
 getWeather().then(({ data }) => {
-  const temperature = data.current.temperature_2;
+  const temperature = data.current.temperature_2m;
   if (temperature < 20) {
     orderText.style.display = "none";
     orderText.textContent = "Uha, det er lidt køligt i dag. Vi tilbyder også kaffe.";
