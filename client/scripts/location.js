@@ -1,6 +1,6 @@
 
-let orderText = document.getElementById("store");
-let storeHeader = document.getElementById("store-header");
+let kaffeAnbefaling = document.getElementById("kaffe_anbefaling");
+//let storeHeader = document.getElementById("store-header");
 let loading = document.getElementById("loading");
 let kaffelink = document.getElementById("kaffe_link");
 
@@ -29,7 +29,7 @@ getWeather().then(({ data }) => {
   const temperature = data.current.temperature_2m;
   if (temperature < 20) {
     //orderText.style.display = "none";
-    kaffelink.textContent = "Uha, det er lidt køligt i dag. Vi tilbyder også kaffe.";
+    kaffeAnbefaling.textContent = "Uha, det er lidt køligt i dag. Vi tilbyder også kaffe.";
     console.log(temperature)
   } else {
     console.log("Tilbyd kaffe..");
