@@ -316,3 +316,15 @@ h4 {
   filter: brightness(20%); /* Adjust the brightness as needed */
   cursor: pointer;
 }
+
+.Ingredients-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.product {
+  width: 200px; /* Adjust the width as needed */
+  margin: 15px;
+  text-align: center;
+}
