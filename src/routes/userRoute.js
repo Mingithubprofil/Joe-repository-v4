@@ -5,7 +5,7 @@ const userRoute = express.Router();
 
 //const db = require('../db/db.js');
 
-const { executeStatement } = require('../db/db');
+const connection = require('../db/db');
 
 // Cookie implementation
 const cookieParser = require("cookie-parser");
@@ -114,6 +114,51 @@ userRoute.get("/global.css", (req, res) => {
 });
 
 
+
+userRoute.get("/user", (req, res) => {
+  const request = new Request('SELECT * FROM Users;', (err, rowCount, rows) => {
+    if (err) {
+      console.error('Fejl ved hentning af brugere fra SQL-database:', err.message);
+      res.status(500).send('Internal Server Error');
+    } else {
+      const users = rows.map(row => ({
+        id: row[0].value,
+        username: row[1].value,
+        password: row[2].value,
+      }));
+      res.send(users);
+    }
+  });
+
+  connection.execSql(request);
+});
+
+userRoute.post("/user", (req, res) => {
+  const data = req.body;
+
+  const request = new Request(
+    'INSERT INTO Users (username, password) VALUES (@username, @password);',
+    (err) => {
+      if (err) {
+        console.error('Fejl ved indsættelse af bruger i SQL-database:', err.message);
+        res.status(500).send('Internal Server Error');
+      } else {
+        res.send('User added');
+      }
+    }
+  );
+
+  request.addParameter('username', TYPES.NVarChar, data.username);
+  request.addParameter('password', TYPES.NVarChar, data.password);
+
+  connection.execSql(request);
+});
+
+module.exports = userRoute;
+
+/*
+
+
 // Endpoint for at hente alle brugere
 userRoute.get("/user", (req, res) => {
   const sql = 'SELECT * FROM Users';
@@ -187,6 +232,8 @@ userRoute.post("/login", (req, res) => {
     }
   });
 });
+
+*/
 
 module.exports = userRoute;
 
