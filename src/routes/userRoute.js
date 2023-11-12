@@ -207,9 +207,82 @@ userRoute.post("/checkUser", (req, res) => {
 });
 
 
+// Middleware funktion til at tjekke autentificering
+const checkAuth = async (req) => {
+  const { username, password } = req.body;
+
+  // Tjek om username og password er til stede i request body
+  if (!username || !password) {
+    return false;
+  }
+
+  const sql = `SELECT id FROM Users WHERE username = @username AND password = @password`;
+
+  const request = new Request(sql, (err, rowCount) => {
+    if (err) {
+      console.error('Fejl ved tjek af bruger i SQL-database:', err.message);
+    }
+  });
+
+  request.addParameter('username', TYPES.VarChar, username);
+  request.addParameter('password', TYPES.VarChar, password);
+
+  try {
+    const result = await executeQuery(request);
+    return result && result.rowCount > 0;
+  } catch (error) {
+    console.error('Fejl ved tjek af bruger i SQL-database:', error.message);
+    return false;
+  }
+};
+
+// Login-endepunkt med autentificering
+userRoute.post("/login", async (req, res) => {
+  const isAuthenticated = await checkAuth(req);
+
+  if (!isAuthenticated) {
+    return res.status(401).send("Unauthorized");
+  }
+
+  const { username, password } = req.body;
+
+  // Fortsæt med den tidligere kode for login-endepunktet...
+  const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
+
+  const request = new Request(sql, (err, rowCount, rows) => {
+    if (err) {
+      console.error('Fejl ved login i SQL-database:', err.message);
+      res.status(500).send('Internal Server Error');
+    } else {
+      const user = rows.map(row => ({
+        id: row[0].value,
+        username: row[1].value,
+        password: row[2].value,
+      }));
+
+      if (user.length > 0) {
+        // Tilføj cookie med brugernavn
+        res.cookie("userAuth", username, {
+          maxAge: 3600000,
+        });
+      
+        res.status(200).json({ status: "success", message: "User logged in" });
+      } else {
+        res.status(401).json({ status: "error", message: "Invalid username or password" });
+      }
+    }
+  });
+
+  request.addParameter('username', TYPES.VarChar, username);
+  request.addParameter('password', TYPES.VarChar, password);
+  console.log(sql);
+  connection.execSql(request); 
+});
 
 
-userRoute.post("/login", (req, res) => {
+
+
+/* userRoute.post("/login", (req, res) => {
 
   console.log("Request body:", req.body);
 
@@ -257,191 +330,14 @@ userRoute.post("/login", (req, res) => {
   connection.execSql(request); 
 });
 
-
-/*
-
-userRoute.get("/user/:id", (req, res) => {
-  const userId = req.params.id;
-  const sql = `SELECT * FROM Users WHERE id = @userId`;
-
-  const request = new Request(sql, (err, rowCount, rows) => {
-    if (err) {
-      console.error('Fejl ved hentning af brugere fra SQL-database:', err.message);
-      res.status(500).send('Internal Server Error');
-    } else {
-      const user = rows.map(row => ({
-        id: row[0].value,
-        username: row[1].value,
-        password: row[2].value,
-      }));
-      res.send(user);
-    }
-  });
-
-  request.addParameter('userId', TYPES.Int, userId);
-  connection.execSql(request);
-});
-
-userRoute.delete("/user/:id", (req, res) => {
-  const userId = req.params.id;
-  const sql = `DELETE FROM Users WHERE id = @userId`;
-
-  const request = new Request(sql, (err) => {
-    if (err) {
-      console.error('Fejl ved sletning af bruger i SQL-database:', err.message);
-      res.status(500).send('Internal Server Error');
-    } else {
-      res.send(`User with ID ${userId} deleted`);
-    }
-  });
-
-  request.addParameter('userId', TYPES.Int, userId);
-  connection.execSql(request);
-});
-
-userRoute.post("/login", (req, res) => {
-  const { username, password } = req.body;
-
-  // Tjek om username og password er til stede i request body
-  if (!username || !password) {
-    return res.status(400).send("Username and password are required");
-  }
-
-  const sql = `SELECT * FROM Users WHERE username = @username AND password = @password`;
-
-  const request = new Request(sql, (err, rowCount, rows) => {
-    if (err) {
-      console.error('Fejl ved login i SQL-database:', err.message);
-      res.status(500).send('Internal Server Error');
-    } else {
-      const user = rows.map(row => ({
-        id: row[0].value,
-        username: row[1].value,
-        password: row[2].value,
-      }));
-
-      if (user.length > 0) {
-        // Tilføj cookie med brugernavn
-        res.cookie("userAuth", username, {
-          maxAge: 3600000,
-        });
-
-        res.status(200).send("User logged in");
-      } else {
-        res.status(401).send("Invalid username or password");
-      }
-    }
-  });
-
-  request.addParameter('username', TYPES.NVarChar, username);
-  request.addParameter('password', TYPES.NVarChar, password);
-  connection.execSql(request);
-});
-
-*/
-
-
-
-
-module.exports = userRoute;
-
-/*
-
-
-// Endpoint for at hente alle brugere
-userRoute.get("/user", (req, res) => {
-  const sql = 'SELECT * FROM Users';
-  executeStatement(sql, () => {
-    // Send svar til klienten
-    // Antaget at resultaterne af query'en er i en variabel kaldet 'users'
-    res.send(users);
-  });
-});
-
-// Endpoint for at tilføje en ny bruger
-userRoute.post("/user", (req, res) => {
-  const { username, password } = req.body;
-
-  // Tjek om username og password er til stede i request body
-  if (!username || !password) {
-    return res.status(400).send("Username and password are required");
-  }
-
-  const sql = `INSERT INTO Users (username, password) VALUES ('${username}', '${password}')`;
-  executeStatement(sql, () => {
-    // Send svar til klienten
-    res.send("User added");
-  });
-});
-
-// Endpoint for at hente en specifik bruger
-userRoute.get("/user/:id", (req, res) => {
-  const userId = req.params.id;
-  const sql = `SELECT * FROM Users WHERE id = ${userId}`;
-  executeStatement(sql, () => {
-    // Send svar til klienten
-    // Antaget at resultaterne af query'en er i en variabel kaldet 'user'
-    res.send(user);
-  });
-});
-
-// Endpoint for at slette en bruger
-userRoute.delete("/user/:id", (req, res) => {
-  const userId = req.params.id;
-  const sql = `DELETE FROM Users WHERE id = ${userId}`;
-  executeStatement(sql, () => {
-    // Send svar til klienten
-    res.send(`User with ID ${userId} deleted`);
-  });
-});
-
-// Endpoint for login
-
-userRoute.post("/login", (req, res) => {
-  const { username, password } = req.body;
-
-  // Tjek om username og password er til stede i request body
-  if (!username || !password) {
-    return res.status(400).send("Username and password are required");
-  }
-
-  const sql = `SELECT * FROM Users WHERE username = '${username}' AND password = '${password}'`;
-  executeStatement(sql, () => {
-    // Send svar til klienten baseret på resultatet af login-query'en
-    // Antaget at resultaterne af query'en er i en variabel kaldet 'user'
-    if (user) {
-      // Tilføj cookie med brugernavn
-      res.cookie("userAuth", username, {
-        maxAge: 3600000,
-      });
-
-      res.status(200).send("User logged in");
-    } else {
-      res.status(401).send("Invalid username or password");
-    }
-  });
-});
-
 */
 
 module.exports = userRoute;
 
 
-/*
 
-//database 
 
-userRoute.get('/databaseInfo', async (req, res) => {
-  try {
-    // Kald db-funktionen og log resultatet
-    const result = await database.connectAndQuery();
-    console.log('Resultat fra database:', result);
-    res.send('Se konsollen for resultatet.');
-  } catch (error) {
-    console.error('Fejl ved at hente data fra database:', error);
-    res.status(500).send('Der opstod en fejl.');
-  }
-}); */
+
 
 /*
 
