@@ -209,6 +209,9 @@ userRoute.post("/checkUser", (req, res) => {
 
 
 userRoute.post("/login", (req, res) => {
+
+  console.log("Request body:", req.body);
+
   const { username, password } = req.body;
 
   // Tjek om username og password er til stede i request body
