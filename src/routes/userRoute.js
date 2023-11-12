@@ -222,11 +222,12 @@ userRoute.post("/login", (req, res) => {
         res.cookie("userAuth", username, {
           maxAge: 3600000,
         });
-
-        res.status(200).send("User logged in");
+      
+        res.status(200).json({ status: "success", message: "User logged in" });
       } else {
-        res.status(401).send("Invalid username or password");
+        res.status(401).json({ status: "error", message: "Invalid username or password" });
       }
+      
     }
   });
 
