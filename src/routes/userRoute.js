@@ -200,8 +200,8 @@ userRoute.get("/checkUser", (req, res) => {
     }
   });
 
-  request.addParameter('username', TYPES.NVarChar, username);
-  request.addParameter('password', TYPES.NVarChar, password);
+  request.addParameter('username', TYPES.VarChar, username);
+  request.addParameter('password', TYPES.VarChar, password);
   connection.execSql(request);
 });
 
@@ -245,8 +245,8 @@ userRoute.post("/login", (req, res) => {
     }
   });
 
-  request.addParameter('username', TYPES.NVarChar, username);
-  request.addParameter('password', TYPES.NVarChar, password);
+  request.addParameter('username', TYPES.VarChar, username);
+  request.addParameter('password', TYPES.VarChar, password);
   console.log(request.parameters);
   connection.execSql(request);
 });
