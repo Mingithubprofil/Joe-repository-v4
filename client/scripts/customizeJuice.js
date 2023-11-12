@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const juiceImageContainer = document.querySelector('.juice-image-container');
   const vitaminDisplay = document.getElementById('vitaminDisplay'); // New element for vitamin display
   const maxContainerWidth = 600; // Set the maximum width as needed
+  const juiceFee = 50.00; // Standard juice fee
   let cartItems = [];
 
   function getRandomPosition(containerWidth, containerHeight, elementWidth, elementHeight) {
@@ -51,6 +52,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  function addJuiceFee() {
+    // Add the standard juice fee
+    cartItems.unshift({ name: 'Juice Fee', price: juiceFee, image: null, vitamin: null });
+  }
+
   function addToCart(button) {
     const productName = button.parentElement.querySelector('h3').textContent;
     const productImage = button.parentElement.querySelector('img').src;
@@ -84,6 +90,15 @@ document.addEventListener('DOMContentLoaded', function () {
     selectedIngredientsContainer.appendChild(ingredientImage);
 
     const cartItem = { name: productName, price: productPrice, image: productImage, vitamin: productVitamin };
+
+    // Check if there is already a juice fee in the cart
+    const juiceFeeIndex = cartItems.findIndex(item => item.name === 'Juice Fee');
+
+    // If there is no juice fee, add it to the cart without an image
+    if (juiceFeeIndex === -1) {
+      addJuiceFee();
+    }
+
     cartItems.push(cartItem);
     updateVitaminDisplay(); // Update the vitamin display
     updateCartView();
@@ -95,6 +110,12 @@ document.addEventListener('DOMContentLoaded', function () {
     updateCartView();
   }
 
+  function handleCheckout() {
+    // Implement your checkout logic here
+    // For now, let's just close the cart
+    closeCart();
+  }
+
   function updateCartView() {
     cartItemsList.innerHTML = '';
     let total = 0;
@@ -102,27 +123,29 @@ document.addEventListener('DOMContentLoaded', function () {
     selectedIngredientsContainer.innerHTML = '';
 
     cartItems.forEach((item, index) => {
-      const listItem = document.createElement('li');
-      listItem.innerHTML = `
-        ${item.name} - ${item.price} kr.
-        <button class="removeBtn" data-index="${index}">Remove</button>
-      `;
-      cartItemsList.appendChild(listItem);
+      if (item.name !== 'Juice Fee') {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+          ${item.name} - ${item.price} kr.
+          <button class="removeBtn" data-index="${index}">Remove</button>
+        `;
+        cartItemsList.appendChild(listItem);
 
-      const removeBtn = listItem.querySelector('.removeBtn');
-      removeBtn.addEventListener('click', () => removeFromCart(index));
+        const removeBtn = listItem.querySelector('.removeBtn');
+        removeBtn.addEventListener('click', () => removeFromCart(index));
 
-      total += item.price;
+        total += item.price;
 
-      const ingredientImage = document.createElement('img');
-      ingredientImage.src = item.image;
-      ingredientImage.alt = item.name;
-      ingredientImage.classList.add('selected-ingredient');
-      selectedIngredientsContainer.appendChild(ingredientImage);
+        const ingredientImage = document.createElement('img');
+        ingredientImage.src = item.image;
+        ingredientImage.alt = item.name;
+        ingredientImage.classList.add('selected-ingredient');
+        selectedIngredientsContainer.appendChild(ingredientImage);
 
-      // Scale the ingredient image
-      const scale = 0.8; // Adjust the scale factor as needed
-      ingredientImage.style.transform = `scale(${scale})`;
+        // Scale the ingredient image
+        const scale = 0.8; // Adjust the scale factor as needed
+        ingredientImage.style.transform = `scale(${scale})`;
+      }
     });
 
     const juiceName = generateRandomJuiceName(cartItems.map(item => item.name));
@@ -159,3 +182,4 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initial adjustment of container size
   adjustContainerSize();
 });
+
