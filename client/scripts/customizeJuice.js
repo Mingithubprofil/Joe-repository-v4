@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const juiceNameElement = document.getElementById('juiceName');
   const selectedIngredientsContainer = document.getElementById('selectedIngredients');
   const juiceImageContainer = document.querySelector('.juice-image-container');
+  const vitaminDisplay = document.getElementById('vitaminDisplay'); // New element for vitamin display
   const maxContainerWidth = 600; // Set the maximum width as needed
   let cartItems = [];
 
@@ -30,11 +31,32 @@ document.addEventListener('DOMContentLoaded', function () {
     return `${randomAdjective} ${limitedIngredients.join(' ')} ${randomNoun}`;
   }
 
+  function updateVitaminDisplay() {
+    // Clear previous vitamin display
+    vitaminDisplay.innerHTML = '';
+
+    // Get unique vitamins from cart items
+    const uniqueVitamins = [...new Set(cartItems.map(item => item.vitamin))];
+
+    // Display each vitamin in a visually appealing way
+    uniqueVitamins.forEach(vitamin => {
+      const vitaminDiv = document.createElement('div');
+      vitaminDiv.classList.add('vitamin-item');
+      vitaminDiv.textContent = vitamin;
+
+      // You can add additional styling or icons for each vitamin if needed
+      // vitaminDiv.style.color = 'red'; // Example styling
+
+      vitaminDisplay.appendChild(vitaminDiv);
+    });
+  }
+
   function addToCart(button) {
     const productName = button.parentElement.querySelector('h3').textContent;
     const productImage = button.parentElement.querySelector('img').src;
     const productPriceString = button.parentElement.querySelector('p').textContent;
     const productPrice = parseFloat(productPriceString.split(' ')[1].replace(',', '.'));
+    const productVitamin = button.parentElement.dataset.vitamin; // Get vitamin from data attribute
 
     const ingredientImage = document.createElement('img');
     ingredientImage.src = productImage;
@@ -61,13 +83,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     selectedIngredientsContainer.appendChild(ingredientImage);
 
-    const cartItem = { name: productName, price: productPrice, image: productImage };
+    const cartItem = { name: productName, price: productPrice, image: productImage, vitamin: productVitamin };
     cartItems.push(cartItem);
+    updateVitaminDisplay(); // Update the vitamin display
     updateCartView();
   }
 
   function removeFromCart(index) {
     cartItems.splice(index, 1);
+    updateVitaminDisplay(); // Update the vitamin display
     updateCartView();
   }
 
