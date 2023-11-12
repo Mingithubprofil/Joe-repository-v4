@@ -113,7 +113,7 @@ userRoute.get("/global.css", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/styles/global.css"));
 });
 
-//db 
+//database 
 
 userRoute.get('/databaseInfo', async (req, res) => {
   try {

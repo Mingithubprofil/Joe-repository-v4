@@ -20,10 +20,10 @@ async function connectAndQuery() {
       console.log('Forbundet til Azure SQL Database');
   
       // Opret en forespørgsel
-      const result = await pool.request().query('SELECT * FROM Users');
+      //const result = await pool.request().query('SELECT * FROM Users');
       
       // Log resultatet af forespørgslen
-      console.log('Data fra databasen:', result.recordset);
+      //console.log('Data fra databasen:', result.recordset);
     } catch (err) {
       // Håndter fejl ved forbindelse eller forespørgsel
       console.error('Fejl ved forbindelse til Azure SQL Database:', err.message);
