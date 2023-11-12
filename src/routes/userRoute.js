@@ -188,9 +188,6 @@ userRoute.post("/login", (req, res) => {
   });
 });
 
-module.exports = userRoute;
-
-
 
 /*
 
