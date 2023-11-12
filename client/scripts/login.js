@@ -1,8 +1,10 @@
 
 
+let user = {};
+
+
 let responseDOM = document.getElementById("response");
 
-let user = {};
 
 function wait(time) {
   return new Promise(resolve => {

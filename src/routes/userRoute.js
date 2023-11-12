@@ -116,26 +116,6 @@ userRoute.get("/global.css", (req, res) => {
 });
 
 
-//til registrering af bruger (virker fint)
-
-/* userRoute.get("/user", (req, res) => {
-  const request = new Request('SELECT * FROM Users;', (err, rowCount, rows) => {
-    if (err) {
-      console.error('Fejl ved hentning af brugere fra SQL-database:', err.message);
-      res.status(500).send('Internal Server Error');
-    } else {
-      const users = rows.map(row => ({
-        id: row[0].value,
-        username: row[1].value,
-        password: row[2].value,
-      }));
-      res.send(users);
-    }
-  });
-
-  connection.execSql(request);
-}); */
-
 //til registering af bruger (virker fint)
 
 userRoute.post("/user", (req, res) => {
@@ -265,6 +245,7 @@ userRoute.post("/login", (req, res) => {
 
   request.addParameter('username', TYPES.NVarChar, username);
   request.addParameter('password', TYPES.NVarChar, password);
+  console.log(request.parameters);
   connection.execSql(request);
 });
 
