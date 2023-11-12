@@ -182,7 +182,7 @@ userRoute.delete("/user/:id", (req, res) => {
 
 
 userRoute.get("/checkUser", (req, res) => {
-  const { username, password } = req.params;
+  const { username, password } = req.body;
 
   // Tjek om username og password er til stede i query params
   if (!username || !password) {
