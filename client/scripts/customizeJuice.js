@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const maxContainerWidth = 600; // Set the maximum width as needed
   const juiceFee = 50.00; // Standard juice fee
   let cartItems = [];
+  let juiceFeeAdded = false; // Flag to check if juice fee is added
 
   function getRandomPosition(containerWidth, containerHeight, elementWidth, elementHeight) {
     const x = Math.random() * (containerWidth - elementWidth);
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function addJuiceFee() {
     // Add the standard juice fee
-    cartItems.unshift({ name: 'Juice Fee', price: juiceFee, image: null, vitamin: null });
+    cartItems.unshift({ name: 'Juice Fee', price: juiceFee, image: null, vitamin: null, isJuiceFee: true });
   }
 
   function addToCart(button) {
@@ -89,31 +90,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     selectedIngredientsContainer.appendChild(ingredientImage);
 
-    const cartItem = { name: productName, price: productPrice, image: productImage, vitamin: productVitamin };
+    const cartItem = { name: productName, price: productPrice, image: productImage, vitamin: productVitamin, isJuiceFee: false };
+    cartItems.push(cartItem);
 
-    // Check if there is already a juice fee in the cart
-    const juiceFeeIndex = cartItems.findIndex(item => item.name === 'Juice Fee');
-
-    // If there is no juice fee, add it to the cart without an image
-    if (juiceFeeIndex === -1) {
+    // Add juice fee only for the first product
+    if (!juiceFeeAdded) {
       addJuiceFee();
+      juiceFeeAdded = true;
     }
 
-    cartItems.push(cartItem);
     updateVitaminDisplay(); // Update the vitamin display
     updateCartView();
-  }
-
-  function removeFromCart(index) {
-    cartItems.splice(index, 1);
-    updateVitaminDisplay(); // Update the vitamin display
-    updateCartView();
-  }
-
-  function handleCheckout() {
-    // Implement your checkout logic here
-    // For now, let's just close the cart
-    closeCart();
   }
 
   function updateCartView() {
@@ -123,19 +110,15 @@ document.addEventListener('DOMContentLoaded', function () {
     selectedIngredientsContainer.innerHTML = '';
 
     cartItems.forEach((item, index) => {
-      if (item.name !== 'Juice Fee') {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-          ${item.name} - ${item.price} kr.
-          <button class="removeBtn" data-index="${index}">Remove</button>
-        `;
-        cartItemsList.appendChild(listItem);
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `
+        ${!item.isJuiceFee ? `<span>${item.name} - ${item.price} kr. </span> <button class="removeBtn" data-index="${index}">Remove</button>` : ''}
+      `;
+      cartItemsList.appendChild(listItem);
 
-        const removeBtn = listItem.querySelector('.removeBtn');
-        removeBtn.addEventListener('click', () => removeFromCart(index));
+      total += item.price;
 
-        total += item.price;
-
+      if (item.image && !item.isJuiceFee) {
         const ingredientImage = document.createElement('img');
         ingredientImage.src = item.image;
         ingredientImage.alt = item.name;
@@ -146,14 +129,25 @@ document.addEventListener('DOMContentLoaded', function () {
         const scale = 0.8; // Adjust the scale factor as needed
         ingredientImage.style.transform = `scale(${scale})`;
       }
+
+      if (!item.isJuiceFee) {
+        const removeBtn = listItem.querySelector('.removeBtn');
+        removeBtn.addEventListener('click', () => removeFromCart(index));
+      }
     });
 
-    const juiceName = generateRandomJuiceName(cartItems.map(item => item.name));
+    const juiceName = generateRandomJuiceName(cartItems.filter(item => !item.isJuiceFee).map(item => item.name));
     juiceNameElement.textContent = `Juice Navn: ${juiceName}`;
 
     totalPriceElement.textContent = `Total: ${total.toFixed(2)} kr.`;
 
     openCart();
+  }
+
+  function removeFromCart(index) {
+    cartItems.splice(index, 1);
+    updateVitaminDisplay(); // Update the vitamin display
+    updateCartView();
   }
 
   function openCart() {
@@ -182,4 +176,3 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initial adjustment of container size
   adjustContainerSize();
 });
-
