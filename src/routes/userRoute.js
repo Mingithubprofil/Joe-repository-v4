@@ -196,6 +196,29 @@ userRoute.delete("/user/:id", (req, res) => {
   connection.execSql(request);
 });
 
+
+
+userRoute.post("/checkUser", (req, res) => {
+  const { username } = req.body;
+
+  const sql = `SELECT id FROM Users WHERE username = @username`;
+
+  const request = new Request(sql, (err, rowCount, rows) => {
+    if (err) {
+      console.error('Fejl ved tjek af bruger i SQL-database:', err.message);
+      res.status(500).send('Internal Server Error');
+    } else {
+      const userExists = rowCount > 0;
+      res.json({ status: "success", userExists });
+    }
+  });
+
+  request.addParameter('username', TYPES.NVarChar, username);
+  connection.execSql(request);
+});
+
+
+
 userRoute.post("/login", (req, res) => {
   const { username, password } = req.body;
 
