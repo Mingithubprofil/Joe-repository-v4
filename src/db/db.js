@@ -29,7 +29,7 @@ sql.connect(config)
   })
   .finally(() => {
     // Luk forbindelsen ved afslutning af din applikation
-    sql.close();
+    //sql.close();
     console.log('Forbindelse til Azure SQL Database lukket ved afslutning.');
   });
 
