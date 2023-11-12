@@ -37,11 +37,9 @@ function loginUser() {
   let password = document.getElementById("password").value;
 
   // Anmodning til /checkUser-endpoint
-  axios.get("http://188.166.200.199/checkUser", {
-    params: {
-      username,
-      password,
-    },
+  axios.post("http://188.166.200.199/checkUser", {
+    username,
+    password,
   })
   .then(async function (response) {
     if (response.data.userExists) {
@@ -56,6 +54,7 @@ function loginUser() {
     responseDOM.innerHTML = "Der opstod en fejl ved brugertjek. Tjek konsollen for detaljer.";
   });
 }
+
 
 // Hjælpefunktion til at udføre login
 async function performLogin(username, password) {
