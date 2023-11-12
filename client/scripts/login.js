@@ -43,10 +43,14 @@ function loginUser() {
   console.log("Sending login request with username:", username, "and password:", password);
 
   // Anmodning til /checkUser-endpoint
-  axios.post("http://188.166.200.199/checkUser", {
-    username,
-    password,
-  })
+  axios.post("http://188.166.200.199/login", {
+  username,
+  password,
+}, {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
   .then(async function (response) {
     if (response.data.userExists) {
       // Hvis brugeren eksisterer, udfør login
@@ -65,9 +69,13 @@ function loginUser() {
 // Hjælpefunktion til at udføre login
 async function performLogin(username, password) {
   axios.post("http://188.166.200.199/login", {
-    username,
-    password,
-  })
+  username,
+  password,
+}, {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
   .then(async function (response) {
     console.log(response.data);
     if (response.data.status === "success") {
