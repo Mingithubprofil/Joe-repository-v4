@@ -28,7 +28,12 @@ async function isUserRegistered(username) {
 }
 
 
-axios
+//login funktion
+function loginUser() {
+  let username = document.getElementById("username").value;
+  let password = document.getElementById("password").value;
+
+  axios
   .post("http://188.166.200.199/login", { username, password })
   .then(async function (response) {
     console.log(response.data);
@@ -55,6 +60,7 @@ axios
     console.log(error);
   });
 
+}
 
 
 
