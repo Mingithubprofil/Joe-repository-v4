@@ -12,6 +12,8 @@ function wait(time) {
 }
 
 // Simpel funktion til at tjekke om brugeren er registreret
+
+/*
 async function isUserRegistered(username) {
   try {
     const response = await axios.get(`http://188.166.200.199/user`);
@@ -21,6 +23,16 @@ async function isUserRegistered(username) {
     const isRegistered = users.some(user => user.username === username);
     
     return isRegistered;
+  } catch (error) {
+    console.error("Fejl ved forespørgsel om brugere:", error.message);
+    return false;
+  }
+} */
+
+async function isUserRegistered(username, password) {
+  try {
+    const response = await axios.post("http://188.166.200.199/login", { username, password });
+    return response.data.status === "success";
   } catch (error) {
     console.error("Fejl ved forespørgsel om brugere:", error.message);
     return false;
