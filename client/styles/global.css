@@ -11,6 +11,7 @@ ul {
   overflow: hidden;
   background-color: #f7c1d9;
   font-size: 2em;
+  border-radius: 10px;
   font-weight: bold;
   transition: background-color 0.3s ease-in-out; /* Added smooth background color transition */
 }
@@ -262,6 +263,7 @@ h4 {
 
 .modal-content {
   padding: 22px;
+  margin-top: 10px;
   background-color: white; /* Set a white background for content */
   border-radius: 10px; /* Match the rounded corners */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
