@@ -25,7 +25,16 @@
     <div class="header">
       <h4 id="customername_on_order_page"></h4>
       <h4>On this page, you can customize your own juice!</h4>
-      <h4>Ingredienser</h4>
+      <div class="juice-container">
+        <div class="juice-image-container">
+          <img src="https://icons.veryicon.com/png/o/miscellaneous/shuangyang-cloud-campus-icon-library/icon-juice.png" alt="Tom juice">
+          <div id="selectedIngredients"></div>
+        </div>
+        <div class="juice-name-container">
+          <p id="juiceName"></p>
+        </div>
+      </div>
+      <h4 id="IngredienserTitel">Ingredienser</h4>
     </div>
     <div class="Ingredients-list">
 
@@ -99,6 +108,15 @@
         <h3>Protein</h3>
         <p>Pris: 10,00 kr.</p>
         <button class="addToCartBtn">Tilføj til kurv</button>
+      </div>
+
+      <div id="cartModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Din kurv</h2>
+          <ul id="cartItems"></ul>
+          <p id="totalPrice">Total: 0 kr.</p>
+        </div>
       </div>
     </div>
   </div>
