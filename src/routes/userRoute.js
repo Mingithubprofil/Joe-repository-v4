@@ -118,7 +118,7 @@ userRoute.get("/global.css", (req, res) => {
 
 //til registrering af bruger (virker fint)
 
-userRoute.get("/user", (req, res) => {
+/* userRoute.get("/user", (req, res) => {
   const request = new Request('SELECT * FROM Users;', (err, rowCount, rows) => {
     if (err) {
       console.error('Fejl ved hentning af brugere fra SQL-database:', err.message);
@@ -134,7 +134,7 @@ userRoute.get("/user", (req, res) => {
   });
 
   connection.execSql(request);
-});
+}); */
 
 //til registering af bruger (virker fint)
 
