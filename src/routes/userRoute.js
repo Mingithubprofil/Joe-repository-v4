@@ -158,6 +158,85 @@ userRoute.post("/user", (req, res) => {
   connection.execSql(request);
 });
 
+userRoute.get("/user/:id", (req, res) => {
+  const userId = req.params.id;
+  const sql = `SELECT id, username FROM Users WHERE id = @userId`;
+
+  const request = new Request(sql, (err, rowCount, rows) => {
+    if (err) {
+      console.error('Fejl ved hentning af bruger fra SQL-database:', err.message);
+      res.status(500).send('Internal Server Error');
+    } else {
+      const user = rows.map(row => ({
+        id: row[0].value,
+        username: row[1].value,
+      }));
+      res.send(user);
+    }
+  });
+
+  request.addParameter('userId', TYPES.Int, userId);
+  connection.execSql(request);
+});
+
+userRoute.delete("/user/:id", (req, res) => {
+  const userId = req.params.id;
+  const sql = `DELETE FROM Users WHERE id = @userId`;
+
+  const request = new Request(sql, (err) => {
+    if (err) {
+      console.error('Fejl ved sletning af bruger i SQL-database:', err.message);
+      res.status(500).send('Internal Server Error');
+    } else {
+      res.send(`User with ID ${userId} deleted`);
+    }
+  });
+
+  request.addParameter('userId', TYPES.Int, userId);
+  connection.execSql(request);
+});
+
+userRoute.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  // Tjek om username og password er til stede i request body
+  if (!username || !password) {
+    return res.status(400).send("Username and password are required");
+  }
+
+  const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
+
+  const request = new Request(sql, (err, rowCount, rows) => {
+    if (err) {
+      console.error('Fejl ved login i SQL-database:', err.message);
+      res.status(500).send('Internal Server Error');
+    } else {
+      const user = rows.map(row => ({
+        id: row[0].value,
+        username: row[1].value,
+        password: row[2].value,
+      }));
+
+      if (user.length > 0) {
+        // Tilføj cookie med brugernavn
+        res.cookie("userAuth", username, {
+          maxAge: 3600000,
+        });
+
+        res.status(200).send("User logged in");
+      } else {
+        res.status(401).send("Invalid username or password");
+      }
+    }
+  });
+
+  request.addParameter('username', TYPES.NVarChar, username);
+  request.addParameter('password', TYPES.NVarChar, password);
+  connection.execSql(request);
+});
+
+
+/*
 
 userRoute.get("/user/:id", (req, res) => {
   const userId = req.params.id;
@@ -237,7 +316,7 @@ userRoute.post("/login", (req, res) => {
   connection.execSql(request);
 });
 
-
+*/
 
 
 
