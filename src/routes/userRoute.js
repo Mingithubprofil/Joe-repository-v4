@@ -5,7 +5,7 @@ const userRoute = express.Router();
 
 //const db = require('../db/db.js');
 
-const database = require('./db/db');
+const database = require('../db/db');
 
 // Cookie implementation
 const cookieParser = require("cookie-parser");
