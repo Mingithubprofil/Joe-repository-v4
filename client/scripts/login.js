@@ -29,12 +29,11 @@ async function isUserRegistered(username) {
   }
 } */
 
-async function isUserRegistered(username, password) {
+async function isUserRegistered(username) {
   try {
     const response = await axios.get("http://188.166.200.199/checkUser", {
       params: {
         username,
-        password,
       },
     });
     return response.data.userExists;
@@ -43,6 +42,7 @@ async function isUserRegistered(username, password) {
     return false;
   }
 }
+
 
 
 
