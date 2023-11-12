@@ -31,8 +31,8 @@ async function isUserRegistered(username) {
   }
 } */
 
-let encodedUsername = encodeURIComponent(username);
-let encodedPassword = encodeURIComponent(password);
+//let encodedUsername = encodeURIComponent(username);
+//let encodedPassword = encodeURIComponent(password);
 
 
 // Login funktion
@@ -42,8 +42,8 @@ function loginUser() {
 
   // Anmodning til /checkUser-endpoint
   axios.post("http://188.166.200.199/checkUser", {
-    username: encodedUsername,
-    password: encodedPassword,
+    username,
+    password,
   })
   .then(async function (response) {
     if (response.data.userExists) {
