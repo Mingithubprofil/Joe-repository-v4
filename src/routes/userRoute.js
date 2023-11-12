@@ -133,8 +133,8 @@ userRoute.post("/user", (req, res) => {
     }
   );
 
-  request.addParameter('username', TYPES.NVarChar, data.username);
-  request.addParameter('password', TYPES.NVarChar, data.password);
+  request.addParameter('username', TYPES.VarChar, data.username);
+  request.addParameter('password', TYPES.VarChar, data.password);
 
   console.log(request.parameters);
 
