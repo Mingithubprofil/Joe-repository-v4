@@ -113,6 +113,8 @@ userRoute.get("/global.css", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/styles/global.css"));
 });
 
+/*
+
 //database 
 
 userRoute.get('/databaseInfo', async (req, res) => {
@@ -125,7 +127,7 @@ userRoute.get('/databaseInfo', async (req, res) => {
     console.error('Fejl ved at hente data fra database:', error);
     res.status(500).send('Der opstod en fejl.');
   }
-});
+}); */
 
 
 
