@@ -1,5 +1,5 @@
 
-
+/*
 //configuration af db
 
 const sql = require('mssql');
@@ -55,5 +55,54 @@ process.on('SIGINT', () => {
 
 */
 
+const { Connection, Request } = require('tedious');
+
+const config = {
+  server: 'servertilhjemmeside.database.windows.net',
+  authentication: {
+    type: 'default',
+    options: {
+      userName: 'admin20',
+      password: 'Kodetdatabase20',
+    },
+  },
+  options: {
+    encrypt: true, // Sørg for at aktivere kryptering
+    database: 'hjemmesidedatabase',
+  },
+};
+
+const connection = new Connection(config);
+
+connection.on('connect', (err) => {
+  if (err) {
+    console.error('Fejl ved forbindelse til Azure SQL Database:', err.message);
+  } else {
+    console.log('Forbundet til Azure SQL Database');
+
+    // Udfør SQL-operationer her (indsæt, opdater, hent, slet data)
+    executeStatement();
+  }
+});
+
+function executeStatement() {
+  const request = new Request('SELECT * FROM Users', (err, rowCount) => {
+    if (err) {
+      console.error('Fejl ved udførelse af SQL-forespørgsel:', err.message);
+    } else {
+      console.log(`${rowCount} rækker returneret`);
+    }
+
+    connection.close();
+  });
+
+  request.on('row', (columns) => {
+    columns.forEach((column) => {
+      console.log(`${column.metadata.colName}: ${column.value}`);
+    });
+  });
+
+  connection.execSql(request);
+}
 
 
