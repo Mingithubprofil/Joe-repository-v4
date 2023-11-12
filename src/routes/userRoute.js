@@ -216,6 +216,8 @@ userRoute.post("/login", (req, res) => {
     return res.status(400).send("Username and password are required");
   }
 
+  console.log("Received login request with username:", username, "and password:", password);
+
   const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
 
   const request = new Request(sql, (err, rowCount, rows) => {
