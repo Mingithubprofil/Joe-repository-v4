@@ -227,14 +227,18 @@ const checkAuth = async (req) => {
   request.addParameter('username', TYPES.VarChar, username);
   request.addParameter('password', TYPES.VarChar, password);
 
-  try {
-    const result = await executeQuery(request);
-    return result && result.rowCount > 0;
-  } catch (error) {
-    console.error('Fejl ved tjek af bruger i SQL-database:', error.message);
-    return false;
-  }
+  return new Promise((resolve, reject) => {
+    connection.execSql(request, (err, rowCount) => {
+      if (err) {
+        console.error('Fejl ved tjek af bruger i SQL-database:', err.message);
+        reject(err);
+      } else {
+        resolve(rowCount > 0);
+      }
+    });
+  });
 };
+
 
 // Login-endepunkt med autentificering
 userRoute.post("/login", async (req, res) => {
