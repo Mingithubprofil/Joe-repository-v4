@@ -5,7 +5,7 @@ const userRoute = express.Router();
 
 //const db = require('../db/db.js');
 
-const connection = require('../db/db');
+const { connection, Request, TYPES } = require('../db/db');
 
 
 
