@@ -29,9 +29,14 @@ async function isUserRegistered(username) {
   }
 } */
 
-async function isUserRegistered(username) {
+async function isUserRegistered(username, password) {
   try {
-    const response = await axios.post("http://188.166.200.199/checkUser", { username });
+    const response = await axios.get("http://188.166.200.199/checkUser", {
+      params: {
+        username,
+        password,
+      },
+    });
     return response.data.userExists;
   } catch (error) {
     console.error("Fejl ved tjek af brugere:", error.message);

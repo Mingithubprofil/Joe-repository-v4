@@ -198,24 +198,30 @@ userRoute.delete("/user/:id", (req, res) => {
 
 
 
-userRoute.post("/checkUser", (req, res) => {
-  const { username } = req.body;
+userRoute.get("/checkUser", (req, res) => {
+  const { username, password } = req.query;
 
-  const sql = `SELECT id FROM Users WHERE username = @username`;
+  // Tjek om username og password er til stede i query params
+  if (!username || !password) {
+    return res.status(400).json({ userExists: false, message: "Username and password are required" });
+  }
+
+  const sql = `SELECT id FROM Users WHERE username = @username AND password = @password`;
 
   const request = new Request(sql, (err, rowCount, rows) => {
     if (err) {
       console.error('Fejl ved tjek af bruger i SQL-database:', err.message);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({ userExists: false, message: 'Internal Server Error' });
     } else {
-      const userExists = rowCount > 0;
-      res.json({ status: "success", userExists });
+      res.json({ userExists: rowCount > 0 });
     }
   });
 
   request.addParameter('username', TYPES.NVarChar, username);
+  request.addParameter('password', TYPES.NVarChar, password);
   connection.execSql(request);
 });
+
 
 
 
