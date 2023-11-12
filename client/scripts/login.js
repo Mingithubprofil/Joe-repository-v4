@@ -43,7 +43,7 @@ function loginUser() {
   console.log("Sending login request with username:", username, "and password:", password);
 
   // Anmodning til /checkUser-endpoint
-  axios.post("http://188.166.200.199/login", {
+  axios.post("http://188.166.200.199/checkUser", {
   username,
   password,
 }, {
