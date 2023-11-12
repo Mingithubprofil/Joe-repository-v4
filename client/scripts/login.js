@@ -31,6 +31,10 @@ async function isUserRegistered(username) {
   }
 } */
 
+let encodedUsername = encodeURIComponent(username);
+let encodedPassword = encodeURIComponent(password);
+
+
 // Login funktion
 function loginUser() {
   let username = document.getElementById("username").value;
