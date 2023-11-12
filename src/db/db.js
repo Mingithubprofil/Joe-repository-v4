@@ -20,8 +20,8 @@ sql.connect(config)
     return pool.request().query('SELECT * FROM Users');
   })
   .then(result => {
-    console.dir(result.recordset);
-  })
+    console.log('Data fra databasen:', result.recordset);
+  })  
   .catch(err => {
     console.error('Fejl ved forbindelse til Azure SQL Database:', err);
     console.error('Fejlbesked:', err.message); // Tilføj fejlmeddelelsen til logningen
