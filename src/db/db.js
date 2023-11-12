@@ -22,14 +22,18 @@ sql.connect(config)
   .then(result => {
     console.dir(result.recordset);
   })
-  .catch(err => console.error('Fejl ved forbindelse til Azure SQL Database:', err))
+  .catch(err => {
+    console.error('Fejl ved forbindelse til Azure SQL Database:', err);
+    console.error('Fejlbesked:', err.message); // Tilføj fejlmeddelelsen til logningen
+    console.error('Fejldetaljer:', err);
+  })
   .finally(() => {
     // Luk forbindelsen ved afslutning af din applikation
     sql.close();
     console.log('Forbindelse til Azure SQL Database lukket ved afslutning.');
   });
 
-  
+
 /* 
 
 //Luk forbindelsen ved afslutning af din applikation
