@@ -38,8 +38,8 @@ function loginUser() {
 
   // Anmodning til /checkUser-endpoint
   axios.post("http://188.166.200.199/checkUser", {
-      username,
-      password,
+    username: encodedUsername,
+    password: encodedPassword,
   })
   .then(async function (response) {
     if (response.data.userExists) {
