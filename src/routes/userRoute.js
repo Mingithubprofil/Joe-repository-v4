@@ -113,6 +113,85 @@ userRoute.get("/global.css", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/styles/global.css"));
 });
 
+
+// Endpoint for at hente alle brugere
+userRoute.get("/user", (req, res) => {
+  const sql = 'SELECT * FROM Users';
+  executeStatement(sql, () => {
+    // Send svar til klienten
+    // Antaget at resultaterne af query'en er i en variabel kaldet 'users'
+    res.send(users);
+  });
+});
+
+// Endpoint for at tilføje en ny bruger
+userRoute.post("/user", (req, res) => {
+  const { username, password } = req.body;
+
+  // Tjek om username og password er til stede i request body
+  if (!username || !password) {
+    return res.status(400).send("Username and password are required");
+  }
+
+  const sql = `INSERT INTO Users (username, password) VALUES ('${username}', '${password}')`;
+  executeStatement(sql, () => {
+    // Send svar til klienten
+    res.send("User added");
+  });
+});
+
+// Endpoint for at hente en specifik bruger
+userRoute.get("/user/:id", (req, res) => {
+  const userId = req.params.id;
+  const sql = `SELECT * FROM Users WHERE id = ${userId}`;
+  executeStatement(sql, () => {
+    // Send svar til klienten
+    // Antaget at resultaterne af query'en er i en variabel kaldet 'user'
+    res.send(user);
+  });
+});
+
+// Endpoint for at slette en bruger
+userRoute.delete("/user/:id", (req, res) => {
+  const userId = req.params.id;
+  const sql = `DELETE FROM Users WHERE id = ${userId}`;
+  executeStatement(sql, () => {
+    // Send svar til klienten
+    res.send(`User with ID ${userId} deleted`);
+  });
+});
+
+// Endpoint for login
+
+userRoute.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  // Tjek om username og password er til stede i request body
+  if (!username || !password) {
+    return res.status(400).send("Username and password are required");
+  }
+
+  const sql = `SELECT * FROM Users WHERE username = '${username}' AND password = '${password}'`;
+  executeStatement(sql, () => {
+    // Send svar til klienten baseret på resultatet af login-query'en
+    // Antaget at resultaterne af query'en er i en variabel kaldet 'user'
+    if (user) {
+      // Tilføj cookie med brugernavn
+      res.cookie("userAuth", username, {
+        maxAge: 3600000,
+      });
+
+      res.status(200).send("User logged in");
+    } else {
+      res.status(401).send("Invalid username or password");
+    }
+  });
+});
+
+module.exports = userRoute;
+
+
+
 /*
 
 //database 
@@ -129,7 +208,7 @@ userRoute.get('/databaseInfo', async (req, res) => {
   }
 }); */
 
-
+/*
 
 userRoute
   .get("/user", (req, res) => {
@@ -204,5 +283,7 @@ userRoute
       .send(response)
       .status(200);
   });
+
+  */
 
 module.exports = userRoute;
