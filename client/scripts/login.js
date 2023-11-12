@@ -37,9 +37,11 @@ function loginUser() {
   let password = document.getElementById("password").value;
 
   // Anmodning til /checkUser-endpoint
-  axios.post("http://188.166.200.199/checkUser", {
-    username,
-    password,
+  axios.get("http://188.166.200.199/checkUser", {
+    params: {
+      username,
+      password,
+    },
   })
   .then(async function (response) {
     if (response.data.userExists) {
