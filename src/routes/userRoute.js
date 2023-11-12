@@ -153,8 +153,11 @@ userRoute.post("/user", (req, res) => {
   request.addParameter('username', TYPES.NVarChar, data.username);
   request.addParameter('password', TYPES.NVarChar, data.password);
 
+  console.log(request.parameters);
+
   connection.execSql(request);
 });
+
 
 module.exports = userRoute;
 
