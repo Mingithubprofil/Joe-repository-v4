@@ -116,6 +116,7 @@ userRoute.get("/global.css", (req, res) => {
 });
 
 
+//til registrering af bruger (virker fint)
 
 userRoute.get("/user", (req, res) => {
   const request = new Request('SELECT * FROM Users;', (err, rowCount, rows) => {
@@ -134,6 +135,8 @@ userRoute.get("/user", (req, res) => {
 
   connection.execSql(request);
 });
+
+//til registering af bruger (virker fint)
 
 userRoute.post("/user", (req, res) => {
   const data = req.body;

@@ -29,56 +29,59 @@ async function isUserRegistered(username) {
   }
 } */
 
-async function isUserRegistered(username) {
-  try {
-    const response = await axios.get("http://188.166.200.199/checkUser", {
-      params: {
-        username,
-      },
-    });
-    return response.data.userExists;
-  } catch (error) {
-    console.error("Fejl ved tjek af brugere:", error.message);
-    return false;
-  }
-}
-
-
-
-
-//login funktion
-
+// Login funktion
 function loginUser() {
   let username = document.getElementById("username").value;
   let password = document.getElementById("password").value;
 
-  axios
-    .post("http://188.166.200.199/login", { username, password })
-    .then(async function (response) {
-      console.log(response.data);
-      if (response.data.status === "success") {
-        // Tjek om brugeren er registreret, før du logger dem ind
-        if (await isUserRegistered(username, password)) {
-          // localStorage.setItem("Username", username);
-          document.cookie = `userAuth=${username}`;
-
-          // Redirect og opdater DOM
-          responseDOM.innerHTML = response.data.message;
-          await wait(3);
-          location.href = "/userHome";
-        } else {
-          responseDOM.innerHTML = "Brugeren er ikke registreret.";
-        }
-      } else {
-        // Opdater DOM i tilfælde af anden respons end "User logged in"
-        responseDOM.innerHTML = response.data.message || "Der opstod en ukendt fejl under login.";
-      }
-    })
-    .catch(function (error) {
-      console.log("Fejl ved login:", error);
-      responseDOM.innerHTML = "Der opstod en fejl under login. Tjek konsollen for detaljer.";
-    });
+  // Anmodning til /checkUser-endpoint
+  axios.get("http://188.166.200.199/checkUser", {
+    params: {
+      username,
+      password,
+    },
+  })
+  .then(async function (response) {
+    if (response.data.userExists) {
+      // Hvis brugeren eksisterer, udfør login
+      await performLogin(username, password);
+    } else {
+      responseDOM.innerHTML = "Brugeren er ikke registreret.";
+    }
+  })
+  .catch(function (error) {
+    console.error("Fejl ved tjek af brugere:", error.message);
+    responseDOM.innerHTML = "Der opstod en fejl ved brugertjek. Tjek konsollen for detaljer.";
+  });
 }
+
+// Hjælpefunktion til at udføre login
+async function performLogin(username, password) {
+  axios.post("http://188.166.200.199/login", {
+    username,
+    password,
+  })
+  .then(async function (response) {
+    console.log(response.data);
+    if (response.data.status === "success") {
+      // localStorage.setItem("Username", username);
+      document.cookie = `userAuth=${username}`;
+
+      // Redirect og opdater DOM
+      responseDOM.innerHTML = response.data.message;
+      await wait(3);
+      location.href = "/userHome";
+    } else {
+      // Opdater DOM i tilfælde af anden respons end "User logged in"
+      responseDOM.innerHTML = response.data.message || "Der opstod en ukendt fejl under login.";
+    }
+  })
+  .catch(function (error) {
+    console.log("Fejl ved login:", error);
+    responseDOM.innerHTML = "Der opstod en fejl under login. Tjek konsollen for detaljer.";
+  });
+}
+
 
 
 
