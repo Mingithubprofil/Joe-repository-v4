@@ -222,7 +222,6 @@ userRoute.post("/login", (req, res) => {
 
   console.log("Received login request with username:", username, "and password:", password);
 
-/*
 
   const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
 
@@ -255,7 +254,7 @@ userRoute.post("/login", (req, res) => {
   request.addParameter('password', TYPES.VarChar, password);
   //console.log(request.parameters);
   console.log(sql);
-  connection.execSql(request); */
+  connection.execSql(request); 
 });
 
 
