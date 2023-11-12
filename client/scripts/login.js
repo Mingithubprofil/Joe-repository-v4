@@ -33,6 +33,43 @@ function loginUser() {
   let username = document.getElementById("username").value;
   let password = document.getElementById("password").value;
 
+  axios
+    .post("http://188.166.200.199/login", { username, password })
+    .then(async function (response) {
+      console.log(response.data);
+      if (response.data === "User logged in") {
+        // Tjek om brugeren er registreret, før du logger dem ind
+        if (await isUserRegistered(username)) {
+          // localStorage.setItem("Username", username);
+          document.cookie = `userAuth=${username}`;
+
+          // Redirect og opdater DOM
+          responseDOM.innerHTML = response.data;
+          await wait(3);
+          location.href = "/userHome";
+        } else {
+          responseDOM.innerHTML = "Brugeren er ikke registreret.";
+          return;
+        }
+      } else {
+        // Opdater DOM i tilfælde af anden respons end "User logged in"
+        responseDOM.innerHTML = response.data;
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+
+
+/*
+
+//login funktion
+function loginUser() {
+  let username = document.getElementById("username").value;
+  let password = document.getElementById("password").value;
+
   user.username = username;
   user.password = password;
 
@@ -64,7 +101,7 @@ function loginUser() {
     });
 }
 
-
+*/
 
 /*
 //login funktion
