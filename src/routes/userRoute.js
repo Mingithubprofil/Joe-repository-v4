@@ -118,7 +118,7 @@ userRoute.get("/global.css", (req, res) => {
 
 
 userRoute.get("/user", (req, res) => {
-  const request = new connection.Request('SELECT * FROM Users;', (err, rowCount, rows) => {
+  const request = new Request('SELECT * FROM Users;', (err, rowCount, rows) => {
     if (err) {
       console.error('Fejl ved hentning af brugere fra SQL-database:', err.message);
       res.status(500).send('Internal Server Error');
@@ -138,7 +138,7 @@ userRoute.get("/user", (req, res) => {
 userRoute.post("/user", (req, res) => {
   const data = req.body;
 
-  const request = new connection.Request(
+  const request = new Request(
     'INSERT INTO Users (username, password) VALUES (@username, @password);',
     (err) => {
       if (err) {
