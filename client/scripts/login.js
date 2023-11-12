@@ -40,6 +40,8 @@ function loginUser() {
   let username = document.getElementById("username").value;
   let password = document.getElementById("password").value;
 
+  console.log("Sending login request with username:", username, "and password:", password);
+
   // Anmodning til /checkUser-endpoint
   axios.post("http://188.166.200.199/checkUser", {
     username,

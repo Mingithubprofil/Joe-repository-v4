@@ -202,6 +202,7 @@ userRoute.post("/checkUser", (req, res) => {
 
   request.addParameter('username', TYPES.VarChar, username);
   request.addParameter('password', TYPES.VarChar, password);
+  console.log(sql);
   connection.execSql(request);
 });
 
@@ -251,6 +252,7 @@ userRoute.post("/login", (req, res) => {
   request.addParameter('username', TYPES.VarChar, username);
   request.addParameter('password', TYPES.VarChar, password);
   //console.log(request.parameters);
+  console.log(sql);
   connection.execSql(request);
 });
 
