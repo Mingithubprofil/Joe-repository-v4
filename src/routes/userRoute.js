@@ -5,6 +5,8 @@ const userRoute = express.Router();
 
 //const db = require('../db/db.js');
 
+const database = require('./db/db');
+
 // Cookie implementation
 const cookieParser = require("cookie-parser");
 userRoute.use(cookieParser());
@@ -110,6 +112,21 @@ userRoute.get('/juicechat.js', (req, res) => {
 userRoute.get("/global.css", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/styles/global.css"));
 });
+
+//db 
+
+userRoute.get('/databaseInfo', async (req, res) => {
+  try {
+    // Kald db-funktionen og log resultatet
+    const result = await database.connectAndQuery();
+    console.log('Resultat fra database:', result);
+    res.send('Se konsollen for resultatet.');
+  } catch (error) {
+    console.error('Fejl ved at hente data fra database:', error);
+    res.status(500).send('Der opstod en fejl.');
+  }
+});
+
 
 
 userRoute
