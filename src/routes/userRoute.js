@@ -184,7 +184,7 @@ userRoute.delete("/user/:id", (req, res) => {
 userRoute.post("/checkUser", (req, res) => {
   const { username, password } = req.body;
 
-  // Tjek om username og password er til stede i query params
+  // Tjekker om username og password er til stede i body
   if (!username || !password) {
     return res.status(400).json({ userExists: false, message: "Username and password are required" });
   }
@@ -211,7 +211,7 @@ userRoute.post("/checkUser", (req, res) => {
 const checkAuth = async (req) => {
   const { username, password } = req.body;
 
-  // Tjek om username og password er til stede i request body
+  // Tjekker om username og password er til stede i request body
   if (!username || !password) {
     return false;
   }
@@ -240,7 +240,7 @@ const checkAuth = async (req) => {
 };
 
 
-// Login-endepunkt med autentificering
+// Login-endpoint med autentificering
 userRoute.post("/login", async (req, res) => {
   const isAuthenticated = await checkAuth(req);
 
@@ -250,7 +250,7 @@ userRoute.post("/login", async (req, res) => {
 
   const { username, password } = req.body;
 
-  // Fortsæt med den tidligere kode for login-endepunktet...
+  
   const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
 
   const request = new Request(sql, (err, rowCount, rows) => {
@@ -265,7 +265,7 @@ userRoute.post("/login", async (req, res) => {
       }));
 
       if (user.length > 0) {
-        // Tilføj cookie med brugernavn
+        // Tilføjer cookie med brugernavn
         res.cookie("userAuth", username, {
           maxAge: 3600000,
         });

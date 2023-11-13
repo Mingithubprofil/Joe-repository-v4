@@ -18,7 +18,7 @@ function wait(time) {
 /*
 async function isUserRegistered(username) {
   try {
-    const response = await axios.get(`http://188.166.200.199/user`);
+    const response = await axios.get(`http://188.166.200.199/checkUser`);
     const users = response.data;
 
     // Tjek om brugeren findes i listen over brugere
@@ -50,7 +50,7 @@ function loginUser() {
     headers: {
       'Content-Type': 'application/json',
     },
-    timeout: 20000, // Øg timeout til 10 sekunder (eller mere efter behov)
+    timeout: 5000, // Øg timeout til 10 sekunder (eller mere efter behov)
   })
     .then(async function (response) {
       if (response.data.userExists) {
@@ -76,7 +76,7 @@ async function performLogin(username, password) {
       headers: {
         'Content-Type': 'application/json',
       },
-      timeout: 20000, // Øg timeout til 10 sekunder (eller mere efter behov)
+      timeout: 20000, 
     });
 
     console.log(response.data);
