@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const host = '0.0.0.0';
+const host = 'localhost';
 const path = require('path')
 const userRoute = require("./routes/userRoute");
 
