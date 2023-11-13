@@ -242,14 +242,14 @@ const checkAuth = async (req) => {
 
 // Login-endpoint med autentificering
 userRoute.post("/login", async (req, res) => {
+
+  const { username, password } = req.body;
+
   const isAuthenticated = await checkAuth(req);
 
   if (!isAuthenticated) {
     return res.status(401).send("Unauthorized");
   }
-
-  const { username, password } = req.body;
-
   
   const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
 
