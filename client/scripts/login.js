@@ -44,6 +44,74 @@ function loginUser() {
 
   // Anmodning til /checkUser-endpoint
   axios.post("http://188.166.200.199/checkUser", JSON.stringify({
+    username,
+    password,
+  }), {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    timeout: 10000, // Øg timeout til 10 sekunder (eller mere efter behov)
+  })
+    .then(async function (response) {
+      if (response.data.userExists) {
+        // Hvis brugeren eksisterer, udfør login
+        await performLogin(username, password);
+      } else {
+        responseDOM.innerHTML = "Brugeren er ikke registreret.";
+      }
+    })
+    .catch(function (error) {
+      console.error("Fejl ved tjek af brugere:", error.message);
+      responseDOM.innerHTML = "Der opstod en fejl ved brugertjek. Tjek konsollen for detaljer.";
+    });
+}
+
+// Hjælpefunktion til at udføre login
+async function performLogin(username, password) {
+  try {
+    const response = await axios.post("http://188.166.200.199/login", JSON.stringify({
+      username,
+      password,
+    }), {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      timeout: 10000, // Øg timeout til 10 sekunder (eller mere efter behov)
+    });
+
+    console.log(response.data);
+
+    if (response.data.status === "success") {
+      // localStorage.setItem("Username", username);
+      document.cookie = `userAuth=${username}`;
+
+      // Redirect og opdater DOM
+      responseDOM.innerHTML = response.data.message;
+      await wait(3);
+      location.href = "/userHome";
+    } else {
+      // Opdater DOM i tilfælde af anden respons end "User logged in"
+      responseDOM.innerHTML = response.data.message || "Der opstod en ukendt fejl under login.";
+    }
+  } catch (error) {
+    console.log("Fejl ved login:", error);
+    responseDOM.innerHTML = "Der opstod en fejl under login. Tjek konsollen for detaljer.";
+  }
+}
+
+
+
+/*
+
+// Login funktion
+function loginUser() {
+  let username = document.getElementById("username").value;
+  let password = document.getElementById("password").value;
+
+  console.log("Sending login request with username:", username, "and password:", password);
+
+  // Anmodning til /checkUser-endpoint
+  axios.post("http://188.166.200.199/checkUser", JSON.stringify({
   username,
   password,
 }), {
@@ -140,6 +208,8 @@ function loginUser() {
 }
 
 */
+
+
 
 /*
 //login funktion
