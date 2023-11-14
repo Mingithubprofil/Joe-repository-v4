@@ -50,7 +50,7 @@ function loginUser() {
     headers: {
       'Content-Type': 'application/json',
     },
-    timeout: 10000, // Øg timeout til 10 sekunder (eller mere efter behov)
+    timeout: 20000, // Øg timeout til 10 sekunder (eller mere efter behov)
   })
     .then(async function (response) {
       if (response.data.userExists) {
@@ -76,7 +76,7 @@ async function performLogin(username, password) {
       headers: {
         'Content-Type': 'application/json',
       },
-      timeout: 10000, 
+      timeout: 20000, 
     });
 
     console.log(response.data);
