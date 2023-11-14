@@ -38,7 +38,7 @@ async function isUserRegistered(username) {
 // Login funktion
 function loginUser() {
   let username = document.getElementById("username").value;
-  let password = document.getElementById("password").value;
+  let password = document.getElementById("Kodeord").value;
 
   console.log("Sending login request with username:", username, "and password:", password);
 
