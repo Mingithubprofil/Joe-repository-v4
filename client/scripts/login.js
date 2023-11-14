@@ -22,7 +22,7 @@ async function loginUser() {
 
     console.log("Sending login request with username:", username, "and password:", password);
 
-    const response = await axios.post("http://188.166.200.199/login", JSON.stringify({
+    const response = await axios.post("/login", JSON.stringify({
       username,
       password,
     }), {
