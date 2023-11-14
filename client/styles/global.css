@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: Roboto, Arial, sans-serif;
-  background-color: #f8f8f6;
+  background-color: #f7c1d9;
 }
 
 ul {
@@ -13,12 +13,12 @@ ul {
   font-size: 2em;
   border-radius: 10px;
   font-weight: bold;
-  transition: background-color 0.3s ease-in-out; /* Added smooth background color transition */
+  transition: background-color 0.3s ease-in-out;
 }
 
 li {
   float: left;
-  transition: transform 0.3s ease-in-out; /* Added smooth transform transition */
+  transition: transform 0.3s ease-in-out;
 }
 
 li a {
@@ -27,7 +27,7 @@ li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  transition: background-color 0.3s ease-in-out, font-weight 0.3s ease-in-out; /* Added smooth transitions */
+  transition: background-color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
 }
 
 li img {
@@ -53,13 +53,32 @@ li a:hover {
   text-align: center;
   position: relative;
   background: url('https://tb-static.uber.com/prod/image-proc/processed_images/7245b4f37328089235741119bdec312c/3ac2b39ad528f8c8c5dc77c59abb683d.jpeg') center center/cover no-repeat;
-  background-size: cover; /* Make sure the background covers the entire container */
-  background-position: center; /* Center the background image */
+  background-size: cover;
+  background-position: center;
 }
 
 .center > div {
   background-color: rgb(255 201 201 / 70%);
-  border-radius: 20px;
+}
+
+.baggrund {
+  height: 100%;
+  background: url('https://tb-static.uber.com/prod/image-proc/processed_images/7245b4f37328089235741119bdec312c/3ac2b39ad528f8c8c5dc77c59abb683d.jpeg') center center/cover no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.center1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  height: 100%;
+}
+
+.center1 > div {
+  background-color: rgba(59, 36, 36, 0.5);
 }
 
 .removeBtn {
@@ -70,14 +89,13 @@ li a:hover {
   margin: 10px;
   cursor: pointer;
   border-radius: 10px;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
 }
 
 .removeBtn:hover {
   background-color: #f088b7;
   font-weight: bolder;
 }
-
 
 .messages {
   background-color: white;
@@ -101,8 +119,8 @@ li a:hover {
 }
 
 input {
-  border-radius: 5px;
-  border: 2px solid #f7c1d9;
+  border-radius: 15px;
+  border: 8px solid #f7c1d9;
   padding: 5px;
 }
 
@@ -113,6 +131,7 @@ input {
   align-items: flex-start;
   flex-direction: column;
   justify-content: flex-start;
+  white-space: normal;
 }
 
 .jss53 {
@@ -130,27 +149,25 @@ input {
   background-size: cover;
   justify-content: center;
   background-position: center;
+  white-space: normal;
 }
 
 .MuiTypography-root.MuiTypography-h1.MuiTypography-colorTextSecondary[data-cy="hero-image-title"] {
-  opacity: 1;
-  transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1) 750ms;
-  font-size: 5em;
-  color: #fbfbfb;
+  margin-bottom: 50px;
+  margin-top: 150px;
+  font-size: 3em;
+  color:  #ffffff;
   font-weight: bold;
-}
+  }
+  
 
-.MuiBox-root.jss62 {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
 
 .MuiTypography-root.jss54.MuiTypography-body1.MuiTypography-colorTextSecondary {
   font-weight: bold;
   color: #ffffff;
   font-size: 1.2em;
-  padding-bottom: 2em;
+  margin-bottom: 50px;
+  white-space: normal;
 }
 
 h1 {
@@ -168,8 +185,9 @@ h1 {
   color: #24272a;
   box-shadow: none;
   border-radius: 0;
-  font-size: 16px;
-  padding: 10px 16px;
+  margin-bottom: 500px;
+  font-size: 14px;
+  padding: 10px 50px;
   text-align: center;
   display: inline-block;
   text-decoration: none;
@@ -235,7 +253,7 @@ h1 {
   padding: 10px 16px;
   margin: 2px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out, font-weight 0.3s ease-in-out; /* Added smooth transitions */
+  transition: background-color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
 }
 
 .product button:hover {
@@ -248,40 +266,42 @@ h4 {
   font-weight: bold;
   animation: fadeIn 1s ease-in-out 750ms forwards;
 }
+
 .modal {
   position: fixed;
   right: 0;
+  margin-top: 10px;
+  margin-right: 10px;
   top: 0;
   width: 0;
   height: auto;
   overflow: hidden;
   background-color: #f7c1d9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  border-radius: 10px; /* Add rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
 }
 
 .modal-content {
   padding: 22px;
-  margin-top: 10px;
-  background-color: white; /* Set a white background for content */
-  border-radius: 10px; /* Match the rounded corners */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .close {
   position: absolute;
-  top: 10px; /* Adjust the top position */
+  top: 10px;
   right: 10px;
   font-size: 24px;
-  color: #333; /* Set a dark color for the close icon */
+  color: #333;
   cursor: pointer;
 }
 
 #cartItems {
   list-style-type: none;
   padding: 0;
-  font-size: 1.2em; /* Adjust the font size */
+  font-size: 0.9em;
 }
 
 #totalPrice {
@@ -289,15 +309,13 @@ h4 {
   margin-top: 10px;
 }
 
-/* Adjust font size */
 #cartModal h2 {
   font-size: 2em;
-  color: #333; /* Set a dark color for the heading */
+  color: #333;
 }
-/* Add this to your existing CSS styles */
 
 #cartIcon:hover {
-  filter: brightness(20%); /* Adjust the brightness as needed */
+  filter: brightness(20%);
   cursor: pointer;
 }
 
@@ -308,11 +326,8 @@ h4 {
 }
 
 .product {
-  width: 200px; /* Adjust the width as needed */
-  margin: 15px;
-  text-align: center;
+  width: 200px;
 }
-
 
 .customize-container {
   display: flex;
@@ -331,12 +346,11 @@ h4 {
 
 .selected-ingredient {
   position: absolute;
-  max-width: 20%; /* Just an example size, adjust as needed */
-  top: 10%; /* Adjust the top position to center vertically */
-  left: 30%; /* Adjust the left position to center horizontally */
-  transform: translate(-1000%, -100%); /* Center the ingredient image */
+  max-width: 20%;
+  top: 10%;
+  left: 30%;
+  transform: translate(-1000%, -100%);
   z-index: 100;
-  /* Add more styling as needed for positioning */
 }
 
 #juiceName {
@@ -351,9 +365,8 @@ h4 {
   align-items: center;
 }
 
-
 .header h4#IngredienserTitel {
-  margin: 10px 0; /* Juster marginen efter behov */
+  margin: 10px 0;
 }
 
 a {
@@ -365,7 +378,7 @@ a {
   padding: 10px 16px;
   margin: 2px;
   cursor: pointer;
-  text-decoration: none; /* Fjern understregning fra linket */
+  text-decoration: none;
   transition: background-color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
 }
 
@@ -393,9 +406,49 @@ h5 {
   padding: 10px 16px;
   margin: 2px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out, font-weight 0.3s ease-in-out; /* Added smooth transitions */
+  transition: background-color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
 }
 
 .betalBtn:hover {
   background-color: #f088b7;
+}
+
+button {
+  background-color: #f7c1d9;
+  color: #24272a;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin: 30px;
+  margin-bottom: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #f088b7;
+  font-weight: bolder;
+}
+
+.slutknapper{
+  margin-bottom: 400px;
+}
+
+.password-message1 {
+  font-size: 0.6em;
+  color: #000000;
+  margin-left: -27px;
+  font-style: italic;
+  margin-bottom: -6px;
+  margin-top: 5px;
+}
+
+.password-message2 {
+  font-size: 0.6em;
+  color: #000000;
+  margin-left: -103px;
+  font-style: italic;
 }
