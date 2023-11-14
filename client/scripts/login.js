@@ -13,6 +13,59 @@ function wait(time) {
   });
 }
 
+
+// Login funktion
+async function loginUser() {
+  try {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("Kodeord").value;
+
+    console.log("Sending login request with username:", username, "and password:", password);
+
+    const response = await axios.post("http://188.166.200.199/login", JSON.stringify({
+      username,
+      password,
+    }), {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      timeout: 20000, // Øg timeout til 20 sekunder (eller mere efter behov)
+    });
+
+    console.log(response.data);
+
+    if (response.data.userExists) {
+      // Hvis brugeren eksisterer, udfør login
+      // localStorage.setItem("Username", username);
+      document.cookie = `userAuth=${username}`;
+      console.log(document.cookie);
+
+      // Redirect og opdater DOM
+      responseDOM.innerHTML = response.data.message;
+      await wait(3);
+      window.location.replace("/userHome");
+    } else {
+      responseDOM.innerHTML = "Brugeren er ikke registreret.";
+    }
+  } catch (error) {
+    console.error("Fejl ved login eller tjek af brugere:", error.message);
+    responseDOM.innerHTML = "Der opstod en fejl ved login eller brugertjek. Tjek konsollen for detaljer.";
+  }
+}
+
+
+//logud funktion
+
+function logoutUser() {
+  // Fjern brugerens autentificeringscookie
+  document.cookie = 'userAuth=; expires= 0; path=/;';
+
+  // Redirect til login-siden eller hvor du ønsker
+  location.href = "/login";
+}
+
+
+
 // Simpel funktion til at tjekke om brugeren er registreret
 
 /*
@@ -34,6 +87,7 @@ async function isUserRegistered(username) {
 //let encodedUsername = encodeURIComponent(username);
 //let encodedPassword = encodeURIComponent(password);
 
+/*
 
 // Login funktion
 function loginUser() {
@@ -100,7 +154,7 @@ async function performLogin(username, password) {
   }
 }
 
-
+*/
 
 /*
 
