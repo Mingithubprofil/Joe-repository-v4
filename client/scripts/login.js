@@ -84,11 +84,12 @@ async function performLogin(username, password) {
     if (response.data.status === "success") {
       // localStorage.setItem("Username", username);
       document.cookie = `userAuth=${username}`;
+      console.log(document.cookie);
 
       // Redirect og opdater DOM
       responseDOM.innerHTML = response.data.message;
       await wait(3);
-      location.href = "/userHome";
+      window.location.replace("/userHome");
     } else {
       // Opdater DOM i tilfælde af anden respons end "User logged in"
       responseDOM.innerHTML = response.data.message || "Der opstod en ukendt fejl under login.";
