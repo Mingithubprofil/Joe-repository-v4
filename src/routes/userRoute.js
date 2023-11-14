@@ -180,6 +180,7 @@ userRoute.delete("/user/:id", (req, res) => {
 });
 
 
+/*
 
 userRoute.post("/checkUser", (req, res) => {
   const { username, password } = req.body;
@@ -206,6 +207,7 @@ userRoute.post("/checkUser", (req, res) => {
   connection.execSql(request);
 });
 
+*/
 
 // Middleware funktion til at tjekke autentificering
 const checkAuth = async (req) => {
