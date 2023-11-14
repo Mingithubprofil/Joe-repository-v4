@@ -272,9 +272,9 @@ userRoute.post("/login", async (req, res) => {
           maxAge: 3600000,
         });
       
-        res.status(200).json({ status: "success", message: "User logged in" });
+        res.status(200).json({ userExists: true, status: "success", message: "User logged in" });
       } else {
-        res.status(401).json({ status: "error", message: "Invalid username or password" });
+        res.status(401).json({ userExists: false, status: "error", message: "Invalid username or password" });
       }
     }
   });
