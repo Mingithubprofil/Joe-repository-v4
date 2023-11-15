@@ -213,6 +213,80 @@ const checkAuth = async (username, password) => {
 
     const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
 
+    // Brug en Promise til at håndtere asynkron SQL-forespørgsel
+    const result = await new Promise((resolve, reject) => {
+      const request = new Request(sql, (err, rowCount, rows) => {
+        if (err) {
+          console.error('Fejl ved login i SQL-database:', err.message);
+          reject(err);
+        } else {
+          const user = rows.map(row => ({
+            id: row[0].value,
+            username: row[1].value,
+            password: row[2].value,
+          }));
+
+          if (user.length > 0) {
+            // Hvis brugeren findes, resolver vi med true
+            resolve(true);
+          } else {
+            // Hvis brugeren ikke findes, resolver vi med false
+            resolve(false);
+          }
+        }
+      });
+
+      request.addParameter('username', TYPES.VarChar, username);
+      request.addParameter('password', TYPES.VarChar, password);
+      console.log(sql);
+      connection.execSql(request);
+    });
+
+    // Returnerer resultatet fra SQL-forespørgslen
+    return result;
+
+  } catch (error) {
+    console.error('Fejl ved checkAuth:', error);
+    throw error; // Kast fejlen, så den kan håndteres et andet sted
+  }
+};
+
+
+
+/*
+// Login-endpoint med autentificering
+userRoute.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // Middleware funktion til at tjekke autentificering
+    const isAuthenticated = await checkAuth(username, password);
+
+    console.log({ isAuthenticated });
+
+    if (!isAuthenticated) {
+      return res.status(401).send("Unauthorized");
+    }
+
+    // Resten af din kode (håndtering af brugeroprettelse)
+
+    return res.status(200).json({ userExists: true, status: "success", message: "User logged in" });
+  } catch (error) {
+    console.error('Fejl ved login:', error);
+    return res.status(500).send('Internal Server Error');
+  }
+});
+
+// Funktion til at tjekke autentificering
+const checkAuth = async (username, password) => {
+  try {
+    // Tjekker om username og password er til stede
+    if (!username || !password) {
+      return false;
+    }
+
+    const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
+
     const request = new Request(sql, (err, rowCount, rows) => {
       if (err) {
         console.error('Fejl ved login i SQL-database:', err.message);
@@ -248,7 +322,7 @@ const checkAuth = async (username, password) => {
   }
 };
 
-
+*/
 
 /*
 // Funktion til at tjekke autentificering
