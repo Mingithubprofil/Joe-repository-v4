@@ -12,10 +12,12 @@ function wait(time) {
 function saveUser(){
     let username = document.getElementById("username").value
     let email = document.getElementById("email").value
+    let phonenumber = document.getElementById("phonenumber").value
     let password = document.getElementById("password").value
     
     user.username = username
     user.email = email
+    user.phonenumber = phonenumber
     user.password = password
 
     console.log(user)

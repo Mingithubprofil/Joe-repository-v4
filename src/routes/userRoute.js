@@ -122,7 +122,7 @@ userRoute.post("/user", (req, res) => {
   const data = req.body;
 
   const request = new Request(
-    'INSERT INTO Users (username, password) VALUES (@username, @password);',
+    'INSERT INTO Users (username, password, email, phonenumber) VALUES (@username, @password, @email, @phonenumber);',
     (err) => {
       if (err) {
         console.error('Fejl ved indsættelse af bruger i SQL-database:', err.message);
@@ -135,11 +135,15 @@ userRoute.post("/user", (req, res) => {
 
   request.addParameter('username', TYPES.VarChar, data.username);
   request.addParameter('password', TYPES.VarChar, data.password);
+  request.addParameter('email', TYPES.VarChar, data.email);
+  request.addParameter('phonenumber', TYPES.VarChar, data.phonenumber);
+
 
   console.log(request.parameters);
 
   connection.execSql(request);
 });
+
 
 userRoute.get("/user/:id", (req, res) => {
   const userId = req.params.id;
@@ -161,6 +165,7 @@ userRoute.get("/user/:id", (req, res) => {
   request.addParameter('userId', TYPES.Int, userId);
   connection.execSql(request);
 });
+
 
 userRoute.delete("/user/:id", (req, res) => {
   const userId = req.params.id;
@@ -235,7 +240,7 @@ userRoute.post("/login", async (req, res) => {
       return res.status(401).send("Unauthorized");
     }
 
-    // Resten af din kode (håndtering af brugeroprettelse)
+    // Resten af din kode (håndtering af login)
 
     return res.status(200).json({ userExists: true, status: "success", message: "User logged in" });
   } catch (error) {
