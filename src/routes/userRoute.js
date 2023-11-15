@@ -182,6 +182,72 @@ userRoute.delete("/user/:id", (req, res) => {
 
 // Login-endpoint med autentificering
 userRoute.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // Middleware funktion til at tjekke autentificering
+    const isAuthenticated = await checkAuth(username, password);
+
+    console.log({ isAuthenticated });
+
+    if (!isAuthenticated) {
+      return res.status(401).send("Unauthorized");
+    }
+
+    // Resten af din kode (håndtering af brugeroprettelse)
+
+    return res.status(200).json({ userExists: true, status: "success", message: "User logged in" });
+  } catch (error) {
+    console.error('Fejl ved login:', error);
+    return res.status(500).send('Internal Server Error');
+  }
+});
+
+// Funktion til at tjekke autentificering
+const checkAuth = async (username, password) => {
+  // Tjekker om username og password er til stede
+  if (!username || !password) {
+    return false;
+  }
+
+  return new Promise((resolve, reject) => {
+    const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
+
+    const request = new Request(sql, (err, rowCount, rows) => {
+      if (err) {
+        console.error('Fejl ved login i SQL-database:', err.message);
+        reject(err);
+      } else {
+        const user = rows.map(row => ({
+          id: row[0].value,
+          username: row[1].value,
+          password: row[2].value,
+        }));
+
+        if (user.length > 0) {
+          // Tilføjer cookie med brugernavn
+          res.cookie("userAuth", username, {
+            maxAge: 3600000,
+          });
+
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      }
+    });
+
+    request.addParameter('username', TYPES.VarChar, username);
+    request.addParameter('password', TYPES.VarChar, password);
+    console.log(sql);
+    connection.execSql(request);
+  });
+};
+
+
+/*
+// Login-endpoint med autentificering
+userRoute.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   // Middleware funktion til at tjekke autentificering
@@ -240,7 +306,7 @@ userRoute.post("/login", async (req, res) => {
     return res.status(500).send('Internal Server Error');
   }
 });
-
+*/
 
 
 /*

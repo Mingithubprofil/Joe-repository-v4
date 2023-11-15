@@ -14,6 +14,7 @@ function wait(time) {
 }
 
 
+
 // Login funktion
 async function loginUser() {
   try {
