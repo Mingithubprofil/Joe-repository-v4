@@ -211,6 +211,54 @@ const checkAuth = async (username, password) => {
       return false;
     }
 
+    const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
+
+    const request = new Request(sql, (err, rowCount, rows) => {
+      if (err) {
+        console.error('Fejl ved login i SQL-database:', err.message);
+        res.status(500).send('Internal Server Error');
+        return; // Tilføjet return for at stoppe eksekveringen
+      } else {
+        const user = rows.map(row => ({
+          id: row[0].value,
+          username: row[1].value,
+          password: row[2].value,
+        }));
+
+        if (user.length > 0) {
+          // Tilføjer cookie med brugernavn
+          res.cookie("userAuth", username, {
+            maxAge: 3600000,
+          });
+
+          res.status(200).json({ userExists: true, status: "success", message: "User logged in" });
+        } else {
+          res.status(401).json({ userExists: false, status: "error", message: "Invalid username or password" });
+        }
+      }
+    });
+
+    request.addParameter('username', TYPES.VarChar, username);
+    request.addParameter('password', TYPES.VarChar, password);
+    console.log(sql);
+    connection.execSql(request);
+  } catch (error) {
+    console.error('Fejl ved checkAuth:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+
+/*
+// Funktion til at tjekke autentificering
+const checkAuth = async (username, password) => {
+  try {
+    // Tjekker om username og password er til stede
+    if (!username || !password) {
+      return false;
+    }
+
     return new Promise((resolve, reject) => {
       const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
 
@@ -249,7 +297,7 @@ const checkAuth = async (username, password) => {
     return false;
   }
 };
-
+*/
 
 
 /*
