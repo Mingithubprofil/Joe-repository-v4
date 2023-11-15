@@ -186,7 +186,7 @@ userRoute.post("/login", async (req, res) => {
     const { username, password } = req.body;
 
     // Middleware funktion til at tjekke autentificering
-    const isAuthenticated = await checkAuth(username, password);
+    const isAuthenticated = await checkAuth(username, password, res);
 
     console.log({ isAuthenticated });
 
@@ -204,7 +204,7 @@ userRoute.post("/login", async (req, res) => {
 });
 
 // Funktion til at tjekke autentificering
-const checkAuth = async (username, password) => {
+const checkAuth = async (username, password, res) => {
   try {
     // Tjekker om username og password er til stede
     if (!username || !password) {
