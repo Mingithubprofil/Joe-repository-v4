@@ -179,6 +179,72 @@ userRoute.delete("/user/:id", (req, res) => {
   connection.execSql(request);
 });
 
+
+// Login-endpoint med autentificering
+userRoute.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  // Middleware funktion til at tjekke autentificering
+  const checkAuth = async () => {
+    // Tjekker om username og password er til stede i request body
+    if (!username || !password) {
+      return false;
+    }
+
+    return new Promise((resolve, reject) => {
+      const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
+
+      const request = new Request(sql, (err, rowCount, rows) => {
+        if (err) {
+          console.error('Fejl ved login i SQL-database:', err.message);
+          reject(err);
+        } else {
+          const user = rows.map(row => ({
+            id: row[0].value,
+            username: row[1].value,
+            password: row[2].value,
+          }));
+
+          if (user.length > 0) {
+            // Tilføjer cookie med brugernavn
+            res.cookie("userAuth", username, {
+              maxAge: 3600000,
+            });
+
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }
+      });
+
+      request.addParameter('username', TYPES.VarChar, username);
+      request.addParameter('password', TYPES.VarChar, password);
+      console.log(sql);
+      connection.execSql(request);
+    });
+  };
+
+  try {
+    const isAuthenticated = await checkAuth();
+
+    console.log({ isAuthenticated });
+
+    if (!isAuthenticated) {
+      return res.status(401).send("Unauthorized");
+    }
+
+    return res.status(200).json({ userExists: true, status: "success", message: "User logged in" });
+  } catch (error) {
+    console.error('Fejl ved asynkront login:', error.message);
+    return res.status(500).send('Internal Server Error');
+  }
+});
+
+
+
+/*
+
 // Login-endpoint med autentificering
 userRoute.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -233,6 +299,10 @@ userRoute.post("/login", async (req, res) => {
     return res.status(401).send("Unauthorized");
   }
 });
+
+/*
+
+
 
 
 /*
