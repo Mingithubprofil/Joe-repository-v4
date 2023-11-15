@@ -205,44 +205,51 @@ userRoute.post("/login", async (req, res) => {
 
 // Funktion til at tjekke autentificering
 const checkAuth = async (username, password) => {
-  // Tjekker om username og password er til stede
-  if (!username || !password) {
+  try {
+    // Tjekker om username og password er til stede
+    if (!username || !password) {
+      return false;
+    }
+
+    return new Promise((resolve, reject) => {
+      const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
+
+      const request = new Request(sql, (err, rowCount, rows) => {
+        if (err) {
+          console.error('Fejl ved login i SQL-database:', err.message);
+          reject(false);
+        } else {
+          const user = rows.map(row => ({
+            id: row[0].value,
+            username: row[1].value,
+            password: row[2].value,
+          }));
+
+          if (user.length > 0) {
+            // Tilføjer cookie med brugernavn
+            res.cookie("userAuth", username, {
+              maxAge: 3600000,
+            });
+
+            // Brug return her for at sikre, at promise kun fuldføres én gang
+            return resolve(true);
+          } else {
+            return resolve(false);
+          }
+        }
+      });
+
+      request.addParameter('username', TYPES.VarChar, username);
+      request.addParameter('password', TYPES.VarChar, password);
+      console.log(sql);
+      connection.execSql(request);
+    });
+  } catch (error) {
+    console.error('Fejl ved checkAuth:', error);
     return false;
   }
-
-  return new Promise((resolve, reject) => {
-    const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
-
-    const request = new Request(sql, (err, rowCount, rows) => {
-      if (err) {
-        console.error('Fejl ved login i SQL-database:', err.message);
-        reject(err);
-      } else {
-        const user = rows.map(row => ({
-          id: row[0].value,
-          username: row[1].value,
-          password: row[2].value,
-        }));
-
-        if (user.length > 0) {
-          // Tilføjer cookie med brugernavn
-          res.cookie("userAuth", username, {
-            maxAge: 3600000,
-          });
-
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      }
-    });
-
-    request.addParameter('username', TYPES.VarChar, username);
-    request.addParameter('password', TYPES.VarChar, password);
-    console.log(sql);
-    connection.execSql(request);
-  });
 };
+
 
 
 /*
