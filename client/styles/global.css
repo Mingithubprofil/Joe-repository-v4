@@ -275,8 +275,9 @@ body {
     color: #333;
   }
   #cartIcon:hover {
-    filter: brightness(20%);
+    background-color: #f088b7;
     cursor: pointer;
+    border-radius: 10px;
   }
   .Ingredients-list {
     display: flex;
@@ -393,3 +394,14 @@ body {
     margin-left: -103px;
     font-style: italic;
   }
+
+  h6{
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+
+  }
+
+
