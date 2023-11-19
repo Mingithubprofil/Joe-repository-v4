@@ -69,5 +69,30 @@ document.addEventListener('DOMContentLoaded', function () {
       cartModal.style.width = '0';
     }
   });
-  
-  //test
+
+  window.addEventListener('DOMContentLoaded', (event) => {
+    openLocationPopup();
+});
+
+function openLocationPopup() {
+    document.getElementById('locationPopup').style.display = 'flex';
+}
+
+function closeLocationPopup() {
+    document.getElementById('locationPopup').style.display = 'none';
+}
+
+function selectCity() {
+    var selectedCity = document.getElementById('cities').value;
+    // Handle the selected city as needed (e.g., pass it to your server, store in a variable, etc.)
+    console.log("Selected City:", selectedCity);
+
+    // Update the text with the selected city
+    var orderTextElement = document.getElementById('orderText');
+    if (orderTextElement) {
+        orderTextElement.innerText = `På denne side kan du bestille en juice fra vores lækre menu i ${selectedCity}!`;
+    }
+
+    // Close the popup (you can remove this if you want to keep it open)
+    closeLocationPopup();
+}

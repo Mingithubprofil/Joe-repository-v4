@@ -22,7 +22,7 @@
   <div class="center">
     <div>
       <h4 id="customername_on_order_page"></h4>
-      <h4>På denne side kan du bestille en juice fra vores lækre menu!</h4>
+      <h4 id="orderText">På denne side kan du bestille en juice fra vores lækre menu!</h4>
       <h5>Du kan også lave din egen tilpassede juice! <a href="http://188.166.200.199/customize_juice">Klik her</a></h5>
       <h5 id="loading" style="display: none">Loading...</h5>
       <h5 id="kaffe_anbefaling"></h5>
@@ -258,7 +258,34 @@
       </div>
     </div>
   </div>
+
+  <div id="locationPopup" class="location-popup">
+    <div class="location-popup-content">
+        <span class="close" onclick="closeLocationPopup()">&times;</span>
+        <!-- Tilføj billedet her -->
+        <img src="https://scanmaps.dk/Webkort/images/kortoversigter_ditkort.png" alt="City Map" style="width: 100%; max-width: 400px;">
+        <!-- Dropdown-menuen for byvalg -->
+        <h2>Select Location</h2>
+        <label for="cities">Choose a city:</label>
+        <select id="cities">
+          <option value="copenhagen">Copenhagen</option>
+          <option value="aarhus">Aarhus</option>
+          <option value="odense">Odense</option>
+          <option value="aalborg">Aalborg</option>
+          <option value="roskilde">Roskilde</option>
+          <option value="aalborg">Aalborg</option>
+          <option value="esbjerg">Esbjerg</option>
+          <option value="randers">Randers</option>
+          <!-- Tilføj flere byer efter behov -->
+      </select>
+        <button onclick="selectCity()">Select</button>
+    </div>
+</div>
 </body>
+
+<footer>
+  <p>&copy; 2023 TeamEffektivJuices. All rights reserved.</p>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../scripts/cart.js"></script>
 <script src="../scripts/location.js"></script>
