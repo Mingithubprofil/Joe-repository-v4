@@ -20,14 +20,19 @@ document.addEventListener('DOMContentLoaded', function () {
   
     // Function to add an item to the cart
     function addToCart(button) {
-      const productName = button.parentElement.querySelector('h3').textContent;
-      const productPrice = 63.00; // Set the price accordingly
+      const productContainer = button.closest('.product');
+      const productName = productContainer.querySelector('h3').textContent;
+    
+      // Find the price element and extract the numerical value
+      const priceElement = productContainer.querySelector('p[pricetag]');
+      const productPrice = parseFloat(priceElement.getAttribute('pricetag'));
+    
       const cartItem = { name: productName, price: productPrice };
-  
+    
       cartItems.push(cartItem);
       updateCartView();
     }
-  
+
     // Function to remove an item from the cart
     function removeFromCart(index) {
       cartItems.splice(index, 1);
@@ -96,3 +101,4 @@ function selectCity() {
     // Close the popup (you can remove this if you want to keep it open)
     closeLocationPopup();
 }
+
