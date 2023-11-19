@@ -33,6 +33,7 @@ li img {
   display: block;
   width: 65px;
   padding: 8px;
+  animation: scaleIn 0.5s ease-in-out;
 }
 
 .active {
@@ -279,12 +280,27 @@ h1 {
   .product button:hover {
     background-color: #f088b7;
   }
-  h4 {
+
+  #orderText {
     font-size: 1.8em;
     color: #000000;
     font-weight: bold;
-    animation: fadeIn 1s ease-in-out 750ms forwards;
-  }
+    display: inline-block;
+    background-color: #f7c1d9;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+/* Tilføj fadeIn animation hvis den ikke er defineret */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
   .modal {
     position: fixed;
     right: 0;
@@ -396,6 +412,20 @@ h1 {
     margin-inline-end: 0px;
     font-weight: bold;
   }
+
+
+/* Tilføj fadeIn animation hvis den ikke er defineret */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
   .betalBtn {
     background-color: #f7c1d9;
     color: #24272a;
@@ -474,6 +504,7 @@ h1 {
 }
 
 .location-popup-content {
+  animation: scaleIn 0.5s ease-in-out;
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
