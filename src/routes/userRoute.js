@@ -228,10 +228,13 @@ userRoute.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
+    console.log("Received login request with username:", username, "and password:", password);
+
     // Middleware funktion til at tjekke autentificering
     const isAuthenticated = await checkAuth(username, password);
 
     console.log({ isAuthenticated });
+
 
     if (!isAuthenticated) {
       return res.status(401).send("Unauthorized");
