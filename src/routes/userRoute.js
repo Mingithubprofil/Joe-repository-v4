@@ -230,7 +230,14 @@ const checkAuth = async (username, password) => {
 
     return new Promise((resolve, reject) => {
       console.log("Executing SQL query:", sql);
-      connection.execSql(request);
+      connection.execSql(request, (err, results) => {
+        if (err) {
+          console.error('Fejl ved udførelse af SQL-query:', err.message);
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
     });
   } catch (error) {
     console.error('Fejl ved checkAuth:', error);
