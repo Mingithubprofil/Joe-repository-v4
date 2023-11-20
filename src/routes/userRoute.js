@@ -188,6 +188,7 @@ userRoute.delete("/user/:id", (req, res) => {
 // Funktion til at tjekke autentificering
 const checkAuth = async (username, password) => {
   try {
+    console.log("Received login request with username:", username, "and password:", password);
     // Tjekker om username og password er til stede
     if (!username || !password) {
       return false;
@@ -213,7 +214,13 @@ const checkAuth = async (username, password) => {
         console.log("Alle rækker fra databasen:", rows);
         console.log("Resultater af SQL-query:", user);
 
-        return user.length > 0;
+        if (user.length > 0) {
+          console.log("Authentication successful.");
+          resolve(true);
+        } else {
+          console.log("Authentication failed.");
+          resolve(false);
+        }
       }
     });
 
