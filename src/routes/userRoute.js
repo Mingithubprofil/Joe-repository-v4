@@ -193,7 +193,9 @@ const checkAuth = async (username, password) => {
       return false;
     }
 
-    const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
+    //const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
+    const sql = 'SELECT id, username, password FROM Users';
+
     console.log("Executing SQL query:", sql);
 
     const request = new Request(sql, (err, rowCount, rows) => {
