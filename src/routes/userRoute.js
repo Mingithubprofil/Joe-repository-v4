@@ -193,31 +193,27 @@ const checkAuth = async (username, password) => {
       return false;
     }
 
+    const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
+
+    const request = new Request(sql, (err, rowCount, rows) => {
+      if (err) {
+        console.error('Fejl ved login i SQL-database:', err.message);
+        return Promise.reject(err);
+      } else {
+        const user = rows.map(row => ({
+          id: row[0].value,
+          username: row[1].value,
+          password: row[2].value,
+        }));
+
+        return user.length > 0;
+      }
+    });
+
+    request.addParameter('username', TYPES.VarChar, username);
+    request.addParameter('password', TYPES.VarChar, password);
+
     return new Promise((resolve, reject) => {
-      const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
-
-      const request = new Request(sql, (err, rowCount, rows) => {
-        if (err) {
-          console.error('Fejl ved login i SQL-database:', err.message);
-          reject(err);
-        } else {
-          const user = rows.map(row => ({
-            id: row[0].value,
-            username: row[1].value,
-            password: row[2].value,
-          }));
-
-          if (user.length > 0) {
-            resolve(true);
-          } else {
-            resolve(false);
-          }
-        }
-      });
-
-      request.addParameter('username', TYPES.VarChar, username);
-      request.addParameter('password', TYPES.VarChar, password);
-      console.log(sql);
       connection.execSql(request);
     });
   } catch (error) {
@@ -225,6 +221,7 @@ const checkAuth = async (username, password) => {
     return false;
   }
 };
+
 
 // Login-endpoint med autentificering
 userRoute.post("/login", async (req, res) => {
