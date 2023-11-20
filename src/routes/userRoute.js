@@ -206,6 +206,7 @@ const checkAuth = async (username, password) => {
           username: row[1].value,
           password: row[2].value,
         }));
+        console.log("Resultater af SQL-query:", user);
 
         return user.length > 0;
       }
