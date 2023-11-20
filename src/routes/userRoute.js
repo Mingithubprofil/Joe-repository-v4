@@ -201,11 +201,13 @@ const checkAuth = async (username, password) => {
         console.error('Fejl ved login i SQL-database:', err.message);
         return Promise.reject(err);
       } else {
+        console.log("SQL-query udført uden fejl");
         const user = rows.map(row => ({
           id: row[0].value,
           username: row[1].value,
           password: row[2].value,
         }));
+        console.log("Alle rækker fra databasen:", rows);
         console.log("Resultater af SQL-query:", user);
 
         return user.length > 0;
