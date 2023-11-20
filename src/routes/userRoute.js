@@ -196,7 +196,7 @@ const checkAuth = async (username, password) => {
 
     //const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
     //const sql = `SELECT id, username, password FROM Users WHERE username = '${username}' AND password = '${password}'`;
-    `SELECT id, username, password FROM Users WHERE username = 'amigo' AND password = 'Amigo'`;
+    const sql = `SELECT id, username, password FROM Users WHERE username = 'amigo' AND password = 'Amigo'`;
 
 
 
