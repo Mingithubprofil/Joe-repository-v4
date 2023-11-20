@@ -214,6 +214,7 @@ const checkAuth = async (username, password) => {
 
     request.addParameter('username', TYPES.VarChar, username);
     request.addParameter('password', TYPES.VarChar, password);
+    console.log("Parametre bundet til SQL-query:", request.parameters);
 
     return new Promise((resolve, reject) => {
       connection.execSql(request);
