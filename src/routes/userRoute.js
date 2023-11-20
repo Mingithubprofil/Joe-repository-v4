@@ -203,7 +203,7 @@ const checkAuth = async (username, password) => {
     const request = new Request(sql, (err, rowCount, rows) => {
       if (err) {
         console.error('Fejl ved login i SQL-database:', err.message);
-        return Promise.reject(err);
+        return false;
       } else {
         console.log("SQL-query udført uden fejl");
         const user = rows.map(row => ({
@@ -216,10 +216,10 @@ const checkAuth = async (username, password) => {
 
         if (user.length > 0) {
           console.log("Authentication successful.");
-          resolve(true);
+          return true;
         } else {
           console.log("Authentication failed.");
-          resolve(false);
+          return false;
         }
       }
     });
