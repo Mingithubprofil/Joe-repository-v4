@@ -222,6 +222,7 @@ const checkAuth = async (username, password) => {
     console.log("Parametre bundet til SQL-query:", request.parameters);
 
     return new Promise((resolve, reject) => {
+      console.log("Executing SQL query:", sql);
       connection.execSql(request);
     });
   } catch (error) {
