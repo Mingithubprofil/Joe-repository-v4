@@ -30,7 +30,7 @@ async function loginUser() {
       headers: {
         'Content-Type': 'application/json',
       },
-      timeout: 20000, // Øg timeout til 20 sekunder (eller mere efter behov)
+      timeout: 10000, 
     });
 
     console.log(response.data);
