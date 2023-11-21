@@ -310,9 +310,9 @@ userRoute.post("/login", async (req, res) => {
           console.log(`Bruger ${username} logged ind!`);
           console.log("User data in authentication:", hentBrugerId);
     
-          const brugerId = hentBrugerId[0].user_id;
-          const brugerUsername = hentBrugerId[0].username;
-          const brugerPassword = hentBrugerId[0].password;
+          const brugerId = hentBrugerId[1].user_id;
+          const brugerUsername = hentBrugerId[1].username;
+          const brugerPassword = hentBrugerId[1].password;
     
           console.log("User ID:", brugerId);
           console.log("Username:", brugerUsername);
