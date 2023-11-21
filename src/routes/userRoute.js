@@ -198,8 +198,6 @@ const checkAuth = async (username, password) => {
     //const sql = `SELECT id, username, password FROM Users WHERE username = '${username}' AND password = '${password}'`;
     //const sql = `SELECT id, username, password FROM Users WHERE username = 'amigo' AND password = 'Amigo'`;
 
-
-
     console.log("Executing SQL query:", sql);
 
     const request = new Request(sql, (err, rowCount, rows) => {
@@ -237,7 +235,7 @@ const checkAuth = async (username, password) => {
           console.error('Fejl ved udførelse af SQL-query:', err.message);
           reject(err);
         } else {
-          resolve(isAuthenticated);
+          resolve(rows.length > 0);
         }
       });
     });
