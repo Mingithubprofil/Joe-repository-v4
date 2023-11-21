@@ -250,6 +250,7 @@ const checkAuth = async (username, password) => {
   }
 }; */
 
+/*
 // Funktion til at hente data fra azure sql-database 
 async function getUserByUsernameAndPassword(username, password) {
   const query = `
@@ -260,7 +261,34 @@ async function getUserByUsernameAndPassword(username, password) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(query);
-    }, 5000); // Simulerer en 1 sekunds forsinkelse, udskift dette med den faktiske databaseforespørgsel
+    }, 5000); // Simulerer en 5 sekunders forsinkelse, udskift dette med den faktiske databaseforespørgsel
+  });
+} */
+
+
+// Funktion til at hente data fra azure sql-database 
+async function getUserByUsernameAndPassword(username, password) {
+  return new Promise((resolve, reject) => {
+    const sql = `
+      SELECT user_id, username, password
+      FROM Users
+      WHERE username = '${username}' AND password = '${password}'
+    `;
+    
+    const request = new Request(sql, (err, rowCount, rows) => {
+      if (err) {
+        reject(err);
+      } else {
+        const users = rows.map(row => ({
+          user_id: row[0].value,
+          username: row[1].value,
+          password: row[2].value,
+        }));
+        resolve(users);
+      }
+    });
+
+    connection.execSql(request);
   });
 }
 
