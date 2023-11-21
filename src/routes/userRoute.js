@@ -209,14 +209,14 @@ const checkAuth = async (username, password) => {
       } else {
         console.log("SQL-query udført uden fejl");
         const user = rows.map(row => ({
-          id: row.id.value,
-          username: row.username.value,
-          password: row.password.value,
+          id: row[0].value,
+          username: row[1].value,
+          password: row[2].value,
         }));
         console.log("Alle rækker fra databasen:", rows);
         console.log("Resultater af SQL-query:", user);
 
-        if (rows.length > 0) {
+        if (user.length > 0) {
           console.log("Authentication successful.");
           return true;
         } else {
@@ -241,7 +241,6 @@ const checkAuth = async (username, password) => {
         }
       });
     });
-    return request.rowCount > 0;
   } catch (error) {
     console.error('Fejl ved checkAuth:', error);
     return false;
