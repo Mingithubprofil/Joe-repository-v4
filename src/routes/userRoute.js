@@ -194,7 +194,7 @@ const checkAuth = async (username, password) => {
       return false;
     }
 
-    const sql = `SELECT id, username, password FROM Users WHERE username = username AND password = password`;
+    const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
     //const sql = `SELECT id, username, password FROM Users WHERE username = '${username}' AND password = '${password}'`;
     //const sql = `SELECT id, username, password FROM Users WHERE username = 'amigo' AND password = 'Amigo'`;
 
@@ -216,7 +216,7 @@ const checkAuth = async (username, password) => {
         console.log("Alle rækker fra databasen:", rows);
         console.log("Resultater af SQL-query:", user);
 
-        if (user.length > 0) {
+        if (rows.length > 0) {
           console.log("Authentication successful.");
           return true;
         } else {
@@ -231,13 +231,13 @@ const checkAuth = async (username, password) => {
     console.log("Parametre bundet til SQL-query:", request.parameters);
 
     return new Promise((resolve, reject) => {
-      console.log("Executing SQL query:", sql);
+      //console.log("Executing SQL query:", sql);
       connection.execSql(request, (err, results) => {
         if (err) {
           console.error('Fejl ved udførelse af SQL-query:', err.message);
           reject(err);
         } else {
-          resolve(results);
+          resolve(isAuthenticated);
         }
       });
     });
