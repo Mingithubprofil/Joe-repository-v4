@@ -271,7 +271,7 @@ async function getUserByUsernameAndPassword(userId, username, password) {
 async function getUserByUsernameAndPassword(username, password) {
   return new Promise((resolve, reject) => {
     const sql = `
-      SELECT id, username, password
+      SELECT username, password
       FROM Users
       WHERE username = '${username}' AND password = '${password}'
     `;
@@ -283,7 +283,7 @@ async function getUserByUsernameAndPassword(username, password) {
         console.log('Rows:', rows);
         if (rowCount > 0) {
           const user = {
-            user_id: rows[0].value,
+            //user_id: rows[0].value,
             username: rows[1].value,
             password: rows[2].value,
           };
@@ -315,17 +315,17 @@ userRoute.post("/login", async (req, res) => {
           console.log(`Bruger ${username} logged ind!`);
           console.log("User data in authentication:", hentBruger);
     
-          const brugerId = hentBruger.user_id;
+          //const brugerId = hentBruger.user_id;
           const brugerUsername = hentBruger.username;
           const brugerPassword = hentBruger.password;
     
-          console.log("User ID:", brugerId);
+          //console.log("User ID:", brugerId);
           console.log("Username:", brugerUsername);
           console.log("Password:", brugerPassword);
     
           res.cookie('Username', brugerUsername, { httpOnly: true });
     
-          res.status(200).json({ userExists: true, status: "success", message: "User logged in", userId: brugerId, username: brugerUsername, password: brugerPassword });
+          res.status(200).json({ userExists: true, status: "success", message: "User logged in", username: brugerUsername, password: brugerPassword });
         } else {
           console.log(`User ${username} skrev forkert!`);
           res.status(401).json({ message: 'Forkert bruger eller kode!' });
