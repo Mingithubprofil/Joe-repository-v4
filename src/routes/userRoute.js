@@ -253,9 +253,9 @@ const checkAuth = async (username, password) => {
 // Funktion til at hente data fra azure sql-database 
 async function getUserByUsernameAndPassword(username, password) {
   const query = `
-    SELECT user_id, username, user_password
+    SELECT user_id, username, password
     FROM Users
-    WHERE username = '${username}' AND user_password = '${password}'
+    WHERE username = '${username}' AND password = '${password}'
   `;
   return new Promise((resolve) => {
     setTimeout(() => {
