@@ -211,11 +211,11 @@ const checkAuth = async (username, password) => {
         console.log("SQL-query udført uden fejl");
         console.log("Antal rækker fra databasen:", rowCount);
         console.log("Resultater af SQL-query:", rows);
-        const user = {
-          id: rows[0][0].value,
-          username: rows[0][1].value,
-          password: rows[0][2].value,
-        };        
+        const user = rows.map(row => ({
+          id: row[0].value,
+          username: row[1].value,
+          password: row[2].value,
+        }));
         console.log("Alle rækker fra databasen:", rows);
         console.log("Resultater af SQL-query:", user);
 
