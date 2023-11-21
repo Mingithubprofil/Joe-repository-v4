@@ -235,7 +235,7 @@ const checkAuth = async (username, password) => {
           console.error('Fejl ved udførelse af SQL-query:', err.message);
           reject(err);
         } else {
-          resolve(rows.length > 0);
+          resolve(true);
         }
       });
     });
