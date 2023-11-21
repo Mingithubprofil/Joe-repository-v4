@@ -33,7 +33,7 @@ async function loginUser() {
       timeout: 10000, 
     });
 
-    console.log(response.data);
+    //console.log(response.data);
 
     if (response.data.userExists) {
       // Hvis brugeren eksisterer, udfør login

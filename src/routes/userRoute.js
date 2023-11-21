@@ -231,12 +231,12 @@ userRoute.post("/login", async (req, res) => {
 
   if (username && password) {
     try {
-      console.log("Received login request with username:", username, "and password:", password);
+      console.log("Received login request from user with username:", username);
       const user = await getUserByUsernameAndPassword(username, password);
 
       if (user.username == username && user.password == password) {
         console.log(`User ${username} logged in!`);
-        console.log("User data in authentication:", user);
+        //console.log("User data in authentication:", user);
 
         const brugerUsername = user.username;
         const brugerPassword = user.password;
