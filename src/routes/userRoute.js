@@ -272,37 +272,38 @@ userRoute.post("/login", async (req, res) => {
     console.log("Received login request with username:", username, "and password:", password);
 
     // Funktion til at tjekke autentificering
-    const checkAuth = async (username, password) => {
-      try {
-        console.log("Received login request with username:", username, "and password:", password);
+    const checkAuth = (username, password) => {
+      console.log("Received login request with username:", username, "and password:", password);
 
-        if (username && password) {
-          const hentBrugerId = await getUserByUsernameAndPassword(username, password);
+      if (username && password) {
+        // Brug .then() og .catch() til at håndtere promise
+        getUserByUsernameAndPassword(username, password)
+          .then((hentBrugerId) => {
+            if (hentBrugerId && hentBrugerId.length > 0) {
+              console.log(`Bruger ${username} logged ind!`);
+              console.log("User data in authentication:", hentBrugerId);
 
-          if (hentBrugerId && hentBrugerId.length > 0) {
-            console.log(`Bruger ${username} logged ind!`);
-            console.log("User data in authentication:", hentBrugerId);
+              const brugerId = hentBrugerId[0].user_id;
+              const brugerUsername = hentBrugerId[0].username;
+              const brugerPassword = hentBrugerId[0].user_password;
 
-            const brugerId = hentBrugerId[0].user_id;
-            const brugerUsername = hentBrugerId[0].username;
-            const brugerPassword = hentBrugerId[0].user_password;
+              console.log("User ID:", brugerId);
+              console.log("Username:", brugerUsername);
+              console.log("Password:", brugerPassword);
 
-            console.log("User ID:", brugerId);
-            console.log("Username:", brugerUsername);
-            console.log("Password:", brugerPassword);
-
-            res.status(201).json({ userId: brugerId, username: brugerUsername, password: brugerPassword });
-          } else {
-            console.log(`User ${username} skrev forkert!`);
-            res.status(400).json({ message: 'Forkert bruger eller kode!' });
-          }
-        } else {
-          console.log('Skriv brugernavn og kode!');
-          res.status(400).json({ message: 'Forkert bruger eller kode!' });
-        }
-      } catch (error) {
-        console.error('Database error: ' + error.stack);
-        res.status(500).send('Database error!');
+              res.status(201).json({ userId: brugerId, username: brugerUsername, password: brugerPassword });
+            } else {
+              console.log(`User ${username} skrev forkert!`);
+              res.status(400).json({ message: 'Forkert bruger eller kode!' });
+            }
+          })
+          .catch((error) => {
+            console.error('Database error: ' + error.stack);
+            res.status(500).send('Database error!');
+          });
+      } else {
+        console.log('Skriv brugernavn og kode!');
+        res.status(400).json({ message: 'Forkert bruger eller kode!' });
       }
     };
 
