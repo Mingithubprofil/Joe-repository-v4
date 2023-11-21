@@ -2,8 +2,7 @@ const express = require("express");
 const path = require("path");
 const userRoute = express.Router();
 
-
-//const db = require('../db/db.js');
+const bcrypt = require('bcrypt');
 
 const { connection, Request, TYPES } = require('../db/db');
 
@@ -115,7 +114,7 @@ userRoute.get("/global.css", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/styles/global.css"));
 });
 
-
+/*
 //til registering af bruger (virker fint)
 
 userRoute.post("/user", (req, res) => {
@@ -143,6 +142,41 @@ userRoute.post("/user", (req, res) => {
 
   connection.execSql(request);
 });
+*/
+
+
+userRoute.post("/user", async (req, res) => {
+  const data = req.body;
+
+  const saltRounds = 10;
+
+  bcrypt.hash(data.password, saltRounds, async function(err, hash) {
+    if (err) {
+      console.error('Error hashing password:', err);
+      res.status(500).send('Internal Server Error');
+    } else {
+      const request = new Request(
+        'INSERT INTO Users (username, password, email, phonenumber) VALUES (@username, @password, @email, @phonenumber);',
+        (err) => {
+          if (err) {
+            console.error('Error inserting user into SQL database:', err.message);
+            res.status(500).send('Internal Server Error');
+          } else {
+            res.send('User added');
+          }
+        }
+      );
+
+      request.addParameter('username', TYPES.VarChar, data.username);
+      request.addParameter('password', TYPES.VarChar, hash); // Gem hashet password
+      request.addParameter('email', TYPES.VarChar, data.email);
+      request.addParameter('phonenumber', TYPES.VarChar, data.phonenumber);
+
+      connection.execSql(request);
+    }
+  });
+});
+
 
 //til at hente en bestemt profil
 
