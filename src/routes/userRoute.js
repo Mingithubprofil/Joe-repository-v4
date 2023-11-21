@@ -274,7 +274,7 @@ userRoute.post("/login", async (req, res) => {
     // Funktion til at tjekke autentificering
     const hentBrugerId = await getUserByUsernameAndPassword(username, password);
 
-    if (hentBrugerId && hentBrugerId.length > 0) {
+    if (hentBrugerId) {
       console.log(`Bruger ${username} logged ind!`);
       console.log("User data in authentication:", hentBrugerId);
 
