@@ -281,11 +281,12 @@ async function getUserByUsernameAndPassword(username, password) {
         reject(err);
       } else {
         console.log('Rows:', rows);
+        console.log('Rowcount:', rowCount);
         if (rowCount > 0) {
           const user = {
             //user_id: rows[0].value,
-            username: rows[1].value,
-            password: rows[2].value,
+            username: rows[0].value,
+            password: rows[1].value,
           };
           resolve(user);
         } else {
