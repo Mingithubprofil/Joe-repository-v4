@@ -66,6 +66,10 @@ userRoute.get("/order.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/order.js"));
 });
 
+userRoute.get("/userOrder", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/userOrder.html"));
+});
+
 
 //customize_juice
 
@@ -76,6 +80,10 @@ userRoute.get("/customize_juice", (req, res) => {
 userRoute.get("/customizeJuice.js", (req, res) => {
   //res.header('Content-Type', 'text/javascript');
   res.sendFile(path.join(__dirname, "../../client/scripts/customizeJuice.js"));
+});
+
+userRoute.get("/user_customize_juice", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/user_customize_juice.html"));
 });
 
 
