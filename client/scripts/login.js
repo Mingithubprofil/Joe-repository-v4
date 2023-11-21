@@ -21,7 +21,7 @@ async function loginUser() {
     let username = document.getElementById("username").value;
     let password = document.getElementById("Kodeord").value;
 
-    console.log("Sending login request with username:", username, "and password:", password);
+    console.log("Sending login request with username:", username);
 
     const response = await axios.post("/login", JSON.stringify({
       username,
