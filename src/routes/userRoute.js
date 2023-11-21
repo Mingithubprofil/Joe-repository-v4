@@ -14,8 +14,8 @@ const cookieParser = require("cookie-parser");
 userRoute.use(cookieParser());
 
 
-let id = 1;
-let db = [];
+//let id = 1;
+//let db = [];
 
 
 //login
@@ -285,6 +285,8 @@ userRoute.post("/login", async (req, res) => {
       console.log("User ID:", brugerId);
       console.log("Username:", brugerUsername);
       console.log("Password:", brugerPassword);
+
+      res.cookie('brugerId', brugerId, { httpOnly: true });
 
       res.status(200).json({ userExists: true, status: "success", message: "User logged in", userId: brugerId, username: brugerUsername, password: brugerPassword });
     } else {

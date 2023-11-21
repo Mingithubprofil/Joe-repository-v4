@@ -38,8 +38,8 @@ async function loginUser() {
     if (response.data.userExists) {
       // Hvis brugeren eksisterer, udfør login
       // localStorage.setItem("Username", username);
-      //document.cookie = `userAuth=${username}`;
-      //console.log(document.cookie);
+      document.cookie = `userAuth=${username}`;
+      console.log(document.cookie);
 
       // Redirect og opdater DOM
       responseDOM.innerHTML = response.data.message;
