@@ -300,6 +300,55 @@ async function getUserByUsernameAndPassword(username, password) {
 
 // Login-endpoint med autentificering
 userRoute.post("/login", async (req, res) => {
+  let username = req.body.username;
+  let password = req.body.password;
+
+  if (username && password) {
+    try {
+      console.log("Received login request with username:", username, "and password:", password);
+      const user = await getUserByUsernameAndPassword(username, password);
+
+      if (user) {
+        console.log(`User ${username} logged in!`);
+        console.log("User data in authentication:", user);
+
+        const brugerUsername = user.username;
+        const brugerPassword = user.password;
+
+        console.log("Username:", brugerUsername);
+        console.log("Password:", brugerPassword);
+
+        res.cookie('Username', brugerUsername, { httpOnly: true });
+
+        res.status(200).json({
+          userExists: true,
+          status: "success",
+          message: "User logged in",
+          username: brugerUsername,
+          password: brugerPassword
+        });
+      } else {
+        console.log(`User ${username} entered wrong credentials!`);
+        res.status(401).json({ message: 'Wrong username or password!' });
+      }
+      res.end();
+    } catch (error) {
+      console.error('Error during login:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+      res.end();
+    }
+  } else {
+    console.log('Enter username and password!');
+    res.status(400).json({ message: 'Wrong username or password!' });
+    res.end();
+  }
+});
+
+
+/*
+
+// Login-endpoint med autentificering
+userRoute.post("/login", async (req, res) => {
 
     let username = req.body.username;
     let password = req.body.password;
@@ -343,6 +392,7 @@ userRoute.post("/login", async (req, res) => {
     res.end();
   }
 });
+*/
 
 /*
 // Endpoint og funktion til autentificering
