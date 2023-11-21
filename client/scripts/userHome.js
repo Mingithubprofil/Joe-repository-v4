@@ -1,6 +1,9 @@
 
 
-//document.getElementById("customername_on_order_page").innerHTML = `Welcome ${username}!`
+let username = getCookie("userAuth");
+document.querySelector("username_on_page").innerHTML = `Welcome ${username}!`
+if (!username) location.href = "/login";
+
 
 
 
