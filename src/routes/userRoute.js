@@ -342,7 +342,7 @@ userRoute.post("/login", async (req, res) => {
       console.log("Received login request with username:", username, "and password:", password);
       const user = await getUserByUsernameAndPassword(username, password);
 
-      if (user) {
+      if (user.username == username && user.password == password) {
         console.log(`User ${username} logged in!`);
         console.log("User data in authentication:", user);
 
