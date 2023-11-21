@@ -249,9 +249,9 @@ userRoute.post("/login", async (req, res) => {
         res.status(200).json({
           userExists: true,
           status: "success",
-          message: "User logged in",
-          username: brugerUsername,
-          password: brugerPassword
+          message: "User logged in"
+          //username: brugerUsername,
+          //password: brugerPassword
         });
       } else {
         console.log(`User ${username} entered wrong credentials!`);
