@@ -250,7 +250,7 @@ const checkAuth = async (username, password) => {
   }
 }; */
 
-
+/*
 // Funktion til at hente data fra azure sql-database 
 async function getUserByUsernameAndPassword(userId, username, password) {
   const query = `
@@ -263,9 +263,9 @@ async function getUserByUsernameAndPassword(userId, username, password) {
       resolve(query);
     }, 5000); // Simulerer en 5 sekunders forsinkelse, udskift dette med den faktiske databaseforespørgsel
   });
-} 
+} */
 
-/*
+
 
 // Funktion til at hente data fra azure sql-database 
 async function getUserByUsernameAndPassword(username, password) {
@@ -280,6 +280,7 @@ async function getUserByUsernameAndPassword(username, password) {
       if (err) {
         reject(err);
       } else {
+        console.log('Rows:', rows);
         const users = rows.map(row => ({
           user_id: row[0].value,
           username: row[1].value,
@@ -291,7 +292,7 @@ async function getUserByUsernameAndPassword(username, password) {
 
     connection.execSql(request);
   });
-} */
+} 
 
 // Login-endpoint med autentificering
 userRoute.post("/login", async (req, res) => {
@@ -301,8 +302,9 @@ userRoute.post("/login", async (req, res) => {
 
     if (username && password) {
       try {
-        const hentBrugerId = await getUserByUsernameAndPassword(username, password);
         console.log("Received login request with username:", username, "and password:", password);
+        const hentBrugerId = await getUserByUsernameAndPassword(username, password);
+        
         console.log("User:", hentBrugerId)
         const objKeys = Object.keys(hentBrugerId);
         
@@ -333,7 +335,8 @@ userRoute.post("/login", async (req, res) => {
   }
   } else {
     console.log('Skriv brugernavn og kode!');
-    response.status(400).json({ message: 'Forkert bruger eller kode!' });
+    res.status(400).json({ message: 'Forkert bruger eller kode!' });
+    res.end();
   }
 });
 
