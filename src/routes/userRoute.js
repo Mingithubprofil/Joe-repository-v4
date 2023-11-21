@@ -242,7 +242,7 @@ userRoute.post("/login", async (req, res) => {
         const brugerPassword = user.password;
 
         console.log("Username:", brugerUsername);
-        console.log("Password:", brugerPassword);
+        //console.log("Password:", brugerPassword);
 
         res.cookie('Username', brugerUsername, { httpOnly: true });
 
