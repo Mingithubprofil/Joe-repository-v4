@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const userRoute = express.Router();
 
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 
 const { connection, Request, TYPES } = require('../db/db');
 
@@ -114,7 +114,7 @@ userRoute.get("/global.css", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/styles/global.css"));
 });
 
-/*
+
 //til registering af bruger (virker fint)
 
 userRoute.post("/user", (req, res) => {
@@ -142,9 +142,9 @@ userRoute.post("/user", (req, res) => {
 
   connection.execSql(request);
 });
-*/
 
 
+/*
 userRoute.post("/user", async (req, res) => {
   const data = req.body;
 
@@ -175,7 +175,7 @@ userRoute.post("/user", async (req, res) => {
       connection.execSql(request);
     }
   });
-});
+});*/
 
 
 //til at hente en bestemt profil
