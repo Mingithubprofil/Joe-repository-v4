@@ -29,6 +29,8 @@ connection.connect((err) => {
   }
 });
 
+console.log("Connection state:", connection.state.name);
+
 module.exports = { connection, Request, TYPES };
 
 

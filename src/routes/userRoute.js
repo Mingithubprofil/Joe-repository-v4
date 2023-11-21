@@ -194,20 +194,23 @@ const checkAuth = async (username, password) => {
       return false;
     }
 
-    console.log("Connection state:", connection.state.name);
+    //console.log("Connection state:", connection.state.name);
 
     const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
     //const sql = `SELECT id, username, password FROM Users WHERE username = '${username}' AND password = '${password}'`;
     //const sql = `SELECT id, username, password FROM Users WHERE username = 'amigo' AND password = 'Amigo'`;
 
     console.log("Executing SQL query:", sql);
-
+    console.log("Before SQL query execution");
     const request = new Request(sql, (err, rowCount, rows) => {
+      console.log("Inside SQL query callback");
       if (err) {
         console.error('Fejl ved login i SQL-database:', err.message);
         return false;
       } else {
         console.log("SQL-query udført uden fejl");
+        console.log("Antal rækker fra databasen:", rowCount);
+        console.log("Resultater af SQL-query:", rows);
         const user = rows.map(row => ({
           id: row[0].value,
           username: row[1].value,
