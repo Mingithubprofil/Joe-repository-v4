@@ -295,37 +295,45 @@ async function getUserByUsernameAndPassword(username, password) {
 
 // Login-endpoint med autentificering
 userRoute.post("/login", async (req, res) => {
-  try {
-    const { username, password } = req.body;
 
-    console.log("Received login request with username:", username, "and password:", password);
+    let username = req.body.username;
+    let password = req.body.password;
 
-    // Funktion til at tjekke autentificering
-    const hentBrugerId = await getUserByUsernameAndPassword(username, password);
-    const objKeys = Object.keys(hentBrugerId);
-
-    if (hentBrugerId && objKeys.length > 0) {
-      console.log(`Bruger ${username} logged ind!`);
-      console.log("User data in authentication:", hentBrugerId);
-
-      const brugerId = hentBrugerId[0].user_id;
-      const brugerUsername = hentBrugerId[0].username;
-      const brugerPassword = hentBrugerId[0].password;
-
-      console.log("User ID:", brugerId);
-      console.log("Username:", brugerUsername);
-      console.log("Password:", brugerPassword);
-
-      res.cookie('brugerId', brugerId, { httpOnly: true });
-
-      res.status(200).json({ userExists: true, status: "success", message: "User logged in", userId: brugerId, username: brugerUsername, password: brugerPassword });
-    } else {
-      console.log(`User ${username} skrev forkert!`);
-      res.status(401).json({ message: 'Forkert bruger eller kode!' });
-    }
-  } catch (error) {
+    if (username && password) {
+      try {
+        const hentBrugerId = await getUserByUsernameAndPassword(username, password);
+        console.log("Received login request with username:", username, "and password:", password);
+        console.log("User:", hentBrugerId)
+        const objKeys = Object.keys(hentBrugerId);
+        
+        if (hentBrugerId && objKeys.length > 0) {
+          console.log(`Bruger ${username} logged ind!`);
+          console.log("User data in authentication:", hentBrugerId);
+    
+          const brugerId = hentBrugerId[0].user_id;
+          const brugerUsername = hentBrugerId[0].username;
+          const brugerPassword = hentBrugerId[0].password;
+    
+          console.log("User ID:", brugerId);
+          console.log("Username:", brugerUsername);
+          console.log("Password:", brugerPassword);
+    
+          res.cookie('brugerId', brugerId, { httpOnly: true });
+    
+          res.status(200).json({ userExists: true, status: "success", message: "User logged in", userId: brugerId, username: brugerUsername, password: brugerPassword });
+        } else {
+          console.log(`User ${username} skrev forkert!`);
+          res.status(401).json({ message: 'Forkert bruger eller kode!' });
+        }
+        res.end()
+    } catch (error) {
     console.error('Fejl ved login:', error);
     res.status(500).json({ message: 'Internal Server Error' });
+    res.end()
+  }
+  } else {
+    console.log('Skriv brugernavn og kode!');
+    response.status(400).json({ message: 'Forkert bruger eller kode!' });
   }
 });
 
