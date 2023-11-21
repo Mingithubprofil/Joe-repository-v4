@@ -250,7 +250,7 @@ const checkAuth = async (username, password) => {
   }
 }; */
 
-/*
+
 // Funktion til at hente data fra azure sql-database 
 async function getUserByUsernameAndPassword(username, password) {
   const query = `
@@ -263,8 +263,9 @@ async function getUserByUsernameAndPassword(username, password) {
       resolve(query);
     }, 5000); // Simulerer en 5 sekunders forsinkelse, udskift dette med den faktiske databaseforespørgsel
   });
-} */
+} 
 
+/*
 
 // Funktion til at hente data fra azure sql-database 
 async function getUserByUsernameAndPassword(username, password) {
@@ -290,7 +291,7 @@ async function getUserByUsernameAndPassword(username, password) {
 
     connection.execSql(request);
   });
-}
+} */
 
 // Login-endpoint med autentificering
 userRoute.post("/login", async (req, res) => {
@@ -301,14 +302,15 @@ userRoute.post("/login", async (req, res) => {
 
     // Funktion til at tjekke autentificering
     const hentBrugerId = await getUserByUsernameAndPassword(username, password);
+    const objKeys = Object.keys(hentBrugerId);
 
-    if (hentBrugerId) {
+    if (hentBrugerId && objKeys.length > 0) {
       console.log(`Bruger ${username} logged ind!`);
       console.log("User data in authentication:", hentBrugerId);
 
       const brugerId = hentBrugerId[0].user_id;
       const brugerUsername = hentBrugerId[0].username;
-      const brugerPassword = hentBrugerId[0].user_password;
+      const brugerPassword = hentBrugerId[0].password;
 
       console.log("User ID:", brugerId);
       console.log("Username:", brugerUsername);
