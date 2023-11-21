@@ -207,9 +207,9 @@ const checkAuth = async (username, password) => {
       } else {
         console.log("SQL-query udført uden fejl");
         const user = rows.map(row => ({
-          id: row[0].value,
-          username: row[1].value,
-          password: row[2].value,
+          id: row.id.value,
+          username: row.username.value,
+          password: row.password.value,
         }));
         console.log("Alle rækker fra databasen:", rows);
         console.log("Resultater af SQL-query:", user);
@@ -235,6 +235,7 @@ const checkAuth = async (username, password) => {
           console.error('Fejl ved udførelse af SQL-query:', err.message);
           reject(err);
         } else {
+          console.log(results)
           resolve(true);
         }
       });
