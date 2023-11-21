@@ -252,11 +252,11 @@ const checkAuth = async (username, password) => {
 
 
 // Funktion til at hente data fra azure sql-database 
-async function getUserByUsernameAndPassword(username, password) {
+async function getUserByUsernameAndPassword(userId, username, password) {
   const query = `
     SELECT user_id, username, password
     FROM Users
-    WHERE username = '${username}' AND password = '${password}'
+    WHERE user_id = '${userId}' And username = '${username}' AND password = '${password}'
   `;
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -310,9 +310,9 @@ userRoute.post("/login", async (req, res) => {
           console.log(`Bruger ${username} logged ind!`);
           console.log("User data in authentication:", hentBrugerId);
     
-          const brugerId = hentBrugerId[1].user_id;
-          const brugerUsername = hentBrugerId[1].username;
-          const brugerPassword = hentBrugerId[1].password;
+          const brugerId = hentBrugerId[0].user_id;
+          const brugerUsername = hentBrugerId[0].username;
+          const brugerPassword = hentBrugerId[0].password;
     
           console.log("User ID:", brugerId);
           console.log("Username:", brugerUsername);
