@@ -144,6 +144,7 @@ userRoute.post("/user", (req, res) => {
   connection.execSql(request);
 });
 
+//til at hente en bestemt profil
 
 userRoute.get("/user/:id", (req, res) => {
   const userId = req.params.id;
@@ -167,6 +168,8 @@ userRoute.get("/user/:id", (req, res) => {
 });
 
 
+//til at slette en bruger
+
 userRoute.delete("/user/:id", (req, res) => {
   const userId = req.params.id;
   const sql = `DELETE FROM Users WHERE id = @userId`;
@@ -184,119 +187,8 @@ userRoute.delete("/user/:id", (req, res) => {
   connection.execSql(request);
 });
 
-/*
-// Funktion til at tjekke autentificering
-const checkAuth = async (username, password) => {
-  try {
-    console.log("Received login request with username:", username, "and password:", password);
-    // Tjekker om username og password er til stede
-    if (!username || !password) {
-      return false;
-    }
 
-    //console.log("Connection state:", connection.state.name);
-
-    const sql = `SELECT id, username, password FROM Users WHERE username = @username AND password = @password`;
-    //const sql = `SELECT id, username, password FROM Users WHERE username = '${username}' AND password = '${password}'`;
-    //const sql = `SELECT id, username, password FROM Users WHERE username = 'amigo' AND password = 'Amigo'`;
-
-    console.log("Executing SQL query:", sql);
-    console.log("Before SQL query execution");
-    const request = new Request(sql, (err, rowCount, rows) => {
-      console.log("Inside SQL query callback");
-      if (err) {
-        console.error('Fejl ved login i SQL-database:', err.message);
-        return false;
-      } else {
-        console.log("SQL-query udført uden fejl");
-        console.log("Antal rækker fra databasen:", rowCount);
-        console.log("Resultater af SQL-query:", rows);
-        const user = rows.map(row => ({
-          id: row[0].value,
-          username: row[1].value,
-          password: row[2].value,
-        }));
-        console.log("Alle rækker fra databasen:", rows);
-        console.log("Resultater af SQL-query:", user);
-
-        if (user.length > 0) {
-          console.log("Authentication successful.");
-          return true;
-        } else {
-          console.log("Authentication failed.");
-          return false;
-        }
-      }
-    });
-
-    request.addParameter('username', TYPES.VarChar, username);
-    request.addParameter('password', TYPES.VarChar, password);
-    console.log("Parametre bundet til SQL-query:", request.parameters);
-
-    await new Promise((resolve, reject) => {
-      connection.execSql(request, (err, rowCount, rows) => {
-        if (err) {
-          console.error('Fejl ved udførelse af SQL-query:', err.message);
-          reject(err);
-        } else {
-          console.log("Executed SQL query successfully.");
-          resolve(rowCount > 0);
-        }
-      });
-    });
-  } catch (error) {
-    console.error('Fejl ved checkAuth:', error);
-    return false;
-  }
-}; */
-
-/*
-// Funktion til at hente data fra azure sql-database 
-async function getUserByUsernameAndPassword(userId, username, password) {
-  const query = `
-    SELECT user_id, username, password
-    FROM Users
-    WHERE user_id = '${userId}' And username = '${username}' AND password = '${password}'
-  `;
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(query);
-    }, 5000); // Simulerer en 5 sekunders forsinkelse, udskift dette med den faktiske databaseforespørgsel
-  });
-} */
-
-
-/*
-// Funktion til at hente data fra azure sql-database 
-async function getUserByUsernameAndPassword(username, password) {
-  return new Promise((resolve, reject) => {
-    const sql = `
-      SELECT username, password
-      FROM Users
-      WHERE username = '${username}' AND password = '${password}'
-    `;
-    
-    const request = new Request(sql, (err, rowCount, rows) => {
-      if (err) {
-        reject(err);
-      } else {
-        console.log('Rows:', rows);
-        console.log('Rowcount:', rowCount);
-        if (rowCount > 0 && rows[0]) {
-          const user = {
-            //user_id: rows[0].value,
-            username: rows[0].username.value,
-            password: rows[0].password.value,
-          };
-          resolve(user);
-        } else {
-          resolve(null); // Returner null, hvis brugeren ikke findes
-        }
-      }
-    });
-    connection.execSql(request);
-  });
-} */
+//funktion til at hente data fra sql-database
 
 async function getUserByUsernameAndPassword(username, password) {
   return new Promise((resolve, reject) => {
@@ -379,190 +271,11 @@ userRoute.post("/login", async (req, res) => {
 });
 
 
-/*
-
-// Login-endpoint med autentificering
-userRoute.post("/login", async (req, res) => {
-
-    let username = req.body.username;
-    let password = req.body.password;
-
-    if (username && password) {
-      try {
-        console.log("Received login request with username:", username, "and password:", password);
-        const hentBruger = await getUserByUsernameAndPassword(username, password);
-        
-        console.log("User:", hentBruger)
-        //const objKeys = Object.keys(hentBrugerId);
-        
-        if (hentBruger) {
-          console.log(`Bruger ${username} logged ind!`);
-          console.log("User data in authentication:", hentBruger);
-    
-          //const brugerId = hentBruger.user_id;
-          const brugerUsername = hentBruger.username;
-          const brugerPassword = hentBruger.password;
-    
-          //console.log("User ID:", brugerId);
-          console.log("Username:", brugerUsername);
-          console.log("Password:", brugerPassword);
-    
-          res.cookie('Username', brugerUsername, { httpOnly: true });
-    
-          res.status(200).json({ userExists: true, status: "success", message: "User logged in", username: brugerUsername, password: brugerPassword });
-        } else {
-          console.log(`User ${username} skrev forkert!`);
-          res.status(401).json({ message: 'Forkert bruger eller kode!' });
-        }
-        res.end()
-    } catch (error) {
-    console.error('Fejl ved login:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-    res.end()
-  }
-  } else {
-    console.log('Skriv brugernavn og kode!');
-    res.status(400).json({ message: 'Forkert bruger eller kode!' });
-    res.end();
-  }
-});
-*/
-
-/*
-// Endpoint og funktion til autentificering
-userRoute.post("/login", async (req, res) => {
-  try {
-    const { username, password } = req.body;
-
-    console.log("Received login request with username:", username, "and password:", password);
-
-    // Funktion til at tjekke autentificering
-    const checkAuth = (username, password) => {
-      console.log("Received login request with username:", username, "and password:", password);
-
-      if (username && password) {
-        // Brug .then() og .catch() til at håndtere promise
-        getUserByUsernameAndPassword(username, password)
-          .then((hentBrugerId) => {
-            if (hentBrugerId && hentBrugerId.length > 0) {
-              console.log(`Bruger ${username} logged ind!`);
-              console.log("User data in authentication:", hentBrugerId);
-
-              const brugerId = hentBrugerId[0].user_id;
-              const brugerUsername = hentBrugerId[0].username;
-              const brugerPassword = hentBrugerId[0].user_password;
-
-              console.log("User ID:", brugerId);
-              console.log("Username:", brugerUsername);
-              console.log("Password:", brugerPassword);
-
-              res.status(201).json({ userId: brugerId, username: brugerUsername, password: brugerPassword });
-            } else {
-              console.log(`User ${username} skrev forkert!`);
-              res.status(400).json({ message: 'Forkert bruger eller kode!' });
-            }
-          })
-          .catch((error) => {
-            console.error('Database error: ' + error.stack);
-            res.status(500).send('Database error!');
-          });
-      } else {
-        console.log('Skriv brugernavn og kode!');
-        res.status(400).json({ message: 'Forkert bruger eller kode!' });
-      }
-    };
-
-    // Middleware funktion til at tjekke autentificering
-    const isAuthenticated = await checkAuth(username, password);
-
-    console.log({ isAuthenticated });
-
-    if (!isAuthenticated) {
-      return res.status(401).send("Unauthorized");
-    }
-
-    // Resten af din kode (håndtering af login)
-
-    return res.status(200).json({ userExists: true, status: "success", message: "User logged in" });
-  } catch (error) {
-    console.error('Fejl ved login:', error);
-    return res.status(500).send('Internal Server Error');
-  }
-});
-*/
-
-/*
-
-// Funktion til autentificering
-const checkAuth = async (username, password) => {
-  try {
-    console.log("Received login request with username:", username, "and password:", password);
-
-    if (username && password) {
-      const hentBrugerId = await getUserByUsernameAndPassword(username, password);
-
-      if (hentBrugerId && hentBrugerId.length > 0) {
-        console.log(`Bruger ${username} logged ind!`);
-        console.log("User data in authentication:", hentBrugerId);
-
-        const brugerId = hentBrugerId[0].user_id;
-        const brugerUsername = hentBrugerId[0].username;
-        const brugerPassword = hentBrugerId[0].user_password;
-
-        console.log("User ID:", brugerId);
-        console.log("Username:", brugerUsername);
-        console.log("Password:", brugerPassword);
-
-        response.status(201).json({ userId: brugerId, username: brugerUsername, password: brugerPassword });
-      } else {
-        console.log(`User ${username} skrev forkert!`);
-        response.status(400).json({ message: 'Forkert bruger eller kode!' });
-      }
-      response.end();
-    } else {
-      console.log('Skriv brugernavn og kode!');
-      response.status(400).json({ message: 'Forkert bruger eller kode!' });
-    }
-  } catch (error) {
-    console.error('Database error: ' + error.stack);
-    response.send('Database error!');
-    response.end();
-  }
-};
-
-
-
-// Login-endpoint med autentificering
-userRoute.post("/login", async (req, res) => {
-  try {
-    const { username, password } = req.body;
-
-    console.log("Received login request with username:", username, "and password:", password);
-
-    // Middleware funktion til at tjekke autentificering
-    const isAuthenticated = await checkAuth(username, password);
-
-    console.log({ isAuthenticated });
-
-
-    if (!isAuthenticated) {
-      return res.status(401).send("Unauthorized");
-    }
-
-    // Resten af din kode (håndtering af login)
-
-    return res.status(200).json({ userExists: true, status: "success", message: "User logged in" });
-  } catch (error) {
-    console.error('Fejl ved login:', error);
-    return res.status(500).send('Internal Server Error');
-  }
-});
-
-*/
 
 
 
 module.exports = userRoute;
+
 
 /*
 
