@@ -184,7 +184,7 @@ userRoute.delete("/user/:id", (req, res) => {
   connection.execSql(request);
 });
 
-
+/*
 // Funktion til at tjekke autentificering
 const checkAuth = async (username, password) => {
   try {
@@ -248,7 +248,122 @@ const checkAuth = async (username, password) => {
     console.error('Fejl ved checkAuth:', error);
     return false;
   }
+}; */
+
+// Funktion til at hente data fra azure sql-database 
+async function getUserByUsernameAndPassword(username, password) {
+  const query = `
+    SELECT user_id, username, user_password
+    FROM Users
+    WHERE username = '${username}' AND user_password = '${password}'
+  `;
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(query);
+    }, 5000); // Simulerer en 1 sekunds forsinkelse, udskift dette med den faktiske databaseforespørgsel
+  });
+}
+
+// Endpoint og funktion til autentificering
+userRoute.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    console.log("Received login request with username:", username, "and password:", password);
+
+    // Funktion til at tjekke autentificering
+    const checkAuth = async (username, password) => {
+      try {
+        console.log("Received login request with username:", username, "and password:", password);
+
+        if (username && password) {
+          const hentBrugerId = await getUserByUsernameAndPassword(username, password);
+
+          if (hentBrugerId && hentBrugerId.length > 0) {
+            console.log(`Bruger ${username} logged ind!`);
+            console.log("User data in authentication:", hentBrugerId);
+
+            const brugerId = hentBrugerId[0].user_id;
+            const brugerUsername = hentBrugerId[0].username;
+            const brugerPassword = hentBrugerId[0].user_password;
+
+            console.log("User ID:", brugerId);
+            console.log("Username:", brugerUsername);
+            console.log("Password:", brugerPassword);
+
+            res.status(201).json({ userId: brugerId, username: brugerUsername, password: brugerPassword });
+          } else {
+            console.log(`User ${username} skrev forkert!`);
+            res.status(400).json({ message: 'Forkert bruger eller kode!' });
+          }
+        } else {
+          console.log('Skriv brugernavn og kode!');
+          res.status(400).json({ message: 'Forkert bruger eller kode!' });
+        }
+      } catch (error) {
+        console.error('Database error: ' + error.stack);
+        res.status(500).send('Database error!');
+      }
+    };
+
+    // Middleware funktion til at tjekke autentificering
+    const isAuthenticated = await checkAuth(username, password);
+
+    console.log({ isAuthenticated });
+
+    if (!isAuthenticated) {
+      return res.status(401).send("Unauthorized");
+    }
+
+    // Resten af din kode (håndtering af login)
+
+    return res.status(200).json({ userExists: true, status: "success", message: "User logged in" });
+  } catch (error) {
+    console.error('Fejl ved login:', error);
+    return res.status(500).send('Internal Server Error');
+  }
+});
+
+
+/*
+
+// Funktion til autentificering
+const checkAuth = async (username, password) => {
+  try {
+    console.log("Received login request with username:", username, "and password:", password);
+
+    if (username && password) {
+      const hentBrugerId = await getUserByUsernameAndPassword(username, password);
+
+      if (hentBrugerId && hentBrugerId.length > 0) {
+        console.log(`Bruger ${username} logged ind!`);
+        console.log("User data in authentication:", hentBrugerId);
+
+        const brugerId = hentBrugerId[0].user_id;
+        const brugerUsername = hentBrugerId[0].username;
+        const brugerPassword = hentBrugerId[0].user_password;
+
+        console.log("User ID:", brugerId);
+        console.log("Username:", brugerUsername);
+        console.log("Password:", brugerPassword);
+
+        response.status(201).json({ userId: brugerId, username: brugerUsername, password: brugerPassword });
+      } else {
+        console.log(`User ${username} skrev forkert!`);
+        response.status(400).json({ message: 'Forkert bruger eller kode!' });
+      }
+      response.end();
+    } else {
+      console.log('Skriv brugernavn og kode!');
+      response.status(400).json({ message: 'Forkert bruger eller kode!' });
+    }
+  } catch (error) {
+    console.error('Database error: ' + error.stack);
+    response.send('Database error!');
+    response.end();
+  }
 };
+
 
 
 // Login-endpoint med autentificering
@@ -277,7 +392,7 @@ userRoute.post("/login", async (req, res) => {
   }
 });
 
-
+*/
 
 
 
