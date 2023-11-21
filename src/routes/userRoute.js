@@ -283,9 +283,9 @@ async function getUserByUsernameAndPassword(username, password) {
         console.log('Rows:', rows);
         if (rowCount > 0) {
           const user = {
-            user_id: rows[0][0].value,
-            username: rows[0][1].value,
-            password: rows[0][2].value,
+            user_id: rows[0].value,
+            username: rows[1].value,
+            password: rows[2].value,
           };
           resolve(user);
         } else {
