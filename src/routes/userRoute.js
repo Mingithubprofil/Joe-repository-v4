@@ -271,7 +271,7 @@ async function getUserByUsernameAndPassword(userId, username, password) {
 async function getUserByUsernameAndPassword(username, password) {
   return new Promise((resolve, reject) => {
     const sql = `
-      SELECT user_id, username, password
+      SELECT id, username, password
       FROM Users
       WHERE username = '${username}' AND password = '${password}'
     `;
