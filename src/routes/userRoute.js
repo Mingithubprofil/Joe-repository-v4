@@ -281,15 +281,18 @@ async function getUserByUsernameAndPassword(username, password) {
         reject(err);
       } else {
         console.log('Rows:', rows);
-        const users = rows.map(row => ({
-          user_id: row[0].value,
-          username: row[1].value,
-          password: row[2].value,
-        }));
-        resolve(users);
+        if (rowCount > 0) {
+          const user = {
+            user_id: rows[0][0].value,
+            username: rows[0][1].value,
+            password: rows[0][2].value,
+          };
+          resolve(user);
+        } else {
+          resolve(null); // Returner null, hvis brugeren ikke findes
+        }
       }
     });
-
     connection.execSql(request);
   });
 } 
@@ -303,24 +306,24 @@ userRoute.post("/login", async (req, res) => {
     if (username && password) {
       try {
         console.log("Received login request with username:", username, "and password:", password);
-        const hentBrugerId = await getUserByUsernameAndPassword(username, password);
+        const hentBruger = await getUserByUsernameAndPassword(username, password);
         
-        console.log("User:", hentBrugerId)
-        const objKeys = Object.keys(hentBrugerId);
+        console.log("User:", hentBruger)
+        //const objKeys = Object.keys(hentBrugerId);
         
-        if (hentBrugerId && objKeys.length > 0) {
+        if (hentBruger) {
           console.log(`Bruger ${username} logged ind!`);
-          console.log("User data in authentication:", hentBrugerId);
+          console.log("User data in authentication:", hentBruger);
     
-          const brugerId = hentBrugerId[0].user_id;
-          const brugerUsername = hentBrugerId[0].username;
-          const brugerPassword = hentBrugerId[0].password;
+          const brugerId = hentBruger[0].user_id;
+          const brugerUsername = hentBruger[0].username;
+          const brugerPassword = hentBruger[0].password;
     
           console.log("User ID:", brugerId);
           console.log("Username:", brugerUsername);
           console.log("Password:", brugerPassword);
     
-          res.cookie('brugerId', brugerId, { httpOnly: true });
+          res.cookie('Username:', brugerUsername, { httpOnly: true });
     
           res.status(200).json({ userExists: true, status: "success", message: "User logged in", userId: brugerId, username: brugerUsername, password: brugerPassword });
         } else {
