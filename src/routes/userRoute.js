@@ -266,7 +266,7 @@ async function getUserByUsernameAndPassword(userId, username, password) {
 } */
 
 
-
+/*
 // Funktion til at hente data fra azure sql-database 
 async function getUserByUsernameAndPassword(username, password) {
   return new Promise((resolve, reject) => {
@@ -296,7 +296,41 @@ async function getUserByUsernameAndPassword(username, password) {
     });
     connection.execSql(request);
   });
-} 
+} */
+
+async function getUserByUsernameAndPassword(username, password) {
+  return new Promise((resolve, reject) => {
+    const sql = `
+      SELECT username, password
+      FROM Users
+      WHERE username = @username AND password = @password
+    `;
+
+    const user = {
+      username: null,
+      password: null,
+    };
+
+    const request = new Request(sql, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(user);
+      }
+    });
+
+    request.addParameter('username', TYPES.VarChar, username);
+    request.addParameter('password', TYPES.VarChar, password);
+
+    request.on('row', (columns) => {
+      columns.forEach((column) => {
+        user[column.metadata.colName] = column.value;
+      });
+    });
+
+    connection.execSql(request);
+  });
+}
 
 // Login-endpoint med autentificering
 userRoute.post("/login", async (req, res) => {
