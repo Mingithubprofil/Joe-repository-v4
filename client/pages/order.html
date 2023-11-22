@@ -289,16 +289,19 @@
 <div id="orderConfirmation" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
   <h2>Ordrebekræftelse</h2>
   <!-- Vis din ordrebekræftelse her -->
-  <p>Ordre gennemført!</p>
+  <img src="https://www.joejuice.com/assets/Bag2D-9686bc64.svg"> <p id="ordrebekræftelse">Din ordre er gennemført og klargøres i <span id="selectedLocation"></span></p>
+  <p id="ordrebekræftelse">Du vil modtage en SMS og mail når din ordre er klar til afhentning.</p>
   <!-- Knappen til at lukke ordrebekræftelsen -->
   <button type="button" onclick="hideOrderConfirmation()">Luk</button>
 </div>
 
-</body>
-
 <footer>
   <p>&copy; 2023 TeamEffektivJuices. All rights reserved.</p>
 </footer>
+
+</body>
+
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../scripts/cart.js"></script>
 <script src="../scripts/location.js"></script>

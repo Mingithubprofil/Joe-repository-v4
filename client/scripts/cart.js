@@ -120,16 +120,35 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-function showOrderConfirmation() {
-  // Close the payment form
-  document.getElementById('paymentForm').style.display = 'none';
 
-  // Show the order confirmation
+
+
+
+
+// Function to show order confirmation
+function showOrderConfirmation() {
+  // Get the selected location from the dropdown
+  document.getElementById('paymentForm').style.display = 'none';
   document.getElementById('orderConfirmation').style.display = 'block';
+  const selectedLocation = document.getElementById("cities").value;
+
+  // Update the content of the order confirmation popup
+  const orderConfirmation = document.getElementById("orderConfirmation");
+  if (orderConfirmation) {
+    // Find the span element inside the popup
+    const selectedLocationElement = orderConfirmation.querySelector("#selectedLocation");
+
+    // Update the text with the selected location
+    if (selectedLocationElement) {
+      selectedLocationElement.innerText = selectedLocation;
+    }
+
+    // Show order confirmation popup
+    orderConfirmation.style.display = "block";
+  }
 }
 
-
+// Function to hide order confirmation popup
 function hideOrderConfirmation() {
-  // Skjul ordrebekræftelse-popup
   document.getElementById("orderConfirmation").style.display = "none";
 }

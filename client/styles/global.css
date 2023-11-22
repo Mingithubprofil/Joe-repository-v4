@@ -58,7 +58,7 @@ li a:hover {
 }
 
 .center > div {
-  background-color: rgb(255 201 201 / 70%);
+  background-color: rgb(255 201 201 / 50%);
 }
 
 .baggrund {
@@ -610,4 +610,8 @@ h1 {
     cursor: pointer;
     align-items: center;
     margin: 0px;
+}
+
+ordrebekræftelse {
+  font-weight: bold;
 }
