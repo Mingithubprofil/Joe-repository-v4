@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="global.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="cdn.jsdelivr.net/npm/twilio@3.69.0/dist/browser-twilio.js"></script>
+
+
     <title>Webshop</title>
 </head>
 <body>
@@ -250,7 +256,6 @@
 
   <div id="locationPopup" class="location-popup">
     <div class="location-popup-content">
-        <span class="close" onclick="closeLocationPopup()">&times;</span>
         <!-- Tilføj billedet her -->
         <img src="https://scanmaps.dk/Webkort/images/kortoversigter_ditkort.png" alt="City Map" style="width: 100%; max-width: 400px;">
         <!-- Dropdown-menuen for byvalg -->
@@ -271,22 +276,26 @@
 </div>
 <div id="paymentForm" style="display: none;">
     <form id="paymentForm">
+      <span class="close" onclick="closepaymentPopup()">&times;</span>
       <h2>Betalingsformular</h2>
       <!-- Tilpas felterne efter dine behov -->
-      <label for="cardNumber">Kortnummer:</label>
-      <input type="text" id="cardNumber" name="cardNumber" required>
+      <label for="name">Navn</label>
+      <input type="text" id="name" name="name" placeholder="Navn" required>
       <br>
-      <label for="expiryDate">Udløbsdato:</label>
-      <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/ÅÅ" required>
+      <label for="telefonnummer">Telefonnummer</label>
+      <input type="text" id="telefonnummer" name="telefonnummer" placeholder="Tlf nr." required>
       <br>
-      <label for="cvv">CVV:</label>
-      <input type="text" id="cvv" name="cvv" required>
+      <label for="e-mail">E-mail</label>
+      <input type="text" id="e-mail" name="e-mail" placeholder="E-mail" required>
       <br>
-      <button type="button" onclick="showOrderConfirmation()">Betal nu</button>
+      <div id="paymentTotal" style="margin-top: 10px; font-weight: bold;"></div>
+      <br>
+      <button id="Betalnu" type="button" onclick="showOrderConfirmation()">Betal nu</button>
     </form>
   </div>
 
 <div id="orderConfirmation" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+  <span class="close" onclick="closeorderConfirmation()">&times;</span>
   <h2>Ordrebekræftelse</h2>
   <!-- Vis din ordrebekræftelse her -->
   <img src="https://www.joejuice.com/assets/Bag2D-9686bc64.svg" style="display: inline-block; vertical-align: middle;">

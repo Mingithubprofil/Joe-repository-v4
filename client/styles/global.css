@@ -566,6 +566,7 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Skygge for en mere fremhævet effekt */
   z-index: 1000; /* Sørg for, at det er foran andre elementer */
   border-radius: 10px;
+  animation: fadeIn 0.3s;
 }
 
 #paymentForm label {
@@ -603,6 +604,10 @@ h1 {
   z-index: 1000;
 }
 
+#orderConfirmation {
+  animation: fadeIn 0.3s;
+}
+
 #orderConfirmation button {
   padding: 10px 15px;
     border: none;
@@ -626,3 +631,4 @@ h1 {
   height: 30px;
   margin-right: 3px; /* Adjust the margin as needed */
 }
+
