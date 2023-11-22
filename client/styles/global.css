@@ -211,6 +211,21 @@ h1 {
   }
 }
 
+#userHistory-button {
+  font-weight: bold;
+  font-family: Roboto, Arial, sans-serif;
+  background-color: rgba(247, 193, 217, 1);
+  color: #24272a;
+  box-shadow: none;
+  border-radius: 0;
+  margin-bottom: 400px;
+  font-size: 14px;
+  padding: 10px 50px;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+}
+
   #order-button {
     font-weight: bold;
     font-family: Roboto, Arial, sans-serif;
