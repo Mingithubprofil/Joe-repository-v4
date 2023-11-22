@@ -612,6 +612,17 @@ h1 {
     margin: 0px;
 }
 
-ordrebekræftelse {
+#ordrebekræftelse {
   font-weight: bold;
+}
+
+.icon-with-text {
+  display: inline-flex;
+  align-items: center;
+}
+
+.small-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 3px; /* Adjust the margin as needed */
 }

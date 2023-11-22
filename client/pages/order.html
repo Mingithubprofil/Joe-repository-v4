@@ -289,10 +289,23 @@
 <div id="orderConfirmation" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
   <h2>Ordrebekræftelse</h2>
   <!-- Vis din ordrebekræftelse her -->
-  <img src="https://www.joejuice.com/assets/Bag2D-9686bc64.svg"> <p id="ordrebekræftelse">Din ordre er gennemført og klargøres i <span id="selectedLocation"></span></p>
-  <p id="ordrebekræftelse">Du vil modtage en SMS og mail når din ordre er klar til afhentning.</p>
-  <!-- Knappen til at lukke ordrebekræftelsen -->
+  <img src="https://www.joejuice.com/assets/Bag2D-9686bc64.svg" style="display: inline-block; vertical-align: middle;">
+<p id="ordrebekræftelse" style="display: inline-block; vertical-align: middle;">
+  Din ordre er gennemført og klargøres i <span id="selectedLocation">.</span>
+</p>
+<div class="icon-with-text">
+  <svg class="MuiSvgIcon-root small-icon" viewBox="0 0 28 28" aria-hidden="true">
+  <g id="_x30_2-Icons_x2F_delivery-methods_x2F_Clock-2D">
+    <circle id="Oval" cx="15" cy="15" r="9" fill-rule="evenodd" clip-rule="evenodd" fill="#c2c5ed"></circle>
+    <circle id="Oval_1_" cx="13" cy="13" r="9" fill="none" stroke="#24272A" stroke-width="2"></circle>
+    <path id="Path-6" fill="none" stroke-width="2" stroke="#24272a" d="M13 8v5H8"></path>
+  </g>
+</svg>
+<p id="ordrebekræftelse">Du vil modtage en SMS og en mail når din ordre er klar til afhentning.</p>
+</div>
+<div>
   <button type="button" onclick="hideOrderConfirmation()">Luk</button>
+</div>
 </div>
 
 <footer>
