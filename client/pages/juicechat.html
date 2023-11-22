@@ -16,27 +16,7 @@
     <li style="float:right" ><a href="http://188.166.200.199/userOrder">Order/Menu</a></li>
     <li style="float:right" ><a href="http://188.166.200.199/juicechat" class="active">Juice chat</a></li>
   </ul>
-  
-  <div class="center">
-    <div>
-    <label for="username">Enter username: </label> 
-    <input type="text" id="username">
-    
-    <button onclick="changeUsername()">Change</button>
-    
-    <div class="chatArea">
-      <p style="font-weight: bold; font-family: 'Courier New', Courier, monospace; font-style: italic; font-size: 1.5em;">Juice Chat</p>
-    <ul class="messages" id="messages"></ul>
-    
-    <input id="input" autocomplete="off" placeholder="Write here"/>
-    <button onclick="sendChat()">Send</button>
-  </div>
-  </div>
-  <script src="/socket.io/socket.io.js"></script>
 
-  
-  
-</div>
 
 <div class="baggrund">
   <div class="center1">
@@ -68,10 +48,6 @@
 
 <script src="/socket.io/socket.io.js"></script>
 
-
-
-
-
 </body>
 
 <footer>
@@ -84,3 +60,25 @@
 <script src="../scripts/login.js"></script>
 
 </html>
+
+<!--
+  
+  <div class="center">
+    <div>
+    <label for="username">Enter username: </label> 
+    <input type="text" id="username">
+    
+    <button onclick="changeUsername()">Change</button>
+    
+    <div class="chatArea">
+      <p style="font-weight: bold; font-family: 'Courier New', Courier, monospace; font-style: italic; font-size: 1.5em;">Juice Chat</p>
+    <ul class="messages" id="messages"></ul>
+    
+    <input id="input" autocomplete="off" placeholder="Write here"/>
+    <button onclick="sendChat()">Send</button>
+  </div>
+  </div>
+  
+  <script src="/socket.io/socket.io.js"></script> 
+
+</div> -->
