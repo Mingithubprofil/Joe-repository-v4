@@ -56,6 +56,13 @@ userRoute.get("/profilePage", (req, res) => {
 });
 
 
+//userOrderHistory
+
+userRoute.get("/userOrderHistory", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/userOrderHistory.html"));
+});
+
+
 //order
 
 userRoute.get("/order", (req, res) => {
