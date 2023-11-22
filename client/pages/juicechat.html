@@ -33,8 +33,42 @@
   </div>
   </div>
   <script src="/socket.io/socket.io.js"></script>
+
+  
   
 </div>
+
+<div class="baggrund">
+  <div class="center1">
+    <div class="header">
+      <h4>Welcome</h4>
+      <h4 class="username_on_page"></h4>
+      <h4>On this page, you can chat with your Joe friends</h4>
+      <div>
+        <!--
+        <label for="username">Enter username: </label> 
+        <input type="text" id="username">
+        
+        <button onclick="changeUsername()">Change</button> -->
+        
+        <div class="chatArea">
+          <p style="font-weight: bold; font-family: 'Courier New', Courier, monospace; font-style: italic; font-size: 1.5em;">Juice Chat</p>
+        <ul class="messages" id="messages"></ul>
+        
+        <input id="input" autocomplete="off" placeholder="Write here"/>
+        <button onclick="sendChat()">Send</button>
+      </div>
+      </div>
+      <h1 class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextSecondary" data-cy="hero-image-title"></h1>
+      <p class="MuiTypography-root jss54 MuiTypography-body1 MuiTypography-colorTextSecondary"></p>
+      <a href="http://188.166.200.199/userOrder" class="MuiButton-containedPrimary" id="order-button">Go back to the menu here</a>
+    </div>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+
+
 
 
 
