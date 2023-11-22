@@ -118,3 +118,18 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('paymentForm').style.display = 'block';
 }
 });
+
+
+function showOrderConfirmation() {
+  // Close the payment form
+  document.getElementById('paymentForm').style.display = 'none';
+
+  // Show the order confirmation
+  document.getElementById('orderConfirmation').style.display = 'block';
+}
+
+
+function hideOrderConfirmation() {
+  // Skjul ordrebekræftelse-popup
+  document.getElementById("orderConfirmation").style.display = "none";
+}

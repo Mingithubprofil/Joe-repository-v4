@@ -270,8 +270,8 @@
     </div>
 </div>
 <div id="paymentForm" style="display: none;">
-  <form id="paymentForm">
-    <h2>Betalingsformular</h2>
+    <form id="paymentForm">
+      <h2>Betalingsformular</h2>
       <!-- Tilpas felterne efter dine behov -->
       <label for="cardNumber">Kortnummer:</label>
       <input type="text" id="cardNumber" name="cardNumber" required>
@@ -282,9 +282,18 @@
       <label for="cvv">CVV:</label>
       <input type="text" id="cvv" name="cvv" required>
       <br>
-      <button type="submit">Betal nu</button>
-  </form>
+      <button type="button" onclick="showOrderConfirmation()">Betal nu</button>
+    </form>
+  </div>
+
+<div id="orderConfirmation" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+  <h2>Ordrebekræftelse</h2>
+  <!-- Vis din ordrebekræftelse her -->
+  <p>Ordre gennemført!</p>
+  <!-- Knappen til at lukke ordrebekræftelsen -->
+  <button type="button" onclick="hideOrderConfirmation()">Luk</button>
 </div>
+
 </body>
 
 <footer>

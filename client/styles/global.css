@@ -602,3 +602,12 @@ h1 {
   align-items: center;
   z-index: 1000;
 }
+
+#orderConfirmation button {
+  padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+    margin: 0px;
+}
