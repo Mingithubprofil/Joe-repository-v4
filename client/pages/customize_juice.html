@@ -41,7 +41,7 @@
       <div class="product" data-vitamin="C-vitamin">
         <img src="https://de2yypvld0g7s.cloudfront.net/26c9ea13-9e29-4a90-82d3-4b0c3ba1601d/75-x2.png" alt="Power Shake">
         <h3>Apple</h3>
-        <p>Price: 6,00 kr.</p>
+        <p pricetag="6.00">Price: 6,00 kr.</p>
         <button class="addToCartBtn">Add to Cart</button>
       </div>
 
@@ -49,7 +49,7 @@
       <div class="product" data-vitamin="B6-vitamin">
         <img src="https://de2yypvld0g7s.cloudfront.net/17bd5317-a51f-4a77-a377-25c461b7f8b4/5-x2.png" alt="Power Shake">
         <h3>Ginger</h3>
-        <p>Price: 6,00 kr.</p>
+        <p pricetag="6.00">Price: 6,00 kr.</p>
         <button class="addToCartBtn">Add to Cart</button>
       </div>
 
@@ -57,7 +57,7 @@
       <div class="product" data-vitamin="A-vitamin">
         <img src="https://de2yypvld0g7s.cloudfront.net/4ecee84a-c218-4e35-b7b1-837b3083e0fd/76-x2.png" alt="Power Shake">
         <h3>Carrot</h3>
-        <p>Price: 6,00 kr.</p>
+        <p pricetag="6.00">Price: 6,00 kr.</p>
         <button class="addToCartBtn">Add to Cart</button>
       </div>
 
@@ -65,7 +65,7 @@
       <div class="product" data-vitamin="C-vitamin">
         <img src="https://de2yypvld0g7s.cloudfront.net/cd49d666-560e-4682-a3fc-459f72db32bc/9-x2.png" alt="Power Shake">
         <h3>Lemon</h3>
-        <p>Price: 6,00 kr.</p>
+        <p pricetag="6.00">Price: 6,00 kr.</p>
         <button class="addToCartBtn">Add to Cart</button>
       </div>
 
@@ -73,7 +73,7 @@
       <div class="product" data-vitamin="E-vitamin">
         <img src="https://de2yypvld0g7s.cloudfront.net/4dcb4ab1-59a8-442c-b4bc-e700162bd764/3-x2.png" alt="Power Shake">
         <h3>Avocado</h3>
-        <p>Price: 10,00 kr.</p>
+        <p pricetag="10.00">Price: 10,00 kr.</p>
         <button class="addToCartBtn">Add to Cart</button>
       </div>
 
@@ -81,7 +81,7 @@
       <div class="product" data-vitamin="C-vitamin">
         <img src="https://de2yypvld0g7s.cloudfront.net/2747dc93-876b-4148-9a1b-2c790b23be9f/34-x2.png" alt="Power Shake">
         <h3>Pineapple</h3>
-        <p>Price: 6,00 kr.</p>
+        <p pricetag="6.00">Price: 6,00 kr.</p>
         <button class="addToCartBtn">Add to Cart</button>
       </div>
 
@@ -89,7 +89,7 @@
       <div class="product" data-vitamin="B6-vitamin">
         <img src="https://de2yypvld0g7s.cloudfront.net/75c8d651-b99a-45db-abde-bdc81bec7292/27-x2.png" alt="Power Shake">
         <h3>Banana</h3>
-        <p>Price: 6,00 kr.</p>
+        <p pricetag="6.00">Price: 6,00 kr.</p>
         <button class="addToCartBtn">Add to Cart</button>
       </div>
 
@@ -97,7 +97,7 @@
       <div class="product" data-vitamin="C-vitamin">
         <img src="https://de2yypvld0g7s.cloudfront.net/ac4eda4a-ae81-4bc7-bb5a-c71314c45229/25-x2.png" alt="Power Shake">
         <h3>Strawberries</h3>
-        <p>Price: 6,00 kr.</p>
+        <p pricetag="6.00">Price: 6,00 kr.</p>
         <button class="addToCartBtn">Add to Cart</button>
       </div>
 
@@ -105,7 +105,7 @@
       <div class="product">
         <img src="https://de2yypvld0g7s.cloudfront.net/5a723dd3-7820-4690-9769-fc7b4e5f83c6/Ice%5B44%5D-x2.png" alt="Power Shake">
         <h3>Ice</h3>
-        <p>Price: 0,00 kr.</p>
+        <p pricetag="0.00">Price: 0,00 kr.</p>
         <button class="addToCartBtn">Add to Cart</button>
       </div>
 
@@ -113,7 +113,7 @@
       <div class="product">
         <img src="https://de2yypvld0g7s.cloudfront.net/647b3205-5ba3-4664-9d2d-c6f85f71d880/6-x2.png" alt="Power Shake">
         <h3>Protein</h3>
-        <p>Price: 10,00 kr.</p>
+        <p pricetag="10.00">Price: 10,00 kr.</p>
         <button class="addToCartBtn">Add to Cart</button>
       </div>
 
@@ -126,6 +126,68 @@
           <button class="betalBtn">Pay</button>
         </div>
       </div>
+      <div id="locationPopup" class="location-popup">
+        <div class="location-popup-content">
+            <!-- Tilføj billedet her -->
+            <img src="https://scanmaps.dk/Webkort/images/kortoversigter_ditkort.png" alt="City Map" style="width: 100%; max-width: 400px;">
+            <!-- Dropdown-menuen for byvalg -->
+            <h2>Select Location</h2>
+            <label for="cities">Choose a city:</label>
+            <select id="cities">
+              <option value="Copenhagen">Copenhagen</option>
+              <option value="Aarhus">Aarhus</option>
+              <option value="Odense">Odense</option>
+              <option value="Aalborg">Aalborg</option>
+              <option value="Roskilde">Roskilde</option>
+              <option value="Esbjerg">Esbjerg</option>
+              <option value="Randers">Randers</option>
+              <!-- Tilføj flere byer efter behov -->
+          </select>
+            <button onclick="selectCity()">Select</button>
+        </div>
+    </div>
+    <div id="paymentForm1">
+        <form id="paymentForm">
+          <span class="close" onclick="closepaymentPopup()">&times;</span>
+          <h2 id="paymentinformation">Payment information</h2>
+          <!-- Tilpas felterne efter dine behov -->
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Name" required>
+          <br>
+          <label for="telefonnummer">Phone Number</label>
+          <input type="text" id="telefonnummer" name="telefonnummer" placeholder="Phone Number" required>
+          <br>
+          <label for="e-mail">E-mail</label>
+          <input type="text" id="e-mail" name="e-mail" placeholder="E-mail" required>
+          <br>
+          <div id="paymentTotal" style="margin-top: 10px; font-weight: bold;"></div>
+          <br>
+          <button id="Betalnu" type="button" onclick="showOrderConfirmation()">Confirm</button>
+        </form>
+      </div>
+    
+    <div id="orderConfirmation" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+      <span class="close" onclick="closeorderConfirmation()">&times;</span>
+      <h2>Order confirmation</h2>
+      <!-- Vis din ordrebekræftelse her -->
+      <img src="https://www.joejuice.com/assets/Bag2D-9686bc64.svg" style="display: inline-block; vertical-align: middle;">
+    <p id="ordrebekræftelse" style="display: inline-block; vertical-align: middle;">
+      Your order has been confirmed <span id="orderTime"></span> and is being prepared in <span id="selectedLocation"></span>.
+    </p>
+    <div class="icon-with-text">
+      <svg class="MuiSvgIcon-root small-icon" viewBox="0 0 28 28" aria-hidden="true">
+      <g id="_x30_2-Icons_x2F_delivery-methods_x2F_Clock-2D">
+        <circle id="Oval" cx="15" cy="15" r="9" fill-rule="evenodd" clip-rule="evenodd" fill="#c2c5ed"></circle>
+        <circle id="Oval_1_" cx="13" cy="13" r="9" fill="none" stroke="#24272A" stroke-width="2"></circle>
+        <path id="Path-6" fill="none" stroke-width="2" stroke="#24272a" d="M13 8v5H8"></path>
+      </g>
+    </svg>
+    <p id="ordrebekræftelse">You will receive an SMS and an email when your order is ready for pickup.</p>
+    </div>
+    <div>
+      <button type="button" onclick="hideOrderConfirmation()">Close</button>
+    </div>
+    </div>
     </div>
   </div>
 
