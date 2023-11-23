@@ -25,7 +25,7 @@ async function getWeather() {
 getWeather().then(({ data }) => {
   const temperature = data.current.temperature_2m;
   if (temperature < 20) {
-    kaffeAnbefaling.innerHTML = `Oh, ${temperature} degrees in Copenhagen - it's a bit chilly today. We also offer <a id='kaffe_link' href='#'>Coffee & Tea</a>`;
+    kaffeAnbefaling.innerHTML = `Oh, ${temperature} degrees in Copenhagen - it's a bit chilly today. We also offer<a id='kaffe_link' href='#'>Coffee & Tea</a>`;
 
     // Hent dit kaffe_link element
     const kaffeLink = document.getElementById('kaffe_link');
