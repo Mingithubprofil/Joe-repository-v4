@@ -16,7 +16,7 @@ function selectCity() {
 
   var orderTextElement = document.getElementById('orderText');
   if (orderTextElement) {
-    orderTextElement.innerText = `På denne side kan du bestille en juice fra vores lækre menu i ${selectedCity}!`;
+    orderTextElement.innerText = `On this page, you can order from our delicious menu in ${selectedCity}!`;
   }
 
   closeLocationPopup();

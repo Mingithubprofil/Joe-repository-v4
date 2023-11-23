@@ -556,6 +556,11 @@ h1 {
   cursor: pointer;
 }
 
+#paymentForm1 {
+background-color: rgba(0, 0, 0, 0.5);
+}
+
+
 #paymentForm {
   position: fixed;
   top: 50%;
@@ -636,4 +641,9 @@ h1 {
 #joebillede {
   width: 58px;
   height: 58px;
+}
+
+
+#paymentinformation {
+  margin: 30px;
 }
