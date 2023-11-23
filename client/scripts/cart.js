@@ -108,11 +108,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-function submitPayment() {
-  const accountSid = 'AC12cb9761bd22a85b3994135bbcc68e65';
+/* const accountSid = 'AC12cb9761bd22a85b3994135bbcc68e65';
   const authToken = 'a762494ae79bad3c353db3fcd9b840f0';
   const client = require('twilio')(accountSid, authToken);
 
+ function submitPayment() {
+  
   const name = document.getElementById("name").value;
   const telefonnummer = document.getElementById("telefonnummer").value;
 
@@ -126,7 +127,7 @@ function submitPayment() {
       console.log(message);
       showOrderConfirmation();
     });
-}
+} */
 
 function showOrderConfirmation() {
   document.getElementById('paymentForm').style.display = 'none';

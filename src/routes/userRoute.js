@@ -11,6 +11,10 @@ const { connection, Request, TYPES } = require('../db/db');
 const cookieParser = require("cookie-parser");
 userRoute.use(cookieParser());
 
+//til sms
+//const { MessagingResponse } = require('twilio').twiml;
+//const twilio = require('twilio');
+
 
 //let id = 1;
 //let db = [];
@@ -94,6 +98,15 @@ userRoute.get("/user_customize_juice", (req, res) => {
 });
 
 
+/* //sms 
+
+userRoute.post("/sms", (req, res) => {
+  const twiml = new MessagingResponse();
+  twiml.message('Hej, det er Joe');
+
+  res.type('text/xml').send(twiml.toString());
+}); */
+
 //location 
 
 userRoute.get("/location.js", (req, res) => {
@@ -127,6 +140,42 @@ userRoute.get('/juicechat.js', (req, res) => {
 userRoute.get("/global.css", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/styles/global.css"));
 });
+
+/*
+//sms
+
+userRoute.post("/submit-order", async (req, res) => {
+  try {
+    // Hent bestillingsoplysninger fra anmodningen
+    const { name, telefonnummer, // andre bestillingsoplysninger } = req.body;
+
+    // Udfør betalingsbehandling eller anden nødvendig logik her
+
+    // Send besked med Twilio
+    const client = require('twilio')(accountSid, authToken);
+    const accountSid = 'AC12cb9761bd22a85b3994135bbcc68e65';
+    const authToken = 'a762494ae79bad3c353db3fcd9b840f0';
+    
+
+    client.messages
+      .create({
+        body: `Hej ${name}, din ordre er nu modtaget og vil blive leveret indenfor 5 minutter. Tak fordi du valgte `,
+        messagingServiceSid: 'MG178da6c222de9ec03486b61a2e72c85e',
+        to: `+45${telefonnummer}`
+      })
+      .then(message => {
+        console.log(message);
+        res.status(200).json({ message: 'Order received. SMS sent.' });
+      })
+      .catch(error => {
+        console.error('Error sending SMS:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+      });
+  } catch (error) {
+    console.error('Error processing order:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}); */
 
 
 //til registering af bruger (virker fint)
@@ -317,9 +366,6 @@ userRoute.post("/login", async (req, res) => {
     res.end();
   }
 });
-
-
-
 
 
 module.exports = userRoute;
