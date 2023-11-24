@@ -177,6 +177,31 @@ userRoute.post("/submit-order", async (req, res) => {
   }
 }); */
 
+//til email
+
+const { sendMail } = require('../../client/scripts/email.js');  // Importer sendMail-funktionen
+
+// ... dine eksisterende routes og logik ...
+
+// API-endepunkt for at sende en bekræftelses-e-mail
+userRoute.post('/sendConfirmationEmail', async (req, res) => {
+  try {
+    const { name, telefonnummer, email, orderDetails } = req.body;  // Modtag data fra anmodningen
+
+    // Opret e-mail-indhold baseret på de modtagne oplysninger
+    const subject = 'Order Confirmation';
+    const text = `Dear ${name},\n\nThank you for your order.\n\nDetails: ${orderDetails}\n\nBest regards,\nYour Company`;
+
+    // Send e-mail
+    await sendMail(email, subject, text);
+
+    res.status(200).json({ message: 'Email sent successfully' });
+  } catch (error) {
+    console.error('Fejl ved afsendelse af e-mail:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 //til registering af bruger (virker fint)
 
