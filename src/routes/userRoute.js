@@ -190,7 +190,7 @@ userRoute.post('/sendConfirmationEmail', async (req, res) => {
 
     // Opret e-mail-indhold baseret på de modtagne oplysninger
     const subject = 'Order Confirmation';
-    const text = `Dear ${name},\n\nThank you for your order.\n\nDetails: ${orderDetails}\n\nBest regards,\nYour Company`;
+    const text = `Dear ${name},\n\nThank you for your order.\n\nDetails: ${orderDetails}\n\nBest regards,\nSocialJoe`;
 
     // Send e-mail
     await sendMail(email, subject, text);
