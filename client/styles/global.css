@@ -366,6 +366,7 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-bottom: 80px;
   }
   .product {
     width: 200px;
@@ -670,7 +671,7 @@ footer {
 
 #joebillede {
   width: 58px;
-  height: 58px;
+  height: 50px;
 }
 
 
