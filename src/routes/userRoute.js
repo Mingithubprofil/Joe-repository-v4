@@ -181,8 +181,6 @@ userRoute.post("/submit-order", async (req, res) => {
 
 const { sendMail } = require('../../client/scripts/email.js');  // Importer sendMail-funktionen
 
-// ... dine eksisterende routes og logik ...
-
 // API-endepunkt for at sende en bekræftelses-e-mail
 userRoute.post('/sendConfirmationEmail', async (req, res) => {
   try {
