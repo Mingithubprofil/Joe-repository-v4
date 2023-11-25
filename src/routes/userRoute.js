@@ -227,7 +227,7 @@ userRoute.post("/user", (req, res) => {
   console.log(request.parameters);
 
   connection.execSql(request);
-});
+}); 
 
 
 /*
@@ -254,14 +254,14 @@ userRoute.post("/user", async (req, res) => {
       );
 
       request.addParameter('username', TYPES.VarChar, data.username);
-      request.addParameter('password', TYPES.VarChar, hash); // Gem hashet password
+      request.addParameter('password', TYPES.Binary, Buffer.from(hash, 'binary')); // Gem hashet password som Binary
       request.addParameter('email', TYPES.VarChar, data.email);
       request.addParameter('phonenumber', TYPES.VarChar, data.phonenumber);
 
       connection.execSql(request);
     }
   });
-});*/
+}); */
 
 
 //til at hente en bestemt profil
