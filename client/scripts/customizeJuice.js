@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function () {
 } */
 
 // Function to show order confirmation
-function showOrderConfirmation() {
+async function showOrderConfirmation() {
   // Get the values from the input fields
   const name = document.getElementById('name').value.trim();
   const telefonnummer = document.getElementById('telefonnummer').value.trim();
@@ -370,6 +370,29 @@ function showOrderConfirmation() {
   if (orderConfirmation) {
       orderConfirmation.style.display = 'block';
   }
+
+  // Opret dataobjekt med oplysninger om ordren
+const orderData = {
+  name,
+  telefonnummer,
+  email,
+  orderDetails: 'Your order has been confirmed',  // Tilføj relevante oplysninger om ordren
+};
+
+try {
+  // Send POST-anmodning til serversiden for at udløse e-mail-sendingen
+  const response = await axios.post('/sendConfirmationEmail', orderData);
+
+  if (response.status === 200) {
+    console.log('Email sent successfully');
+    // Fortsæt med din frontend-logik for bekræftelsessiden eller lignende
+  } else {
+    console.error('Fejl ved afsendelse af e-mail:', response.statusText);
+  }
+} catch (error) {
+  console.error('Fejl ved afsendelse af e-mail:', error.message);
+}
+
 }
 
 
