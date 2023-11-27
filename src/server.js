@@ -27,7 +27,7 @@ app.use("/", userRoute);
 
 //home
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/pages/home.html'));
   
 });
