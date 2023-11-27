@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
+
     <title>Webshop</title>
 </head>
 <body>
@@ -17,8 +18,10 @@
     <li><img src="https://i.ibb.co/fNVtRc7/DALL-E-2023-11-23-11-43-24-add-a-to-go-juice-shake-to-the-hand-ai-brush-removebg-lrjil3vn.png" id="joebillede" alt="Logo"></li>
     <li style="float: left;"><a href="http://socialjoe.live/">Home</a></li>
     <li style="float:right; margin-right: 20px; margin-top: 3px; position: relative;"><img src="https://cdn-icons-png.flaticon.com/512/34/34568.png" id="cartIcon" style="width: 40px; height: 40px;"></li>
-    <li style="float:right; margin-left: 20px;"><a href="http://socialjoe.live/login">Log in</a></li>
-    <li style="float:right; margin-left: 20px;"><a href="http://socialjoe.live/register">Register</a></li>
+    <li id="login_knap" style="float:right; margin-left: 20px;"><a href="http://socialjoe.live/login">Log in</a></li>
+    <li id="register_knap" style="float:right; margin-left: 20px;"><a href="http://socialjoe.live/register">Register</a></li>
+    <li id="logout_knap" style="float:right; display:none;" ><a href="#" onclick="logoutUser()">Log out</a></li>
+    <li style="float:right;" ><a id="username_knap" href="http://socialjoe.live/profilePage" style="display:none;"></a></li>
     <li style="float:right; margin-left: 20px;"><a href="http://socialjoe.live/order" class="active">Order/Menu</a></li>
     <li style="float:right; margin-left: 20px;"><a href="http://socialjoe.live/juicechat">Juice chat</a></li>
 </ul>
@@ -319,12 +322,15 @@
   <p>&copy; 2023 SocialJoe. All rights reserved.</p>
 </footer>
 
+
 </body>
 
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../scripts/cart.js"></script>
 <script src="../scripts/location.js"></script>
+<script src="/login.js"></script>
+<script src="../scripts/loginstatus.js"></script>
 </html>
 
 

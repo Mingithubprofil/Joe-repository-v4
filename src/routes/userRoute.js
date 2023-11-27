@@ -41,7 +41,7 @@ userRoute.get("/register.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/register.js"));
 });
 
-
+/*
 //userHome
 
 userRoute.get("/userHome", (req, res) => {
@@ -50,7 +50,7 @@ userRoute.get("/userHome", (req, res) => {
 
 userRoute.get("/userHome.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/userHome.js"));
-});
+}); */
 
 
 //profilePage

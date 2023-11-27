@@ -3,12 +3,6 @@ const socket = io();
 const messages = document.getElementById("messages");
 const input = document.getElementById("input");
 
-// let username = "Anonymous";
-
-// if (localStorage.getItem("Username") != null) {
-//   username = localStorage.getItem("Username");
-// }
-//test
 
 // form.addEventListener('submit', (e) => {
 //   e.preventDefault();
@@ -18,16 +12,6 @@ const input = document.getElementById("input");
 //   }
 // });
 
-// function changeUsername() {
-//   username = document.getElementById("username").value;
-//   if (!username == "") {
-//     localStorage.setItem("Username", username);
-//   } else {
-//     localStorage.setItem("Username", "Anonymous");
-//   }
-//   socket.emit("user joined", username);
-//   document.getElementById("username").value = "";
-// }
 
 function sendChat() {
   if (input.value) {
@@ -35,6 +19,7 @@ function sendChat() {
     input.value = "";
   }
 }
+
 
 socket.on("chat message", (msg) => {
   const item = document.createElement("li");
@@ -52,25 +37,14 @@ if (!username) location.href = "/login";
 
 socket.emit("user joined", username);
 
+
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
-function changeUsername() {
-  username = document.getElementById("username").value;
-
-  if (username == "") {
-    alert("Skriv et nyt brugernavn");
-    return;
-  } else document.cookie = `userAuth=${username}`;
-
-  socket.emit("user joined", username);
-  document.getElementById("username").value = "";
-}
-
-
+/*
 //visning af username på siden
 
 if (username) {
@@ -80,7 +54,18 @@ if (username) {
   elements.forEach(element => {
     element.innerHTML = username;
   });
-}
+} */
+
+
+
+
+
+
+
+
+
+
+
 
 
 

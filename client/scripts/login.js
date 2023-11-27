@@ -44,7 +44,7 @@ async function loginUser() {
       // Redirect og opdater DOM
       responseDOM.innerHTML = response.data.message;
       await wait(3);
-      window.location.replace("/userHome");
+      window.location.replace("/");
     } else {
       responseDOM.innerHTML = "Brugeren er ikke registreret.";
     }

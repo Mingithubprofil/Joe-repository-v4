@@ -11,8 +11,10 @@
   <ul>
     <li><img src="https://i.ibb.co/fNVtRc7/DALL-E-2023-11-23-11-43-24-add-a-to-go-juice-shake-to-the-hand-ai-brush-removebg-lrjil3vn.png" id="joebillede" alt="Logo"></li>
     <li><a href="http://socialjoe.live/" class="active">Home</a></li>
-    <li style="float:right" ><a href="http://socialjoe.live/login">Log in</a></li>
-    <li style="float:right" ><a href="http://socialjoe.live/register">Register</a></li>
+    <li id="login_knap" style="float:right" ><a href="http://socialjoe.live/login">Log in</a></li>
+    <li id="register_knap" style="float:right" ><a href="http://socialjoe.live/register">Register</a></li>
+    <li id="logout_knap" style="float:right; display:none;" ><a href="#" onclick="logoutUser()">Log out</a></li>
+    <li style="float:right;" ><a id="username_knap" href="http://socialjoe.live/profilePage" style="display:none;"></a></li>
     <li style="float:right" ><a href="http://socialjoe.live/order">Order/Menu</a></li>
     <li style="float:right" ><a href="http://socialjoe.live/juicechat">Juice chat</a></li>
   </ul>
@@ -39,6 +41,8 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
 <script src="/home.js"></script>
+<script src="/login.js"></script>
+<script src="../scripts/loginstatus.js"></script>
 <!-- <script src="/juicechat.js"></script> -->
 </html>
 

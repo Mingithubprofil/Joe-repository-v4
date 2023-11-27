@@ -1,7 +1,7 @@
 
 
 
-let username = getCookie("userAuth");
+/*let username = getCookie("userAuth");
 //document.querySelector("username_on_page").innerHTML = `Welcome ${username}!`
 if (!username) location.href = "/login";
 
@@ -20,7 +20,7 @@ if (username) {
     elements.forEach(element => {
       element.innerHTML = username;
     });
-  }
+  }*/
 
 
 
