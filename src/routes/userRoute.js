@@ -41,17 +41,6 @@ userRoute.get("/register.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/register.js"));
 });
 
-/*
-//userHome
-
-userRoute.get("/userHome", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/userHome.html"));
-});
-
-userRoute.get("/userHome.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/scripts/userHome.js"));
-}); */
-
 
 //profilePage
 
@@ -107,6 +96,7 @@ userRoute.post("/sms", (req, res) => {
   res.type('text/xml').send(twiml.toString());
 }); */
 
+
 //location 
 
 userRoute.get("/location.js", (req, res) => {
@@ -140,6 +130,7 @@ userRoute.get('/juicechat.js', (req, res) => {
 userRoute.get("/global.css", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/styles/global.css"));
 });
+
 
 /*
 //sms
@@ -176,6 +167,7 @@ userRoute.post("/submit-order", async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 }); */
+
 
 //til email
 
