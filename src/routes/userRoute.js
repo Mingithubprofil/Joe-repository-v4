@@ -195,7 +195,7 @@ userRoute.post('/sendConfirmationEmail', async (req, res) => {
 
 //til registering af bruger (virker fint)
 
-/*userRoute.post("/user", (req, res) => {
+userRoute.post("/user", (req, res) => {
   const data = req.body;
 
   const request = new Request(
@@ -219,21 +219,23 @@ userRoute.post('/sendConfirmationEmail', async (req, res) => {
   console.log(request.parameters);
 
   connection.execSql(request);
-}); */
+}); 
 
 
-
+/*
 userRoute.post("/user", async (req, res) => {
   const data = req.body;
 
   const saltRounds = 10;
+
+  console.log('Data before hashing:', data.password);
 
   const hash = await bcrypt.hash(data.password, saltRounds);
 
   console.log('Hashed password:', hash);
 
       const request = new Request(
-        'INSERT INTO Users (username, email, phonenumber, hashedPassword) VALUES (@username, @email, @phonenumber, @hashedPassword);',
+        'INSERT INTO Users (username, email, phonenumber, passwordhashed) VALUES (@username, @email, @phonenumber, @passwordhashed);',
         (err) => {
           if (err) {
             console.error('Error inserting user into SQL database:', err.message);
@@ -247,12 +249,14 @@ userRoute.post("/user", async (req, res) => {
       request.addParameter('username', TYPES.VarChar, data.username);
       request.addParameter('email', TYPES.VarChar, data.email);
       request.addParameter('phonenumber', TYPES.VarChar, data.phonenumber);
-      request.addParameter('hashedPassword', TYPES.VarBinary, Buffer.from(hash, 'hex')); // Gemmer hashet password som Binary
+      request.addParameter('passwordhashed', TYPES.VarChar, hash);
+      //request.addParameter('hashedpassword', TYPES.VarBinary, Buffer.from(hash, 'binary'));  Gemmer hashet password som Binary (Buffer.from(hash, 'hex'))
 
       connection.execSql(request);
     });
    
-
+//request.addParameter('hashedpassword', TYPES.VarBinary, Buffer.from(hash, 'binary')); // Gemmer hashet password som Binary (Buffer.from(hash, 'hex'))
+*/
 
 //til at hente en bestemt profil
 
