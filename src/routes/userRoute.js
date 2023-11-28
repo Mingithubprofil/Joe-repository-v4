@@ -247,7 +247,7 @@ userRoute.post("/user", async (req, res) => {
       request.addParameter('username', TYPES.VarChar, data.username);
       request.addParameter('email', TYPES.VarChar, data.email);
       request.addParameter('phonenumber', TYPES.VarChar, data.phonenumber);
-      request.addParameter('hashedPassword', TYPES.VarBinary, Buffer.from(hash, 'binary')); // Gemmer hashet password som Binary
+      request.addParameter('hashedPassword', TYPES.VarBinary, Buffer.from(hash, 'hex')); // Gemmer hashet password som Binary
 
       connection.execSql(request);
     });
