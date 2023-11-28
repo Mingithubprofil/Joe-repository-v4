@@ -22,7 +22,7 @@ function saveUser(){
 
     console.log(`User ${username} added`)
 
-    axios.post('http://188.166.200.199/user', user)
+    axios.post('/user', user)
     .then(async function (response) {
       console.log(response);
       responseDOM.innerHTML = response.data

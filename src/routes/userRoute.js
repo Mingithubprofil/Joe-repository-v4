@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const userRoute = express.Router();
 
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const { connection, Request, TYPES } = require('../db/db');
 
@@ -192,7 +192,7 @@ userRoute.post('/sendConfirmationEmail', async (req, res) => {
   }
 });
 
-
+/*
 //til registering af bruger (virker fint)
 
 userRoute.post("/user", (req, res) => {
@@ -219,16 +219,14 @@ userRoute.post("/user", (req, res) => {
   console.log(request.parameters);
 
   connection.execSql(request);
-}); 
+}); */
 
 
-/*
+
 userRoute.post("/user", async (req, res) => {
   const data = req.body;
 
   const saltRounds = 10;
-
-  console.log('Data before hashing:', data.password);
 
   const hash = await bcrypt.hash(data.password, saltRounds);
 
@@ -256,7 +254,7 @@ userRoute.post("/user", async (req, res) => {
     });
    
 //request.addParameter('hashedpassword', TYPES.VarBinary, Buffer.from(hash, 'binary')); // Gemmer hashet password som Binary (Buffer.from(hash, 'hex'))
-*/
+
 
 //til at hente en bestemt profil
 
@@ -302,6 +300,86 @@ userRoute.delete("/user/:id", (req, res) => {
 });
 
 
+async function getUserByUsername(username) {
+  return new Promise((resolve, reject) => {
+    const sql = `
+      SELECT username, passwordhashed
+      FROM Users
+      WHERE username = @username
+    `;
+
+    const user = {
+      username: null,
+      passwordhashed: null,
+    };
+
+    const request = new Request(sql, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(user);
+      }
+    });
+
+    request.addParameter('username', TYPES.VarChar, username);
+
+    request.on('row', (columns) => {
+      columns.forEach((column) => {
+        user[column.metadata.colName] = column.value;
+      });
+    });
+
+    connection.execSql(request);
+  });
+}
+
+userRoute.post("/login", async (req, res) => {
+  let username = req.body.username;
+  let password = req.body.password;
+
+  if (username && password) {
+    try {
+      console.log("Received login request from user with username:", username);
+      const user = await getUserByUsername(username);
+
+      if (user.username == username) {
+        const isPasswordMatch = await bcrypt.compare(password, user.passwordhashed);
+
+        if (isPasswordMatch) {
+          console.log(`User ${username} logged in!`);
+          const brugerUsername = user.username;
+
+          console.log("Username:", brugerUsername);
+          res.cookie('Username', brugerUsername, { httpOnly: true });
+
+          res.status(200).json({
+            userExists: true,
+            status: "success",
+            message: "User logged in"
+          });
+        } else {
+          console.log(`User ${username} entered wrong credentials!`);
+          res.status(401).json({ message: 'Wrong username or password!' });
+        }
+      } else {
+        console.log(`User ${username} does not exist!`);
+        res.status(401).json({ message: 'Wrong username or password!' });
+      }
+      res.end();
+    } catch (error) {
+      console.error('Error during login:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+      res.end();
+    }
+  } else {
+    console.log('Enter username and password!');
+    res.status(400).json({ message: 'Wrong username or password!' });
+    res.end();
+  }
+});
+
+
+/*
 //funktion til at hente data fra sql-database
 
 async function getUserByUsernameAndPassword(username, password) {
@@ -382,7 +460,7 @@ userRoute.post("/login", async (req, res) => {
     res.status(400).json({ message: 'Wrong username or password!' });
     res.end();
   }
-});
+}); */
 
 
 module.exports = userRoute;
