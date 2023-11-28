@@ -20,7 +20,7 @@ function saveUser(){
     user.phonenumber = phonenumber
     user.password = password
 
-    console.log(user)
+    console.log(`User ${username} added`)
 
     axios.post('http://188.166.200.199/user', user)
     .then(async function (response) {
