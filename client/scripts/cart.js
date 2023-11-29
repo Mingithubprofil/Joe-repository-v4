@@ -10,17 +10,110 @@ function closeLocationPopup() {
   document.getElementById('locationPopup').style.display = 'none';
 }
 
+
+// Visning af temperatur baseret på valg af by for ordre
+
+let kaffeAnbefaling = document.getElementById("kaffe_anbefaling");
+let loading = document.getElementById("loading");
+
+async function getWeather(city) {
+  loading.style.display = "block";
+
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(async () => {
+      try {
+        // Konstruerer API URL'en baseret på den valgte by
+        const apiUrl = getApiUrlForCity(city);
+        const result = await axios.get(apiUrl);
+
+        console.log("API Result:", result.data);
+
+        if (result && result.data && result.data.hourly && result.data.hourly.temperature_2m) {
+          resolve(result);
+        } else {
+          reject(new Error("Invalid data format from the weather API"));
+        }
+      } catch (err) {
+        reject(err);
+      } finally {
+        loading.style.display = "none";
+      }
+    }, 2000);
+  });
+
+  return promise;
+}
+
+function getApiUrlForCity(city) {
+  // Definerer base URL'en for vejr API'et
+  const baseUrl = "https://api.open-meteo.com/v1/forecast";
+
+  // Definerer latitude og longitude for hver by
+  const cityCoordinates = {
+    Copenhagen: { latitude: 55.6759, longitude: 12.5655 },
+    Aarhus: { latitude: 56.1567, longitude: 10.2108 },
+    Odense: { latitude: 55.3959, longitude: 10.3883 },
+    Aalborg: { latitude: 57.048, longitude: 9.9187 },
+    Roskilde: { latitude: 55.6415, longitude: 12.0803 },
+    Esbjerg: { latitude: 55.4703, longitude: 8.4519 },
+    Randers: { latitude: 56.4607, longitude: 10.0364 },
+    
+  };
+
+  // Koordinaterne for den valgte by
+  const { latitude, longitude } = cityCoordinates[city];
+
+  // API URL for den valgte by
+  const apiUrl = `${baseUrl}?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m`;
+
+  return apiUrl;
+}
+
 function selectCity() {
-  var selectedCity = document.getElementById('cities').value;
+  let selectedCity = document.getElementById('cities').value;
   console.log("Selected City:", selectedCity);
 
-  var orderTextElement = document.getElementById('orderText');
+  let orderTextElement = document.getElementById('orderText');
   if (orderTextElement) {
     orderTextElement.innerText = `On this page, you can order from our delicious menu in ${selectedCity}!`;
   }
 
+  // Kalder getWeather funktionen med selected city
+  getWeather(selectedCity)
+    .then(({ data }) => {
+      const temperature = data?.hourly?.temperature_2m?.[0];
+
+      if (temperature !== undefined) {
+        if (temperature < 20) {
+          kaffeAnbefaling.innerHTML = `Oh, ${temperature} degrees in ${selectedCity} - it's a bit chilly today. We also offer<a id='kaffe_link' href='#'>Coffee & Tea</a>`;
+
+          // Henter kaffe_link element
+          const kaffeLink = document.getElementById('kaffe_link');
+
+          // Tilføjer en eventlistener til kaffe_link for at udføre scroll
+          kaffeLink.addEventListener('click', (event) => {
+            event.preventDefault(); // Forhindre standard adfærd (at følge linket)
+
+            // Bruger smooth scroll til at glide ned til kaffe/te-sektionen
+            document.getElementById('kaffeTeSection').scrollIntoView({ behavior: 'smooth' });
+          });
+
+          console.log(temperature);
+        } else {
+          console.log(`Tilbyd kaffe in ${selectedCity}..`);
+        }
+      } else {
+        console.error("Temperature data not available");
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching weather data:", error.message);
+    });
+
   closeLocationPopup();
 }
+
+// Til cart samt payment
 
 document.addEventListener('DOMContentLoaded', function () {
   const addToCartButtons = document.querySelectorAll('.addToCartBtn');
@@ -42,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
   cartIcon.addEventListener('click', openCart);
   closeBtn.addEventListener('click', closeCart);
   betalBtn.addEventListener('click', function () {
-      // Check if there are items in the cart
+      // Tjekker om der er genstande i kurven
       if (cartItems.length > 0) {
           openPaymentForm();
       } else {
@@ -119,6 +212,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+//twilio
+
 /* const accountSid = 'AC12cb9761bd22a85b3994135bbcc68e65';
   const authToken = 'a762494ae79bad3c353db3fcd9b840f0';
   const client = require('twilio')(accountSid, authToken);
@@ -140,17 +235,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 } */
 
-// Function to show order confirmation
+// Funktion til at vise ordrebekræftelse
 async function showOrderConfirmation() {
-  // Get the values from the input fields
+  // Henter værdierne fra inputfelterne
   const name = document.getElementById('name').value.trim();
   const telefonnummer = document.getElementById('telefonnummer').value.trim();
   const email = document.getElementById('e-mail').value.trim();
 
-  // Check if any of the required fields is empty
+  // Tjekker om nogle af de krævede felter er tomme
   if (name === '' || telefonnummer === '' || email === '') {
       alert('Please fill in all the required fields.');
-      return; // Stop execution if any field is empty
+      return; // Stopper eksekvering hvis nogle af felterne er tomme
   }
 
   // Validate phone number (allow only digits and minimum of 8 digits)
@@ -190,7 +285,7 @@ async function showOrderConfirmation() {
       orderConfirmation.style.display = 'block';
   }
 
-// Opret dataobjekt med oplysninger om ordren
+// Opretter dataobjekt med oplysninger om ordren
 const orderData = {
   name,
   telefonnummer,
@@ -199,12 +294,12 @@ const orderData = {
 };
 
 try {
-  // Send POST-anmodning til serversiden for at udløse e-mail-sendingen
+  // Sender POST-anmodning til serversiden for at udløse e-mail-sendingen
   const response = await axios.post('/sendConfirmationEmail', orderData);
 
   if (response.status === 200) {
     console.log('Email sent successfully');
-    // Fortsæt med din frontend-logik for bekræftelsessiden eller lignende
+    
   } else {
     console.error('Fejl ved afsendelse af e-mail:', response.statusText);
   }
@@ -214,6 +309,7 @@ try {
 
 }
 
+// Funktioner til at lukke felter
 
 function hideOrderConfirmation() {
   document.getElementById("orderConfirmation").style.display = "none";

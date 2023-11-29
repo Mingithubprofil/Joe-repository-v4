@@ -1,4 +1,4 @@
-let kaffeAnbefaling = document.getElementById("kaffe_anbefaling");
+/*let kaffeAnbefaling = document.getElementById("kaffe_anbefaling");
 let loading = document.getElementById("loading");
 
 async function getWeather() {
@@ -42,4 +42,4 @@ getWeather().then(({ data }) => {
   } else {
     console.log("Tilbyd kaffe..");
   }
-});
+}); */
