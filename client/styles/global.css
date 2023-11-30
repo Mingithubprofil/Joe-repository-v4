@@ -122,6 +122,7 @@ input {
   border-radius: 15px;
   border: 8px solid #f7c1d9;
   padding: 5px;
+  font-family: monospace;
 }
 
 .root {
@@ -406,7 +407,14 @@ h1 {
   }
   .header h4#IngredienserTitel {
     margin: 10px 0;
+    font-size: 1.5em;
   }
+
+  h4 {
+    font-size: 1.5em;
+  } 
+
+
   a {
     color: #24272a;
     border-color: #000000;
@@ -425,15 +433,11 @@ h1 {
   h5 {
     display: block;
     font-size: 1.3em;
-    /* margin-block-start: 1.67em; */
-    /* margin-block-end: 1.67em; */
-    /* margin-inline-start: 0px; */
-    /* margin-inline-end: 0px; */
     font-weight: bold;
     background-color: #f09bc1;
     padding: 9.5px;
-    /* border-color: black; */
-    /* border-block-style: revert; */
+    margin-right: 10px;
+    margin-bottom: 10px;
     padding-right: 0px;
     border-radius: 8px;
     display: inline-block;
@@ -471,6 +475,7 @@ h1 {
   button {
     background-color: #f7c1d9;
     color: #24272a;
+    font-family: monospace;
     font-weight: bold;
     border: none;
     border-radius: 10px;
@@ -487,11 +492,13 @@ h1 {
   }
   .slutknapper{
     margin-bottom: 400px;
+    font-weight: bold;
   }
   .password-message1 {
     font-size: 0.6em;
     color: #000000;
     margin-left: -27px;
+    font-weight: bold;
     font-style: italic;
     margin-bottom: -6px;
     margin-top: 5px;
@@ -501,6 +508,7 @@ h1 {
     color: #000000;
     margin-left: -103px;
     font-style: italic;
+    font-weight: bold;
   }
 
   h6 {
@@ -589,6 +597,7 @@ footer {
     top: 0;
     left: 0;
     width: 100%;
+    font-family: monospace;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
@@ -619,6 +628,7 @@ footer {
 #paymentForm input {
   width: 100%;
   padding: 8px;
+  font-family: monospace;
   margin-bottom: 15px;
   box-sizing: border-box;
 }
