@@ -16,10 +16,6 @@ userRoute.use(cookieParser());
 //const twilio = require('twilio');
 
 
-//let id = 1;
-//let db = [];
-
-
 //login
 
 userRoute.get("/login", (req, res) => {
@@ -66,10 +62,6 @@ userRoute.get("/order.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/order.js"));
 });
 
-userRoute.get("/userOrder", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/userOrder.html"));
-});
-
 
 //customize_juice
 
@@ -82,10 +74,6 @@ userRoute.get("/customizeJuice.js", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/scripts/customizeJuice.js"));
 });
 
-userRoute.get("/user_customize_juice", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/pages/user_customize_juice.html"));
-});
-
 
 /* //sms 
 
@@ -95,14 +83,6 @@ userRoute.post("/sms", (req, res) => {
 
   res.type('text/xml').send(twiml.toString());
 }); */
-
-
-//location 
-
-userRoute.get("/location.js", (req, res) => {
-  //res.header('Content-Type', 'text/javascript');
-  res.sendFile(path.join(__dirname, "../../client/scripts/location.js"));
-});
 
 
 //cart
@@ -192,36 +172,8 @@ userRoute.post('/sendConfirmationEmail', async (req, res) => {
   }
 });
 
-/*
-//til registering af bruger (virker fint)
 
-userRoute.post("/user", (req, res) => {
-  const data = req.body;
-
-  const request = new Request(
-    'INSERT INTO Users (username, password, email, phonenumber) VALUES (@username, @password, @email, @phonenumber);',
-    (err) => {
-      if (err) {
-        console.error('Fejl ved indsættelse af bruger i SQL-database:', err.message);
-        res.status(500).send('Internal Server Error');
-      } else {
-        res.send('User added');
-      }
-    }
-  );
-
-  request.addParameter('username', TYPES.VarChar, data.username);
-  request.addParameter('password', TYPES.VarChar, data.password);
-  request.addParameter('email', TYPES.VarChar, data.email);
-  request.addParameter('phonenumber', TYPES.VarChar, data.phonenumber);
-
-
-  console.log(request.parameters);
-
-  connection.execSql(request);
-}); */
-
-
+// Til registrering af bruger, herunder hashing af password
 
 userRoute.post("/user", async (req, res) => {
   const data = req.body;
@@ -248,15 +200,12 @@ userRoute.post("/user", async (req, res) => {
       request.addParameter('email', TYPES.VarChar, data.email);
       request.addParameter('phonenumber', TYPES.VarChar, data.phonenumber);
       request.addParameter('passwordhashed', TYPES.VarChar, hash);
-      //request.addParameter('hashedpassword', TYPES.VarBinary, Buffer.from(hash, 'binary'));  Gemmer hashet password som Binary (Buffer.from(hash, 'hex'))
 
       connection.execSql(request);
     });
    
-//request.addParameter('hashedpassword', TYPES.VarBinary, Buffer.from(hash, 'binary')); // Gemmer hashet password som Binary (Buffer.from(hash, 'hex'))
 
-
-//til at hente en bestemt profil
+//til at hente en bestemt bruger baseret på id
 
 userRoute.get("/user/:id", (req, res) => {
   const userId = req.params.id;
@@ -300,6 +249,8 @@ userRoute.delete("/user/:id", (req, res) => {
 });
 
 
+//Til at hente en bruger baseret på username
+
 async function getUserByUsername(username) {
   return new Promise((resolve, reject) => {
     const sql = `
@@ -332,6 +283,8 @@ async function getUserByUsername(username) {
     connection.execSql(request);
   });
 }
+
+//Til autentificering og login af bruger
 
 userRoute.post("/login", async (req, res) => {
   let username = req.body.username;
@@ -377,90 +330,6 @@ userRoute.post("/login", async (req, res) => {
     res.end();
   }
 });
-
-
-/*
-//funktion til at hente data fra sql-database
-
-async function getUserByUsernameAndPassword(username, password) {
-  return new Promise((resolve, reject) => {
-    const sql = `
-      SELECT username, password
-      FROM Users
-      WHERE username = @username AND password = @password
-    `;
-
-    const user = {
-      username: null,
-      password: null,
-    };
-
-    const request = new Request(sql, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(user);
-      }
-    });
-
-    request.addParameter('username', TYPES.VarChar, username);
-    request.addParameter('password', TYPES.VarChar, password);
-
-    request.on('row', (columns) => {
-      columns.forEach((column) => {
-        user[column.metadata.colName] = column.value;
-      });
-    });
-
-    connection.execSql(request);
-  });
-}
-
-// Login-endpoint med autentificering
-userRoute.post("/login", async (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
-
-  if (username && password) {
-    try {
-      console.log("Received login request from user with username:", username);
-      const user = await getUserByUsernameAndPassword(username, password);
-
-      if (user.username == username && user.password == password) {
-        console.log(`User ${username} logged in!`);
-        //console.log("User data in authentication:", user);
-
-        const brugerUsername = user.username;
-        const brugerPassword = user.password;
-
-        console.log("Username:", brugerUsername);
-        //console.log("Password:", brugerPassword);
-
-        res.cookie('Username', brugerUsername, { httpOnly: true });
-
-        res.status(200).json({
-          userExists: true,
-          status: "success",
-          message: "User logged in"
-          //username: brugerUsername,
-          //password: brugerPassword
-        });
-      } else {
-        console.log(`User ${username} entered wrong credentials!`);
-        res.status(401).json({ message: 'Wrong username or password!' });
-      }
-      res.end();
-    } catch (error) {
-      console.error('Error during login:', error);
-      res.status(500).json({ message: 'Internal Server Error' });
-      res.end();
-    }
-  } else {
-    console.log('Enter username and password!');
-    res.status(400).json({ message: 'Wrong username or password!' });
-    res.end();
-  }
-}); */
 
 
 module.exports = userRoute;
