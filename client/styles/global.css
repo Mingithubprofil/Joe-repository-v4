@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Roboto, Arial, sans-serif;
+  font-family: monospace;
   background-color: #f7c1d9;
 }
 
@@ -86,6 +86,7 @@ li a:hover {
   color: #fff;
   border: none;
   padding: 2px 6px;
+  font-family: monospace;
   margin: 10px;
   cursor: pointer;
   border-radius: 10px;
@@ -213,7 +214,7 @@ h1 {
 
 #userHistory-button {
   font-weight: bold;
-  font-family: Roboto, Arial, sans-serif;
+  font-family: monospace;
   background-color: rgba(247, 193, 217, 1);
   color: #24272a;
   box-shadow: none;
@@ -228,11 +229,12 @@ h1 {
 
   #order-button {
     font-weight: bold;
-    font-family: Roboto, Arial, sans-serif;
+    font-family: monospace;
     background-color: rgba(247, 193, 217, 1);
     color: #24272a;
     box-shadow: none;
     border-radius: 0;
+    font-family: monospace;
     margin-bottom: 500px;
     font-size: 14px;
     padding: 10px 50px;
@@ -251,7 +253,7 @@ h1 {
     margin: 0 -10px;
   }
   .product {
-    font-family: Roboto, Arial, sans-serif;
+    font-family: monospace;
     margin: 20px 0;
     padding: 10px;
     text-align: center;
@@ -285,6 +287,7 @@ h1 {
   .product button {
     background-color: #f7c1d9;
     color: #24272a;
+    font-family: monospace;
     font-weight: bold;
     border: none;
     border-radius: 5px;
@@ -301,7 +304,7 @@ h1 {
       color: #000000;
       font-weight: bold;
       display: inline-block;
-      background-color: #fff;
+      background-color: #f09bc1;
       padding: 8px;
       border-radius: 8px;
 }
@@ -427,7 +430,7 @@ h1 {
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
     font-weight: bold;
-    background-color: white;
+    background-color: #f09bc1;
     padding: 9.5px;
     /* border-color: black; */
     /* border-block-style: revert; */
@@ -456,6 +459,7 @@ h1 {
     color: #24272a;
     font-weight: bold;
     border: none;
+    font-family: monospace;
     border-radius: 5px;
     padding: 10px 16px;
     margin: 2px;
@@ -505,15 +509,13 @@ h1 {
     margin-top: 15px;
     margin-bottom: 10px;
     text-align: center;
-    background-color: #ff8f8f;
+    background-color: #f09bc1;
     padding: 9.5px;
-    /* border-color: black; */
-    /* border-block-style: revert; */
-    /* padding-right: 0px; */
-    /* border-radius: 8px; */
-    /* display: inline-block; */
-    /* margin: 3px; */
-    color: #000000;
+    border-start-end-radius: 20px;
+    border-start-start-radius: 20px;
+    border-end-end-radius: 20px;
+    border-end-start-radius: 20px;
+    color: #ffffff;
     align-content: center;
     align-items: center;
 }
@@ -554,6 +556,7 @@ footer {
   border-radius: 4px;
   box-sizing: border-box;
   margin-top: 10px;
+  font-family: monospace;
   margin-bottom: 10px;
   font-size: 16px;
 }
@@ -565,6 +568,7 @@ footer {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-family: monospace;
   font-size: 16px;
 }
 
@@ -596,6 +600,7 @@ footer {
   position: fixed;
   top: 50%;
   left: 50%;
+  font-family: monospace;
   transform: translate(-50%, -50%);
   padding: 20px;
   background-color: #fff; /* Juster farven efter behov */
@@ -621,6 +626,7 @@ footer {
 #paymentForm button {
   padding: 10px 15px;
   border: none;
+  font-family: monospace;
   border-radius: 5px;
   cursor: pointer;
   align-items: center;
@@ -649,6 +655,7 @@ footer {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: monospace;
     align-items: center;
     margin: 0px;
 }
