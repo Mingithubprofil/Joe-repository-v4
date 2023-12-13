@@ -1,19 +1,23 @@
 
 
-// email.js
+// Henter nodemailer-biblioteket
 
 const nodemailer = require('nodemailer');
 
+// Tilføjer transporter
 const transporter = nodemailer.createTransport({
-  service: 'gmail',  // Brug 'gmail' eller konfigurer SMTP-indstillingerne for din mail-udbyder
+  service: 'gmail',  // Bruger 'gmail' som service
   auth: {
     user: 'socialjoejuice@gmail.com',
     pass: 'kaqbqxohhrkwxprq',
   },
 });
 
+// Tilføjer funktion til afsendelse af mailbesked
+
 const sendMail = async (to, subject, text) => {
   try {
+    // Tilføjer afsenders mail samt tilhørende parametre
     const mailOptions = {
       from: 'SocialJoe <socialjoejuice@gmail.com>',
       to,
@@ -29,6 +33,8 @@ const sendMail = async (to, subject, text) => {
   }
 };
 
+// Eksporterer funktionen til andre filer
 module.exports = {
   sendMail,
 };
+
