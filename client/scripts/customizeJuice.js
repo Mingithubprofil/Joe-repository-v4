@@ -371,21 +371,21 @@ async function showOrderConfirmation() {
       orderConfirmation.style.display = 'block';
   }
 
-  // Opret dataobjekt med oplysninger om ordren
+  // Opretter dataobjekt med oplysninger om ordren
 const orderData = {
   name,
   telefonnummer,
   email,
-  orderDetails: 'Your order has been confirmed',  // Tilføj relevante oplysninger om ordren
+  orderDetails: 'Your order has been confirmed',  
 };
 
 try {
-  // Send POST-anmodning til serversiden for at udløse e-mail-sendingen
+  // Sender POST-anmodning til serversiden for at udløse e-mail-afsendelsen
   const response = await axios.post('/sendConfirmationEmail', orderData);
 
   if (response.status === 200) {
     console.log('Email sent successfully');
-    // Fortsæt med din frontend-logik for bekræftelsessiden eller lignende
+
   } else {
     console.error('Fejl ved afsendelse af e-mail:', response.statusText);
   }

@@ -290,11 +290,11 @@ const orderData = {
   name,
   telefonnummer,
   email,
-  orderDetails: 'Your order has been confirmed',  // Tilføj relevante oplysninger om ordren
+  orderDetails: 'Your order has been confirmed',  
 };
 
 try {
-  // Sender POST-anmodning til serversiden for at udløse e-mail-sendingen
+  // Sender POST-anmodning til serversiden for at udløse e-mail-afsendelsen
   const response = await axios.post('/sendConfirmationEmail', orderData);
 
   if (response.status === 200) {
