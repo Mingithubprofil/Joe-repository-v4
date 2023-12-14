@@ -32,11 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const juiceNameElement = document.getElementById('juiceName');
   const selectedIngredientsContainer = document.getElementById('selectedIngredients');
   const juiceImageContainer = document.querySelector('.juice-image-container');
-  const vitaminDisplay = document.getElementById('vitaminDisplay'); // New element for vitamin display
-  const maxContainerWidth = 600; // Set the maximum width as needed
+  const vitaminDisplay = document.getElementById('vitaminDisplay'); // Nyt element for visning af vitaminer
+  const maxContainerWidth = 600; 
   const juiceFee = 50.00; // Standard juice fee
   let cartItems = [];
-  let juiceFeeAdded = false; // Flag to check if juice fee is added
+  let juiceFeeAdded = false; // Tjekker om juice fee er tilføjet
 
   function getRandomPosition(containerWidth, containerHeight, elementWidth, elementHeight) {
     const x = Math.random() * (containerWidth - elementWidth);
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const nouns = ['Energy', 'Booster', 'Splash', 'Fusion', 'Dynamic', 'Power', 'Kick', 'Bomb'];
     
 
-    const uniqueIngredients = [...new Set(ingredients)]; // Remove duplicate ingredients
+    const uniqueIngredients = [...new Set(ingredients)]; // Fjerner duplikat ingredienser
     const limitedIngredients = uniqueIngredients.slice(0, 2);
 
     const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
@@ -59,19 +59,18 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function updateVitaminDisplay() {
-    // Clear previous vitamin display
+    // Clearer tidliere display af vitamin
     vitaminDisplay.innerHTML = '';
 
-    // Get unique vitamins from cart items
+    // Henter unikke vitaminers fra cart items
     const uniqueVitamins = [...new Set(cartItems.map(item => item.vitamin))];
 
-    // Display each vitamin in a visually appealing way
+    // Display'er hver vitamin 
     uniqueVitamins.forEach(vitamin => {
       const vitaminDiv = document.createElement('div');
       vitaminDiv.classList.add('vitamin-item');
       vitaminDiv.textContent = vitamin;
 
-      // You can add additional styling or icons for each vitamin if needed
       // vitaminDiv.style.color = 'red'; // Example styling
 
       vitaminDisplay.appendChild(vitaminDiv);
@@ -79,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function addJuiceFee() {
-    // Add the standard juice fee
+    // Tilføjer standard juice fee
     cartItems.unshift({ name: 'Juice Fee', price: juiceFee, image: null, vitamin: null, isJuiceFee: true });
   }
 
@@ -88,14 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const productImage = button.parentElement.querySelector('img').src;
     const productPriceString = button.parentElement.querySelector('p').textContent;
     const productPrice = parseFloat(productPriceString.split(' ')[1].replace(',', '.'));
-    const productVitamin = button.parentElement.dataset.vitamin; // Get vitamin from data attribute
+    const productVitamin = button.parentElement.dataset.vitamin; 
 
     const ingredientImage = document.createElement('img');
     ingredientImage.src = productImage;
     ingredientImage.alt = productName;
     ingredientImage.classList.add('selected-ingredient');
 
-    const ingredientSize = 80; // Just an example size, adjust as needed
+    const ingredientSize = 80; 
     const randomPosition = getRandomPosition(
       juiceImageContainer.clientWidth,
       juiceImageContainer.clientHeight,
@@ -103,14 +102,14 @@ document.addEventListener('DOMContentLoaded', function () {
       ingredientSize
     );
 
-    const offsetX = 50; // Adjust as needed
-    const offsetY = 100; // Adjust as needed
+    const offsetX = 50; 
+    const offsetY = 100; 
 
     ingredientImage.style.left = `${randomPosition.x - offsetX}px`;
     ingredientImage.style.top = `${randomPosition.y - offsetY}px`;
 
-    // Scale the ingredient image
-    const scale = 0.8; // Adjust the scale factor as needed
+    // Ingrediens billede
+    const scale = 0.8; 
     ingredientImage.style.transform = `scale(${scale})`;
 
     selectedIngredientsContainer.appendChild(ingredientImage);
@@ -118,13 +117,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const cartItem = { name: productName, price: productPrice, image: productImage, vitamin: productVitamin, isJuiceFee: false };
     cartItems.push(cartItem);
 
-    // Add juice fee only for the first product
+    // Tilføjer kun juice fee til første produkt
     if (!juiceFeeAdded) {
       addJuiceFee();
       juiceFeeAdded = true;
     }
 
-    updateVitaminDisplay(); // Update the vitamin display
+    updateVitaminDisplay(); // Opdaterer vitamin display'et
     updateCartView();
   }
 
@@ -150,8 +149,8 @@ document.addEventListener('DOMContentLoaded', function () {
         ingredientImage.classList.add('selected-ingredient');
         selectedIngredientsContainer.appendChild(ingredientImage);
 
-        // Scale the ingredient image
-        const scale = 0.8; // Adjust the scale factor as needed
+        
+        const scale = 0.8; 
         ingredientImage.style.transform = `scale(${scale})`;
       }
 
@@ -171,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function removeFromCart(index) {
     cartItems.splice(index, 1);
-    updateVitaminDisplay(); // Update the vitamin display
+    updateVitaminDisplay(); // Updaterer vitamin display'et
     updateCartView();
   }
 
@@ -198,7 +197,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   closeBtn.addEventListener('click', closeCart);
 
-  // Initial adjustment of container size
   adjustContainerSize();
 });
 
@@ -223,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
   cartIcon.addEventListener('click', openCart);
   closeBtn.addEventListener('click', closeCart);
   betalBtn.addEventListener('click', function () {
-      // Check if there are items in the cart
+      // Tjekker om der er items i cart
       if (cartItems.length > 0) {
           openPaymentForm();
       } else {
@@ -300,70 +298,49 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-/* const accountSid = 'AC12cb9761bd22a85b3994135bbcc68e65';
-  const authToken = 'a762494ae79bad3c353db3fcd9b840f0';
-  const client = require('twilio')(accountSid, authToken);
-
- function submitPayment() {
-  
-  const name = document.getElementById("name").value;
-  const telefonnummer = document.getElementById("telefonnummer").value;
-
-  client.messages
-    .create({
-      body: `Hej ${name}, din ordre er nu modtaget og vil blive leveret indenfor 5 minutter. Tak fordi du valgte `,
-      messagingServiceSid: 'MG178da6c222de9ec03486b61a2e72c85e',
-      to: `+45${telefonnummer}`
-    })
-    .then(message => {
-      console.log(message);
-      showOrderConfirmation();
-    });
-} */
-
-// Function to show order confirmation
+// Funktion til at vise ordrebekræftelse
 async function showOrderConfirmation() {
-  // Get the values from the input fields
+  // Henter værdierne fra inputfelterne
   const name = document.getElementById('name').value.trim();
   const telefonnummer = document.getElementById('telefonnummer').value.trim();
   const email = document.getElementById('e-mail').value.trim();
 
-  // Check if any of the required fields is empty
+  // Tjekker om felterne er tommme
   if (name === '' || telefonnummer === '' || email === '') {
       alert('Please fill in all the required fields.');
-      return; // Stop execution if any field is empty
+      return; 
   }
 
-  // Validate phone number (allow only digits and minimum of 8 digits)
+  // Validerer telefonnummer (tillader kun cifre og minimum 8 cifre)
   if (!/^\d{8,}$/.test(telefonnummer)) {
       alert('Please enter a valid phone number (minimum 8 digits).');
-      return; // Stop execution if validation fails
+      return; 
   }
 
-  // Validate email (check for the presence of @ symbol)
+  // Validerer email (tjekker for @ symbol)
   if (!email.includes('@')) {
       alert('Please enter a valid email address.');
-      return; // Stop execution if validation fails
+      return; 
   }
 
-  // Get the current time
+  // Henter tidspunkt
   const currentTime = new Date();
   const hours = currentTime.getHours();
   const minutes = currentTime.getMinutes();
   
-  // Format the time as HH:MM
+  // Formaterer tidspunktet
   const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 
-  // Update the order time
+  // Opdaterer ordretidspunkt
   document.getElementById('orderTime').innerText = formattedTime;
 
-  // Get the selected location
+  // Henter den valgte lokation
   const selectedLocation = document.getElementById("cities").value;
 
-  // Update the selected location
+  // Opdaterer den valgte lokation
   document.getElementById('selectedLocation').innerText = selectedLocation;
 
-  // Proceed with the order confirmation logic
+  // Fortsætter med logikken for ordrebekræftelsen
   document.getElementById('paymentForm1').style.display = 'none';
   const orderConfirmation = document.getElementById('orderConfirmation');
 

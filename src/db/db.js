@@ -20,7 +20,7 @@ const config = {
 
 const connection = new Connection(config);
 
-// Forbind til SQL-databasen
+// Forbinder til SQL-databasen
 connection.connect((err) => {
   if (err) {
     console.error('Fejl ved forbindelse til SQL-database:', err.message);

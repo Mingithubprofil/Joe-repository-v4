@@ -203,7 +203,7 @@ h1 {
   }
 }
 
-/* Animation for a (link) elementet */
+/* Animation for link elementet */
 @keyframes scaleIn {
   0% {
     transform: scale(0.8);
@@ -310,7 +310,7 @@ h1 {
       border-radius: 8px;
 }
 
-/* Tilføj fadeIn animation hvis den ikke er defineret */
+/* Tilføjer fadeIn animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -446,7 +446,7 @@ h1 {
 }
 
 
-/* Tilføj fadeIn animation hvis den ikke er defineret */
+/* Tilføjer fadeIn animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -612,9 +612,9 @@ footer {
   font-family: monospace;
   transform: translate(-50%, -50%);
   padding: 20px;
-  background-color: #fff; /* Juster farven efter behov */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Skygge for en mere fremhævet effekt */
-  z-index: 1000; /* Sørg for, at det er foran andre elementer */
+  background-color: #fff; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  z-index: 1000; /* Sørger for, at det er foran andre elementer */
   border-radius: 10px;
   animation: fadeIn 0.3s;
 }
@@ -682,7 +682,7 @@ footer {
 .small-icon {
   width: 30px;
   height: 30px;
-  margin-right: 3px; /* Adjust the margin as needed */
+  margin-right: 3px; 
 }
 
 

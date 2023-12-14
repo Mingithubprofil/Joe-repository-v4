@@ -1,6 +1,6 @@
 
 
-// Cookie her:
+// Henter cookie
 
 let accountName = getCookie("userAuth");
 //if (!username) location.href = "/login";
@@ -31,6 +31,4 @@ if (accountName) {
     usernameButton.style.display = "none";
 }
 
-/* usernameDisplays.forEach(element => {
-      element.innerHTML = username;
-    }); */
+

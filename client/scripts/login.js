@@ -36,12 +36,12 @@ async function loginUser() {
     //console.log(response.data);
 
     if (response.data.userExists) {
-      // Hvis brugeren eksisterer, udfør login
-      // localStorage.setItem("Username", username);
+      // Hvis brugeren eksisterer, udføres login
+    
       document.cookie = `userAuth=${username}`;
       //console.log(document.cookie);
 
-      // Redirect og opdater DOM
+      // Redirecter og opdaterer DOM
       responseDOM.innerHTML = response.data.message;
       await wait(3);
       window.location.replace("/");
@@ -58,10 +58,10 @@ async function loginUser() {
 //logud funktion
 
 function logoutUser() {
-  // Fjern brugerens autentificeringscookie
+  // Fjerner brugerens autentificeringscookie
   document.cookie = 'userAuth=; expires= 0; path=/;';
 
-  // Redirect til login-siden eller hvor du ønsker
+  // Redirect til login-siden
   location.href = "/login";
 }
 

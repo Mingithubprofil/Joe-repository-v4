@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000
 
-
 app.use(cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -15,11 +14,6 @@ const io = require('socket.io')(http);
 const host = 'localhost'; // const host = '127.0.0.1';
 const path = require('path')
 const userRoute = require("./routes/userRoute");
-
-
-
-
-//app.use(express.static(__dirname + '../client'));
 
 app.use(express.static(path.join(__dirname, '../client')));
 

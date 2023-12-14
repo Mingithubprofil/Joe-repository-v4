@@ -7,13 +7,9 @@ const bcrypt = require('bcrypt');
 const { connection, Request, TYPES } = require('../db/db');
 
 
-// Cookie implementation
+// til cookie 
 const cookieParser = require("cookie-parser");
 userRoute.use(cookieParser());
-
-//til sms
-//const { MessagingResponse } = require('twilio').twiml;
-//const twilio = require('twilio');
 
 
 //login
@@ -75,16 +71,6 @@ userRoute.get("/customizeJuice.js", (req, res) => {
 });
 
 
-/* //sms 
-
-userRoute.post("/sms", (req, res) => {
-  const twiml = new MessagingResponse();
-  twiml.message('Hej, det er Joe');
-
-  res.type('text/xml').send(twiml.toString());
-}); */
-
-
 //cart
 
 userRoute.get("/cart.js", (req, res) => {
@@ -112,57 +98,21 @@ userRoute.get("/global.css", (req, res) => {
 });
 
 
-/*
-//sms
-
-userRoute.post("/submit-order", async (req, res) => {
-  try {
-    // Hent bestillingsoplysninger fra anmodningen
-    const { name, telefonnummer, // andre bestillingsoplysninger } = req.body;
-
-    // Udfør betalingsbehandling eller anden nødvendig logik her
-
-    // Send besked med Twilio
-    const client = require('twilio')(accountSid, authToken);
-    const accountSid = 'AC12cb9761bd22a85b3994135bbcc68e65';
-    const authToken = 'a762494ae79bad3c353db3fcd9b840f0';
-    
-
-    client.messages
-      .create({
-        body: `Hej ${name}, din ordre er nu modtaget og vil blive leveret indenfor 5 minutter. Tak fordi du valgte `,
-        messagingServiceSid: 'MG178da6c222de9ec03486b61a2e72c85e',
-        to: `+45${telefonnummer}`
-      })
-      .then(message => {
-        console.log(message);
-        res.status(200).json({ message: 'Order received. SMS sent.' });
-      })
-      .catch(error => {
-        console.error('Error sending SMS:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
-      });
-  } catch (error) {
-    console.error('Error processing order:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-}); */
-
 
 //til email
 
-const { sendMail } = require('../../client/scripts/email.js');  // Importer sendMail-funktionen
+const { sendMail } = require('../../client/scripts/email.js');  // Importerer sendMail-funktionen
 
 // API-endepunkt for at sende en bekræftelses-e-mail
 userRoute.post('/sendConfirmationEmail', async (req, res) => {
   try {
-    const { name, telefonnummer, email, orderDetails } = req.body;  // Modtag data fra anmodningen
+    const { name, telefonnummer, email, orderDetails } = req.body;  // Modtager data fra anmodningen
 
-    // Opret e-mail-indhold baseret på de modtagne oplysninger
+    // Opretter e-mail-indhold baseret på de modtagne oplysninger
     const subject = 'Order Confirmation';
     const text = `Dear ${name},\n\nThank you for your order.\n\nDetails: ${orderDetails}\n\nBest regards,\nSocialJoe`;
 
-    // Send e-mail
+    // Sender e-mail
     await sendMail(email, subject, text);
 
     res.status(200).json({ message: 'Email sent successfully' });
@@ -334,83 +284,5 @@ userRoute.post("/login", async (req, res) => {
 
 module.exports = userRoute;
 
-
-/*
-
-userRoute
-  .get("/user", (req, res) => {
-    res.send(db);
-  })
-  .post("/user", (req, res) => {
-    let data = req.body;
-    let user = {};
-    user = data;
-    user.id = id;
-    id++;
-    db.push(user);
-    res.send("User added");
-  })
-  .get("/user/:id", (req, res) => {
-    let response = "";
-    let i = 0;
-    while (i < db.length) {
-      if (req.params.id == db[i].id) {
-        response = db[i];
-        break;
-      }
-      i++;
-      if (i == db.length) {
-        response = "User not found";
-      }
-    }
-    res.send(response);
-  })
-  .delete("/user/:id", (req, res) => {
-    let response = "";
-    let i = 0;
-    while (i < db.length) {
-      if (req.params.id == db[i].id) {
-        response = `User with ID ${db[i].id} deleted`;
-        db.splice(i, 1);
-        // res.send(db[i])
-        break;
-      }
-      i++;
-      if (i == db.length) {
-        response = "User not found";
-      }
-    }
-    res.send(response);
-  })
-  .post("/login", (req, res) => {
-    let response = "";
-    let i = 0;
-    while (i < db.length) {
-      if (req.body.username == db[i].username) {
-        if (req.body.password === db[i].password) {
-          response = "User logged in";
-        } else {
-          response = "Password incorrect";
-        }
-        break;
-      }
-      i++;
-      if (i == db.length) {
-        response = "No user with this username found";
-      }
-    }
-    // res.send(response);
-
-    // Cookie implementation
-
-    res
-      .cookie("userAuth", req.body.username ? req.body.username : "", {
-        maxAge: 3600000,
-      })
-      .send(response)
-      .status(200);
-  });
-
-  */
 
 

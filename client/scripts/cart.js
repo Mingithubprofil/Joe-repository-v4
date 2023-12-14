@@ -212,28 +212,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-//twilio
-
-/* const accountSid = 'AC12cb9761bd22a85b3994135bbcc68e65';
-  const authToken = 'a762494ae79bad3c353db3fcd9b840f0';
-  const client = require('twilio')(accountSid, authToken);
-
- function submitPayment() {
-  
-  const name = document.getElementById("name").value;
-  const telefonnummer = document.getElementById("telefonnummer").value;
-
-  client.messages
-    .create({
-      body: `Hej ${name}, din ordre er nu modtaget og vil blive leveret indenfor 5 minutter. Tak fordi du valgte `,
-      messagingServiceSid: 'MG178da6c222de9ec03486b61a2e72c85e',
-      to: `+45${telefonnummer}`
-    })
-    .then(message => {
-      console.log(message);
-      showOrderConfirmation();
-    });
-} */
 
 // Funktion til at vise ordrebekræftelse
 async function showOrderConfirmation() {
@@ -248,36 +226,36 @@ async function showOrderConfirmation() {
       return; // Stopper eksekvering hvis nogle af felterne er tomme
   }
 
-  // Validate phone number (allow only digits and minimum of 8 digits)
+  // Validerer telefonnummer (tillader kun cifre og minimum 8 cifre)
   if (!/^\d{8,}$/.test(telefonnummer)) {
       alert('Please enter a valid phone number (minimum 8 digits).');
       return; // Stop execution if validation fails
   }
 
-  // Validate email (check for the presence of @ symbol)
+  // Validerer email (tjekker for @ symbol)
   if (!email.includes('@')) {
       alert('Please enter a valid email address.');
       return; // Stop execution if validation fails
   }
 
-  // Get the current time
+  // Henter tidspunkt
   const currentTime = new Date();
   const hours = currentTime.getHours();
   const minutes = currentTime.getMinutes();
   
-  // Format the time as HH:MM
+  // Formaterer tidspunktet
   const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 
-  // Update the order time
+  // Opdaterer tidspunkt for ordre
   document.getElementById('orderTime').innerText = formattedTime;
 
-  // Get the selected location
+  // Henter den valgte lokation
   const selectedLocation = document.getElementById("cities").value;
 
   // Update the selected location
   document.getElementById('selectedLocation').innerText = selectedLocation;
 
-  // Proceed with the order confirmation logic
+  // Fortsætter med logikken for ordrebekræftelsen
   document.getElementById('paymentForm1').style.display = 'none';
   const orderConfirmation = document.getElementById('orderConfirmation');
 
