@@ -98,7 +98,6 @@ userRoute.get("/global.css", (req, res) => {
 });
 
 
-
 //til email
 
 const { sendMail } = require('../../client/scripts/email.js');  // Importerer sendMail-funktionen
@@ -153,50 +152,6 @@ userRoute.post("/user", async (req, res) => {
 
       connection.execSql(request);
     });
-   
-
-//til at hente en bestemt bruger baseret på id
-
-userRoute.get("/user/:id", (req, res) => {
-  const userId = req.params.id;
-  const sql = `SELECT id, username FROM Users WHERE id = @userId`;
-
-  const request = new Request(sql, (err, rowCount, rows) => {
-    if (err) {
-      console.error('Fejl ved hentning af bruger fra SQL-database:', err.message);
-      res.status(500).send('Internal Server Error');
-    } else {
-      const user = rows.map(row => ({
-        id: row[0].value,
-        username: row[1].value,
-      }));
-      res.send(user);
-    }
-  });
-
-  request.addParameter('userId', TYPES.Int, userId);
-  connection.execSql(request);
-});
-
-
-//til at slette en bruger
-
-userRoute.delete("/user/:id", (req, res) => {
-  const userId = req.params.id;
-  const sql = `DELETE FROM Users WHERE id = @userId`;
-
-  const request = new Request(sql, (err) => {
-    if (err) {
-      console.error('Fejl ved sletning af bruger i SQL-database:', err.message);
-      res.status(500).send('Internal Server Error');
-    } else {
-      res.send(`User with ID ${userId} deleted`);
-    }
-  });
-
-  request.addParameter('userId', TYPES.Int, userId);
-  connection.execSql(request);
-});
 
 
 //Til at hente en bruger baseret på username
@@ -233,6 +188,7 @@ async function getUserByUsername(username) {
     connection.execSql(request);
   });
 }
+
 
 //Til autentificering og login af bruger
 
@@ -283,6 +239,15 @@ userRoute.post("/login", async (req, res) => {
 
 
 module.exports = userRoute;
+
+
+
+
+
+
+
+
+
 
 
 
